@@ -5,7 +5,7 @@ namespace Csfd;
 use Sunra\PhpSimple\HtmlDomParser;
 
 
-class Movie
+class Movie extends Serializable
 {
 
 	/** @var int */

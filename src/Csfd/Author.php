@@ -3,7 +3,7 @@
 namespace Csfd;
 
 
-class Author
+class Author extends Serializable
 {
 
 	/** @var int */

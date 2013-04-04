@@ -7,7 +7,7 @@ use Sunra\PhpSimple\HtmlDomParser;
 
 class Grabber
 {
-	
+
 	const GET = 'GET';
 	const POST = 'POST';
 
