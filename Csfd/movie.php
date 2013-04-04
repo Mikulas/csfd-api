@@ -38,8 +38,8 @@ class Movie
 	/** @var int */
 	protected $runtime;
 
-	/** @var \DateTime */
-	protected $premier;
+	/** @var \DateTime[] */
+	protected $releases;
 
 
 
@@ -174,7 +174,32 @@ class Movie
 			}
 		}
 
-		
+		$content = $html->find('.content ul li div', 0);
+		if ($content) {
+			$plot = [];
+			foreach ($content->find('p') as $paragraph) {
+				$text = trim($paragraph->innertext);
+				if (strlen($text) > 10) { // skip meaningless glues
+					$plot[] = $text;
+				}
+			}
+			$movie->plot = implode("\n", $plot);
+		}
+
+		$content_rating = $html->find('.classification', 0);
+		if ($content_rating) {
+			$movie->content_rating = $content_rating->innertext;
+		}
+
+		foreach ($html->find('#releases table tr') as $release) {
+			foreach (['cs' => 'ČR', 'sk' => 'SR'] as $key => $country) {
+				if (mb_strpos($release->find('th', 0)->innertext, $country) !== FALSE) {
+					$match = [];
+					preg_match('~^\s*(?P<date>[\d.]+)~', $release->find('.date', 0)->innertext, $match);
+					$movie->releases[$key] = new \DateTime($match['date']);
+				}
+			}
+		}
 
 		return $movie;
 	}
