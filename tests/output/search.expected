@@ -1,0 +1,168 @@
+array(
+	Mikulas\Csfd\Movie::__set_state(array(
+		'id' => 2260,
+		'year' => 1968,
+		'poster_url' => 'http://img.csfd.cz/posters/0/2260_1.jpg',
+		'names' => array(
+			'cs' => 'Ragazza piuttosto complicata, Una',
+		),
+		'genres' => array(
+			'Thriller',
+		),
+		'countries' => array(
+			'Itálie',
+		),
+		'authors' => array(
+			'directors' => array(
+				Mikulas\Csfd\Author::__set_state(array(
+					'id' => 2865,
+					'name' => 'Damiano Damiani',
+				)),
+			),
+			'actors' => array(
+				Mikulas\Csfd\Author::__set_state(array(
+					'id' => 12145,
+					'name' => 'Jean Sorel',
+				)),
+				Mikulas\Csfd\Author::__set_state(array(
+					'id' => 58999,
+					'name' => 'Catherine Spaak',
+				)),
+			),
+		),
+	)),
+	Mikulas\Csfd\Movie::__set_state(array(
+		'id' => 12571,
+		'year' => 1998,
+		'poster_url' => 'http://img.csfd.cz/assets/images/poster-free.png',
+		'names' => array(
+			'cs' => 'Takové anglické manželství',
+		),
+		'genres' => array(
+			'Drama',
+		),
+		'countries' => array(
+			'Velká Británie',
+		),
+		'authors' => array(
+			'directors' => array(
+				Mikulas\Csfd\Author::__set_state(array(
+					'id' => 14848,
+					'name' => 'Paul Seed',
+				)),
+			),
+			'actors' => array(
+				Mikulas\Csfd\Author::__set_state(array(
+					'id' => 278,
+					'name' => 'Albert Finney',
+				)),
+				Mikulas\Csfd\Author::__set_state(array(
+					'id' => 14272,
+					'name' => 'Tom Courtenay',
+				)),
+			),
+		),
+	)),
+	Mikulas\Csfd\Movie::__set_state(array(
+		'id' => 80066,
+		'year' => 1964,
+		'poster_url' => 'http://img.csfd.cz/posters/8/80066_1.jpg',
+		'names' => array(
+			'cs' => 'I\'d Rather Be Rich',
+		),
+		'genres' => array(
+			'Komedie',
+		),
+		'countries' => array(
+			'USA',
+		),
+		'authors' => array(
+			'directors' => array(
+				Mikulas\Csfd\Author::__set_state(array(
+					'id' => 9772,
+					'name' => 'Jack Smight',
+				)),
+			),
+			'actors' => array(
+				Mikulas\Csfd\Author::__set_state(array(
+					'id' => 21062,
+					'name' => 'Sandra Dee',
+				)),
+				Mikulas\Csfd\Author::__set_state(array(
+					'id' => 61588,
+					'name' => 'Robert Goulet',
+				)),
+			),
+		),
+	)),
+	Mikulas\Csfd\Movie::__set_state(array(
+		'id' => 325859,
+		'year' => 1982,
+		'poster_url' => 'http://img.csfd.cz/assets/images/poster-free.png',
+		'names' => array(
+			'cs' => 'I\'d Rather Be in Paris',
+		),
+		'genres' => array(
+			'Krátkometrážní',
+		),
+		'countries' => array(
+			'USA',
+		),
+		'authors' => array(
+			'directors' => array(
+				Mikulas\Csfd\Author::__set_state(array(
+					'id' => 83163,
+					'name' => 'Dominic Angerame',
+				)),
+			),
+		),
+	)),
+	Mikulas\Csfd\Movie::__set_state(array(
+		'id' => 238207,
+		'year' => 2003,
+		'poster_url' => NULL,
+		'names' => NULL,
+		'genres' => NULL,
+		'countries' => NULL,
+	)),
+	Mikulas\Csfd\Movie::__set_state(array(
+		'id' => 311185,
+		'year' => 2012,
+		'poster_url' => NULL,
+		'names' => NULL,
+		'genres' => NULL,
+		'countries' => NULL,
+	)),
+	Mikulas\Csfd\Movie::__set_state(array(
+		'id' => 337999,
+		'year' => 1971,
+		'poster_url' => NULL,
+		'names' => NULL,
+		'genres' => NULL,
+		'countries' => NULL,
+	)),
+	Mikulas\Csfd\Movie::__set_state(array(
+		'id' => 283324,
+		'year' => 2008,
+		'poster_url' => NULL,
+		'names' => NULL,
+		'genres' => NULL,
+		'countries' => NULL,
+	)),
+	Mikulas\Csfd\Movie::__set_state(array(
+		'id' => 252742,
+		'year' => 2007,
+		'poster_url' => NULL,
+		'names' => NULL,
+		'genres' => NULL,
+		'countries' => NULL,
+	)),
+	Mikulas\Csfd\Movie::__set_state(array(
+		'id' => 327393,
+		'year' => 2010,
+		'poster_url' => NULL,
+		'names' => NULL,
+		'genres' => NULL,
+		'countries' => NULL,
+	)),
+)
