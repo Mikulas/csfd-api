@@ -1,7 +1,7 @@
 {
 	"name": "mikulas/csfdapi",
-	"description": "API for Czech Movie Databse",
-	"homepage": "http://khanovaskola.cz",
+	"description": "API for Czech Movie Database",
+	"homepage": "http://csfdapi.cz",
 	"license": ["BSD-3-Clause"],
 	"authors": [{"name": "Mikulas Dite"}],
 	"minimum-stability": "dev",
