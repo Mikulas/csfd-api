@@ -1,6 +1,6 @@
 <?php
 
-namespace Mikulas\Csfd;
+namespace Csfd;
 
 
 class Csfd

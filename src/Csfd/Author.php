@@ -1,11 +1,11 @@
 <?php
 
-namespace Mikulas\Csfd;
+namespace Csfd;
 
 
 class Author
 {
-	
+
 	/** @var int */
 	protected $id;
 

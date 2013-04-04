@@ -6,7 +6,7 @@
  */
 
 use Tester\Assert;
-use Mikulas\Csfd\Csfd;
+use Csfd\Csfd;
 
 require __DIR__ . '/bootstrap.php';
 

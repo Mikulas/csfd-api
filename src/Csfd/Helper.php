@@ -1,11 +1,11 @@
 <?php
 
-namespace Mikulas\Csfd;
+namespace Csfd;
 
 
 class Helper
 {
-	
+
 	static function parseIdFromUrl($url)
 	{
 		$match = [];

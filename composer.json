@@ -11,5 +11,8 @@
 	},
 	"require-dev": {
         "nette/tester": "@dev"
-    }
+    },
+    "autoload": {
+		"psr-0": {"Csfd": "src/"}
+	}
 }
