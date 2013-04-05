@@ -232,4 +232,20 @@ class Movie extends Serializable
 		return $movie;
 	}
 
+
+
+	public static function fromFilmography($html)
+	{
+		if ($html->find('.ui-advert'))
+			return NULL;
+
+		$id = Helper::parseIdFromUrl($html->find('a', 0)->href);
+		$movie = new self($id);
+
+		$movie->name['cs'] = $html->find('a', 0)->innertext;
+		$movie->year = (int) trim($html->find('th', 0)->innertext);
+
+		return $movie;
+	}
+
 }

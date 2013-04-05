@@ -44,4 +44,11 @@ class Csfd
 		return Movie::fromPage($id, $this->grabber->request(Grabber::GET, "film/$id"));
 	}
 
+
+
+	public function getAuthor($id)
+	{
+		return Author::fromPage($id, $this->grabber->request(Grabber::GET, "tvurce/$id"));
+	}
+
 }
