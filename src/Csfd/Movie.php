@@ -136,8 +136,11 @@ class Movie extends Serializable
 
 
 
-	public static function fromPage($id, $html)
+	public static function fromPage($html, $id = NULL)
 	{
+		if ($id === NULL) {
+			$id = Helper::parseIdFromUrl($html->find('link[rel=canonical]', 0)->href);
+		}
 		$movie = new self($id);
 
 		$movie->names['cs'] = trim($html->find('h1', 0)->innertext);
@@ -168,7 +171,7 @@ class Movie extends Serializable
 
 		$meta = $html->find('.origin', 0);
 		if ($meta) {
-			list($countries, $year, $runtime) = explode(', ', $meta->innertext);
+			@list($countries, $year, $runtime) = explode(', ', $meta->innertext); // itentional, expecting NULL
 			$movie->countries = explode(' / ', $countries);
 			$movie->year = (int) $year;
 			$movie->runtime = $runtime;

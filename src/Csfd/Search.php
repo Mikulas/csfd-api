@@ -82,6 +82,10 @@ class Search
 		if ($this->type === self::TYPE_MOVIE) {
 			$movies = [];
 
+			if ($html->find('#rating')) { // only one result found and redirected
+				return [Movie::fromPage($html)];
+			}
+
 			foreach ($html->find('#search-films li') as $movie) {
 				$movies[] = Movie::fromSearch($movie);
 			}
