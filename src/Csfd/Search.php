@@ -88,6 +88,15 @@ class Search
 
 			return $movies;
 
+		} else if ($this->type === self::TYPE_AUTHOR) {
+			$authors = [];
+
+			foreach ($html->find('#search-creators li') as $author) {
+				$authors[] = Author::fromSearch($author);
+			}
+
+			return $authors;
+
 		} else {
 			throw new NotImplementedException();
 		}
