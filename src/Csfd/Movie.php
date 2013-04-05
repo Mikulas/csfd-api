@@ -182,7 +182,7 @@ class Movie extends Serializable
 					$type = 'actors'; break;
 			}
 
-			$movie->authors[$type][] = [];
+			$movie->authors[$type] = [];
 			foreach ($node->find('span a') as $anchor) {
 				$id = Helper::parseIdFromUrl($anchor->href);
 				$author = new Author($id);
