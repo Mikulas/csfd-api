@@ -40,10 +40,19 @@ class Author extends Serializable
 
 
 
-	public function jsonSerialize() {
+	private function getCsfdUrl()
+	{
+		return "http://www.csfd.cz/tvurce/{$this->id}";
+	}
+
+
+
+	public function jsonSerialize()
+	{
 		$data = parent::jsonSerialize();
 
 		$data['api_url'] = $this->getApiUrl();
+		$data['csfd_url'] = $this->getCsfdUrl();
 
 		return $data;
 	}
