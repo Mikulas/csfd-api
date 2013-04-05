@@ -50,6 +50,23 @@ class Movie extends Serializable
 
 
 
+	private function getApiUrl()
+	{
+		return "/movie/{$this->id}";
+	}
+
+
+
+	public function jsonSerialize() {
+		$data = parent::jsonSerialize();
+
+		$data['api_url'] = $this->getApiUrl();
+
+		return $data;
+	}
+
+
+
 	public static function fromSearch($html)
 	{
 		$id = Helper::parseIdFromUrl($html->find('a', 0)->href);
