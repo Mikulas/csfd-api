@@ -78,6 +78,8 @@ class Movie extends Serializable
 		$name = $html->find('.subject a', 0);
 		if ($name) {
 			$movie->names['cs'] = $name->innertext;
+		} else {
+			$movie->names['cs'] = $html->find('a.film', 0)->innertext;
 		}
 
 		$meta = $html->find('p', 0);
