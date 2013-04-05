@@ -191,7 +191,7 @@ class Movie extends Serializable
 				case 'scénář':
 					$type = 'script'; break;
 				case 'hudba':
-					$type = 'sountrack'; break;
+					$type = 'soundtrack'; break;
 				case 'hrají':
 					$type = 'actors'; break;
 			}
