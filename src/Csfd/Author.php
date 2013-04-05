@@ -145,6 +145,7 @@ class Author extends Serializable
 				case 'režijní':
 					$type = 'director'; break;
 				case 'scénáristická':
+				case 'scenáristická':
 					$type = 'script'; break;
 				case 'herecká':
 					$type = 'actor'; break;
