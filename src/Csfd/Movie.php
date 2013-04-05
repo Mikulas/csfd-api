@@ -45,7 +45,7 @@ class Movie extends Serializable
 
 	public function __construct($id)
 	{
-		$this->id = $id;
+		$this->id = (int) $id;
 	}
 
 

@@ -15,14 +15,11 @@ class Author extends Serializable
 	/** @var string[] */
 	protected $roles;
 
-	/** @var string[] */
-	protected $countries;
+	/** @var string */
+	protected $address;
 
 	/** @var \DateTime */
 	protected $born;
-
-	/** @var string */
-	protected $place;
 
 	/** @var string url */
 	protected $portrait_url;
@@ -40,7 +37,7 @@ class Author extends Serializable
 
 	public function __construct($id)
 	{
-		$this->id = $id;
+		$this->id = (int) $id;
 	}
 
 
@@ -103,7 +100,7 @@ class Author extends Serializable
 
 		$p2 = $html->find('p', 2);
 		if ($p2) {
-			$author->countries = explode(', ', $p2->innertext);
+			$author->address = $p2->innertext;
 		}
 
 		$portrait = $html->find('img[alt=foto]', 0);
@@ -127,13 +124,11 @@ class Author extends Serializable
 		$meta = $html->find('.info ul li', 0);
 		if ($meta) {
 			list($born, $place) = explode("<br />", $meta->innertext);
+
 			$date = substr(trim($born), 5); // "nar. 17.4.1924"
 			$author->born = new \DateTime($date);
 
-			$place = trim($place);
-			$pos = strrpos($place, ', ');
-			$author->countries[] = substr($place, $pos + 2);
-			$author->place = substr($place, 0, $pos);
+			$author->address = trim($place);
 		}
 
 		$author->portrait_url = $html->find('img[alt=foto]', 0)->src;
