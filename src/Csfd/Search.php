@@ -11,6 +11,7 @@ class Search
 
 	const TYPE_MOVIE = 1;
 	const TYPE_AUTHOR = 2;
+	const TYPE_USER = 4;
 
 
 	/** @var enum */
@@ -48,6 +49,16 @@ class Search
 	public function author($filter)
 	{
 		$this->type = self::TYPE_AUTHOR;
+		$this->filter = $filter;
+
+		return $this;
+	}
+
+
+
+	public function user($filter)
+	{
+		$this->type = self::TYPE_USER;
 		$this->filter = $filter;
 
 		return $this;
@@ -100,6 +111,15 @@ class Search
 			}
 
 			return $authors;
+
+		} else if ($this->type === self::TYPE_USER) {
+			$users = [];
+
+			foreach ($html->find('#search-users li') as $user) {
+				$users[] = User::fromSearch($user);
+			}
+
+			return $users;
 
 		} else {
 			throw new NotImplementedException();
