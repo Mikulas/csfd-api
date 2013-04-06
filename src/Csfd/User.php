@@ -124,11 +124,7 @@ class User extends Serializable
 
 			$date = new \DateTime($node->find('td', 2)->innertext);
 
-			$ratings[] = (object) [
-				'rating' => $rating,
-				'date' => $date,
-				'movie' => $movie,
-			];
+			$ratings[] = new Rating($rating, $date, $movie);
 		}
 		$user->ratings = $ratings;
 
