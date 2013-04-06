@@ -108,7 +108,11 @@ class User extends Serializable
 		$user->total_ratings = (int) substr($html->find('.ui-sidebar-menu .active .count', 0)->innertext, 1, -1);
 
 		$ratings = [];
-		foreach ($html->find('.ratings tbody tr') as $node) {
+		foreach ($html->find('.ratings tr') as $node) {
+			if (count($node->find('th')) > 0) {
+				continue; // skip table header and ads
+			}
+
 			$movie = Movie::fromRating($node);
 
 			$stars = $node->find('td img', 0);
