@@ -4,15 +4,15 @@
 	"homepage": "http://csfdapi.cz",
 	"license": ["BSD-3-Clause"],
 	"authors": [{"name": "Mikulas Dite"}],
-	"minimum-stability": "dev",
+	"minimum-stability": "stable",
 	"require": {
 		"php": ">=5.4.0",
-		"sunra/php-simple-html-dom-parser": "dev-master"
+		"sunra/php-simple-html-dom-parser": "~1.5.0"
 	},
 	"require-dev": {
-        "nette/tester": "@dev"
-    },
-    "autoload": {
+		"nette/tester": "@dev"
+	},
+	"autoload": {
 		"psr-0": {"Csfd": "src/"}
 	}
 }
