@@ -14,4 +14,14 @@ class Helper
 		return (int) $match['id'];
 	}
 
+
+
+	static function addSchemaIfMissing($url)
+	{
+		if (strPos($url, '//') === 0) {
+			$url = "http:$url";
+		}
+		return $url;
+	}
+
 }

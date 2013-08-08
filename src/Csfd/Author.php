@@ -105,7 +105,7 @@ class Author extends Serializable
 
 		$portrait = $html->find('img[alt=foto]', 0);
 		if ($portrait) {
-			$author->portrait_url = "http:" . $portrait->src;
+			$author->portrait_url = Helper::addSchemaIfMissing($portrait->src);
 		}
 
 		return $author;
@@ -134,7 +134,7 @@ class Author extends Serializable
 			$author->address = trim($place);
 		}
 
-		$author->portrait_url = "http:" . $html->find('img[alt=foto]', 0)->src;
+		$author->portrait_url = Helper::addSchemaIfMissing($html->find('img[alt=foto]', 0)->src);
 
 		$author->bio = trim(preg_replace('~(\s*<br />\s*)+~', "\n", $html->find('#action p', 0)->innertext));
 

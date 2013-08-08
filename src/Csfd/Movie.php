@@ -82,7 +82,7 @@ class Movie extends Serializable
 		$movie = new self($id);
 
 		$poster = $html->find('img[alt=poster]', 0);
-		$movie->poster_url = $poster ? "http:" . $poster->src : NULL;
+		$movie->poster_url = $poster ? Helper::addSchemaIfMissing($poster->src) : NULL;
 
 		$name = $html->find('.subject a', 0);
 		if ($name) {
@@ -98,7 +98,7 @@ class Movie extends Serializable
 			$movie->countries = explode(' / ', $countries);
 			$movie->year = (int) $year;
 		}
-		$movie->poster_url = $poster ? "http:" . $poster->src : NULL;
+		$movie->poster_url = $poster ? Helper::addSchemaIfMissing($poster->src) : NULL;
 
 		if (!$movie->year && $year = $html->find('.film-year', 0)) {
 			$movie->year = (int) substr($year->innertext, 1, 4); // remove brackets
@@ -161,7 +161,7 @@ class Movie extends Serializable
 
 		$poster = $html->find('img[alt=poster]', 0);
 		if ($poster) {
-			$movie->poster_url = "http:" . $poster->src;
+			$movie->poster_url = Helper::addSchemaIfMissing($poster->src);
 		}
 
 		$genres = $html->find('.genre', 0);
