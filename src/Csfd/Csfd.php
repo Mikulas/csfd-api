@@ -65,4 +65,23 @@ class Csfd
 		return User::fromPage($this->grabber->request(Grabber::GET, "uzivatel/$id/hodnoceni"), $id);
 	}
 
+
+
+	public function getUserAllRatings($id)
+	{
+		$user = User::fromPage($this->grabber->request(Grabber::GET, "uzivatel/$id/hodnoceni"), $id);
+
+		$this->grabber->queueInit();
+		$total_pages = ceil($user->total_ratings / 100);
+		for ($i = 2; $i <= $total_pages; ++$i) {
+			$this->grabber->enqueue("uzivatel/$id/hodnoceni/strana-$i");
+		}
+
+		foreach ($this->grabber->queueRun() as $html) {
+			$user->ratings = array_merge($user->ratings, User::getRatings($html));
+		}
+
+		return $user;
+	}
+
 }

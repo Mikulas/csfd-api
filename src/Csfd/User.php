@@ -22,10 +22,10 @@ class User extends Serializable
 	protected $registered;
 
 	/** @var mixed */
-	protected $ratings;
+	public $ratings;
 
 	/** @var int */
-	protected $total_ratings;
+	public $total_ratings;
 
 
 
@@ -106,7 +106,15 @@ class User extends Serializable
 		$user->registered = new \DateTime("$date $time");
 
 		$user->total_ratings = (int) substr($html->find('.ui-sidebar-menu .active .count', 0)->innertext, 1, -1);
+		$user->ratings = self::getRatings($html);
 
+		return $user;
+	}
+
+
+
+	public static function getRatings($html)
+	{
 		$ratings = [];
 		foreach ($html->find('.ratings tr') as $node) {
 			if (count($node->find('th')) > 0) {
@@ -126,9 +134,7 @@ class User extends Serializable
 
 			$ratings[] = new Rating($rating, $date, $movie);
 		}
-		$user->ratings = $ratings;
-
-		return $user;
+		return $ratings;
 	}
 
 }

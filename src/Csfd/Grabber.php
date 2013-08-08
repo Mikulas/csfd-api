@@ -2,6 +2,7 @@
 
 namespace Csfd;
 
+use cURL;
 use Sunra\PhpSimple\HtmlDomParser;
 
 
@@ -15,6 +16,11 @@ class Grabber
 	/** @var string */
 	protected $url;
 
+	/** @var cURL\Queue */
+	private $queue;
+
+	/** @var array of mixed */
+	private $responses;
 
 
 	public function __construct($url = NULL)
@@ -44,6 +50,36 @@ class Grabber
 		}
 
 		return HtmlDomParser::str_get_html($result);
+	}
+
+
+
+	public function queueInit()
+	{
+		$this->queue = new cURL\RequestsQueue;
+		$this->queue->getDefaultOptions()
+			->set(\CURLOPT_TIMEOUT, 5)
+			->set(\CURLOPT_FOLLOWLOCATION, TRUE)
+			->set(\CURLOPT_RETURNTRANSFER, TRUE);
+
+		$this->queue->addListener('complete', function (cURL\Event $event) {
+			$this->responses[] = HtmlDomParser::str_get_html($event->response->getContent());
+		});
+	}
+
+
+
+	public function enqueue($url)
+	{
+		$this->queue->attach(new cURL\Request("{$this->url}$url"));
+	}
+
+
+
+	public function queueRun()
+	{
+		$this->queue->send();
+		return $this->responses;
 	}
 
 }
