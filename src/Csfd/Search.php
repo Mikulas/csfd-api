@@ -115,6 +115,10 @@ class Search
 		} else if ($this->type === self::TYPE_USER) {
 			$users = [];
 
+			if ($html->find('#pg-web-user')) { // only one result found and redirected
+				return [User::fromPage($html)];
+			}
+
 			foreach ($html->find('#search-users li') as $user) {
 				$users[] = User::fromSearch($user);
 			}
