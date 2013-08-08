@@ -1,2 +1,2 @@
 #/bin/sh
-./vendor/nette/tester/Tester/tester ./tests -p /usr/bin/php
+./vendor/nette/tester/Tester/tester -c /usr/local/php5/lib/php.ini ./tests
