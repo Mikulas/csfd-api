@@ -7,13 +7,13 @@ class Rating extends Serializable
 {
 
 	/** @var int */
-	protected $rating;
+	public $rating;
 
 	/** @var string */
-	protected $date;
+	public $date;
 
 	/** @var Movie */
-	protected $movie;
+	public $movie;
 
 
 

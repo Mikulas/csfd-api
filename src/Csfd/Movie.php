@@ -9,37 +9,37 @@ class Movie extends Serializable
 {
 
 	/** @var int */
-	protected $id;
+	public $id;
 
 	/** @var int */
-	protected $year;
+	public $year;
 
 	/** @var string url */
-	protected $poster_url;
+	public $poster_url;
 
 	/** @var string[] */
-	protected $names;
+	public $names;
 
 	/** @var string[] */
-	protected $genres;
+	public $genres;
 
 	/** @var string[] */
-	protected $countries;
+	public $countries;
 
 	/** @var float */
-	protected $rating;
+	public $rating;
 
 	/** @var string */
-	protected $plot;
+	public $plot;
 
 	/** @var string enum */
-	protected $content_rating;
+	public $content_rating;
 
 	/** @var int */
-	protected $runtime;
+	public $runtime;
 
 	/** @var \DateTime[] */
-	protected $releases;
+	public $releases;
 
 
 

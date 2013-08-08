@@ -7,31 +7,31 @@ class Author extends Serializable
 {
 
 	/** @var int */
-	protected $id;
+	public $id;
 
 	/** @var string */
-	protected $name;
+	public $name;
 
 	/** @var string[] */
-	protected $roles;
+	public $roles;
 
 	/** @var string */
-	protected $address;
+	public $address;
 
 	/** @var \DateTime */
-	protected $born;
+	public $born;
 
 	/** @var string url */
-	protected $portrait_url;
+	public $portrait_url;
 
 	/** @var string */
-	protected $bio;
+	public $bio;
 
 	/** @var mixed */
-	protected $filmography;
+	public $filmography;
 
 	/** @var string url */
-	protected $imdb_url;
+	public $imdb_url;
 
 
 

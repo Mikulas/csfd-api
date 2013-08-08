@@ -7,19 +7,19 @@ class User extends Serializable
 {
 
 	/** @var int */
-	protected $id;
+	public $id;
 
 	/** @var string */
-	protected $name;
+	public $name;
 
 	/** @var string */
-	protected $username;
+	public $username;
 
 	/** @var string url */
-	protected $portrait_url;
+	public $portrait_url;
 
 	/** @var \DateTime */
-	protected $registered;
+	public $registered;
 
 	/** @var mixed */
 	public $ratings;
