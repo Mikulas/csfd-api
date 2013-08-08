@@ -260,7 +260,7 @@ class Movie extends Serializable
 		$id = Helper::parseIdFromUrl($html->find('a', 0)->href);
 		$movie = new self($id);
 
-		$movie->name['cs'] = $html->find('a', 0)->innertext;
+		$movie->names['cs'] = $html->find('a', 0)->innertext;
 		$movie->year = (int) trim($html->find('.film-year', 0)->innertext);
 
 		return $movie;
