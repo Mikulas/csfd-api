@@ -136,7 +136,7 @@ class Author extends Serializable
 
 		$author->portrait_url = "http:" . $html->find('img[alt=foto]', 0)->src;
 
-		$author->bio = preg_replace('~(\s*<br />\s*)+~', "\n", $html->find('#action p', 0)->innertext);
+		$author->bio = trim(preg_replace('~(\s*<br />\s*)+~', "\n", $html->find('#action p', 0)->innertext));
 
 		foreach ($html->find('#filmography div.ct-general') as $group) {
 			list($c_type) = explode(" ", $group->find('h2', 0)->innertext);
