@@ -1,6 +1,6 @@
-# CSFD API
+# ČSFD API
 
-<a href="http://csfdapi.cz/#user-ratings">Web API</a>
+<b>This API is also available via JSON at <a href="http://csfdapi.cz/">http://csfdapi.cz</a>.</b>
 
 # Installation
 
