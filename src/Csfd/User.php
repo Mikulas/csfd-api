@@ -77,7 +77,7 @@ class User extends Serializable
 
 		$portrait = $html->find('img.avatar', 0);
 		if ($portrait) {
-			$user->portrait_url = $portrait->src;
+			$user->portrait_url = "http:" . $portrait->src;
 		}
 
 		return $user;
@@ -99,7 +99,7 @@ class User extends Serializable
 
 		$user->points = (int) explode(" ", $html->find('p.points', 0)->innertext)[0];
 
-		$user->portrait_url = $html->find('img.avatar', 0)->src;
+		$user->portrait_url = "http:" . $html->find('img.avatar', 0)->src;
 
 		$info = trim($html->find('.activity', 0)->innertext); // Na ČSFD.cz od: 4.12.2010&nbsp;&nbsp;11:36
 		list($date, $time) = explode('&nbsp;&nbsp;', htmlentities(substr($info, 15)));
