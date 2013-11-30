@@ -208,8 +208,8 @@ class Movie extends Serializable
 		}
 
 		$content = $html->find('.content ul li div', 0);
+		$plot = [];
 		if ($content) {
-			$plot = [];
 			foreach ($content->find('p') as $paragraph) {
 				$text = trim($paragraph->innertext);
 				if (strlen($text) > 10) { // skip meaningless glues
@@ -217,6 +217,15 @@ class Movie extends Serializable
 				}
 			}
 			$movie->plot = implode("\n", $plot);
+		}
+		if (!$plot)
+		{
+			// different csfd markup
+			$source = $content->find('span.source', 0)->outertext;
+			$plot = $content->innertext;
+			$plot = str_replace($source, '', $plot);
+			$plot = trim(strip_tags($plot));
+			$movie->plot = $plot;
 		}
 
 		$content_rating = $html->find('.classification', 0);
