@@ -152,6 +152,8 @@ class Movie extends Serializable
 				switch ($country) {
 					case 'USA':
 						$language = 'en'; break;
+					case 'Austrálie':
+						$language = 'en'; break;
 					default:
 						$language = strToLower($country);
 				}
