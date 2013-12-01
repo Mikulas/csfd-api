@@ -223,9 +223,13 @@ class Movie extends Serializable
 		if (!$plot)
 		{
 			// different csfd markup
-			$source = $content->find('span.source', 0)->outertext;
 			$plot = $content->innertext;
-			$plot = str_replace($source, '', $plot);
+
+			$sourceDom = $content->find('span.source', 0);
+			if ($sourceDom)
+			{
+				$plot = str_replace($sourceDom->outertext, '', $plot);
+			}
 			$plot = trim(strip_tags($plot));
 			$movie->plot = $plot;
 		}
