@@ -1,0 +1,21 @@
+{
+	"name": "mikulas/csfdapi",
+	"description": "API for Czech Movie Database",
+	"homepage": "http://csfdapi.cz",
+	"license": ["MIT"],
+	"authors": [{"name": "Mikulas Dite"}],
+	"minimum-stability": "stable",
+	"require": {
+		"php": ">=5.4.0",
+		"symfony/console": "~2.4.0",
+		"symfony/dom-crawler": "~2.4.0",
+		"symfony/yaml": "~2.4.0",
+		"symfony/dependency-injection": "~2.4.0"
+	},
+	"require-dev": {
+		"nette/tester": "@dev"
+	},
+	"autoload": {
+		"psr-0": {"Csfd": "src/"}
+	}
+}
