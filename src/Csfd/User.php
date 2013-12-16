@@ -105,6 +105,8 @@ class User extends Serializable
 		list($date, $time) = explode('&nbsp;&nbsp;', htmlentities(substr($info, 15)));
 		$user->registered = new \DateTime("$date $time");
 
+		$user->ratings = array();
+		$user->total_ratings = 0;
 		if (count($html->find('.ratings tr'))) {
 			$user->total_ratings = (int) substr($html->find('.ui-sidebar-menu .active .count', 0)->innertext, 1, -1);
 			$user->ratings = self::getRatings($html);
