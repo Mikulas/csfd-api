@@ -45,7 +45,7 @@ class AuthenticatedUser extends User
 	public function editProfile($text)
 	{
 		$res = $this->authRequest($this->getUrl('profileToken'));
-		$token = $res->getContent()->filterXPath('//*[@name="_token_"]')->attr('value');
+		$token = $this->getParser()->getFormToken($res->getContent(), 'frm-profileForm');
 
 		$data = [
 			'text' => $text,

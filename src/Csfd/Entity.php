@@ -9,11 +9,18 @@ abstract class Entity
 	use UrlAccess;
 
 	private $auth;
+	private $parser;
 
-	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder)
+	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, Parsers\Parser $parser)
 	{
 		$this->auth = $auth;
 		$this->setUrlBuilder($urlBuilder);
+		$this->parser = $parser;
+	}
+
+	protected function getParser()
+	{
+		return $this->parser;
 	}
 
 	/**

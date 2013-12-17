@@ -12,15 +12,19 @@ class Authenticator
 	private $username;
 	private $password;
 
+	/** @var Parsers\User */
+	private $parser;
+
 	/**
 	 * id of authenticated user
 	 * @var int|NULL
 	 */
 	private $userId;
 
-	public function __construct(UrlBuilder $urlBuilder)
+	public function __construct(UrlBuilder $urlBuilder, Parsers\User $parser)
 	{
 		$this->setUrlBuilder($urlBuilder);
+		$this->parser = $parser;
 	}
 
 	public function setCredentials($username, $password)
@@ -53,11 +57,12 @@ class Authenticator
 
 		$res = Request::withoutRedirect($url, $args, Request::POST);
 
-		$errors = $res->getContent()->filterXPath('//*[@class="errors"]/ul/li');
-		if ($errors->count())
-		{
-			throw new \Exception($errors->text()); // TODO
-		}
+		// TODO move to parser
+		// $errors = $res->getContent()->filterXPath('//*[@class="errors"]/ul/li');
+		// if ($errors->count())
+		// {
+		// 	throw new \Exception($errors->text()); // TODO
+		// }
 
 		$this->cookie = $res->getCookie();
 
@@ -83,10 +88,13 @@ class Authenticator
 	{
 		$cookie = $this->cookie; // intentionally not calling getCookie()
 		$res = new Request($this->urlBuilder->getRoot(), [], Request::GET, $cookie);
-		$url = $res->getContent()->filterXPath('//*[@id="user-menu"]/a')->attr('href');
-		
-		$parser = new Parsers\User; // TODO inject
-		$this->userId = $parser->getIdFromUrl($url);
+
+		$this->userId = $this->parser->getCurrentUserId($res->getContent());
+		var_dump($this->userId);
+
+		// $url = $res->getContent()->filterXPath('//*[@id="user-menu"]/a')->attr('href');
+		// $parser = new Parsers\User; // TODO inject
+		// $this->userId = $parser->getIdFromUrl($url);
 	}
 
 }

@@ -2,8 +2,10 @@
 
 namespace Csfd\Parsers;
 
+use Symfony\Component\DomCrawler\Crawler;
 
-class Parser
+
+abstract class Parser
 {
 
 	protected function match($subject, $pattern)
@@ -17,5 +19,16 @@ class Parser
 	{
 		return $this->match($subject, $pattern)['value'];
 	}
+
+	protected function getNode($html, $xpath)
+	{
+		$nodes = new Crawler($html);
+		return $nodes->filterXPath($xpath);
+	}
 	
+	public function getFormToken($html, $formId)
+	{
+		return $this->getNode($html, '//form[@id="' . $formId . '"]//*[@name="_token_"]')->attr('value');
+	}
+
 }

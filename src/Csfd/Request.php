@@ -2,8 +2,6 @@
 
 namespace Csfd;
 
-use Symfony\Component\DomCrawler\Crawler;
-
 
 class Request
 {
@@ -17,8 +15,12 @@ class Request
 
 	static $maxRedirects = 10;
 
+	static $_dbgCount = 0;
+
 	public function __construct($url, array $args = NULL, $method = self::GET, $cookie = NULL)
 	{
+		self::$_dbgCount++;
+
 		$headers = [
 			"Content-type: application/x-www-form-urlencoded",
 		];
@@ -68,11 +70,11 @@ class Request
 	}
 
 	/**
-	 * @return Crawler
+	 * @return string
 	 */
 	public function getContent()
 	{
-		return new Crawler($this->content);
+		return $this->content;
 	}
 
 	public function getCookie()

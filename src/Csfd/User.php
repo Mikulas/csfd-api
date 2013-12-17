@@ -10,15 +10,15 @@ class User extends Entity
 
 	protected $id;
 
-	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, $id)
+	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, Parsers\Parser $parser, $id)
 	{
-		parent::__construct($auth, $urlBuilder);
+		parent::__construct($auth, $urlBuilder, $parser);
 		$this->id = $id;
 	}
 
 	public function getProfile()
 	{
-
+		
 	}
 
 }
