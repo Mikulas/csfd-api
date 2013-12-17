@@ -2,23 +2,35 @@
 
 namespace Csfd;
 
-use Symfony\Component\Yaml\Yaml;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 
 class Csfd
 {
 
-	private $config;
-	private $urlBuilder;
-	private $authenticator;
-	private $userId;
+	/** @var ContainerBuilder */
+	private $container;
 
-	public function __construct()
+	/** @var UsersRepository */
+	public $users;
+
+	public function __construct(ContainerBuilder $container)
 	{
-		$raw = file_get_contents(__DIR__ . '/config.yml');
-		$this->config = Yaml::parse($raw);
-		$this->urlBuilder = new UrlBuilder($this->config);
-		$this->authenticator = new Authenticator($this->urlBuilder);
+		$this->container = $container;
+
+		$this->users = $this->container->get('users');
+	}
+
+	public static function create()
+	{
+		$container = new ContainerBuilder();
+		$loader = new YamlFileLoader($container, new FileLocator(__DIR__));
+		$loader->load('services.yml');
+		$container->setParameter('root', __DIR__);
+		$container->compile();
+		return new static($container);
 	}
 
 	// TODO methods with @auth should automatically include
@@ -28,36 +40,17 @@ class Csfd
 	// TODO provide a method for getting authenticated user
 
 	/**
-	 * @auth
-	 * @return User
-	 */
-	public function getAuthenticatedUser()
-	{
-		// TODO move to another method
-		if (!$this->userId)
-		{
-			$res = new Request($this->config['url']['root'], [], Request::GET, $this->authenticator->getCookie());
-			$url = $res->getContent()->filterXPath('//*[@id="user-menu"]/a')->attr('href');
-			$parser = new Parsers\User;
-			$this->userId = $parser->getIdFromUrl($url);
-			echo "set user id\n";
-			var_dump($this->userId);
-		}
-		// TODO create user from userId
-	}
-
-	/**
 	 * Credentials are verified upon first authenticated request
 	 * @param string $username
 	 * @param string $password
 	 */
 	public function authenticate($username, $password)
 	{
-		$this->authenticator->setCredentials($username, $password);
+		$this->container->get('authenticator')->setCredentials($username, $password);
 
-		// TODO dbg, remove
-		$this->getAuthenticatedUser();
-		$this->urlBuilder->addMap('userId', $this->userId);
+		// // TODO dbg, remove
+		// $this->getAuthenticatedUser();
+		// $this->container->get('urlBuilder')->addMap('userId', $this->userId);
 	}
 
 	public function dbg_validateCrendentials()
@@ -67,7 +60,7 @@ class Csfd
 
 	public function dbg_getUser()
 	{
-		return new User($this->authenticator, $this->urlBuilder);
+		// return new User($this->container->get('authenticator'), $this->container->get('urlBuilder'));
 	}
 
 }

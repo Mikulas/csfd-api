@@ -2,21 +2,33 @@
 
 namespace Csfd;
 
+use Symfony\Component\Yaml\Yaml;
+
 
 class UrlBuilder
 {
 
-	const CONFIG = 'url';
-
 	private $urls;
 	private $map;
 
-	public function __construct(array $config)
+	public static function factory($configFile)
+	{
+		var_dump($configFile);
+		$urls = Yaml::parse(file_get_contents($configFile));
+		return new static($urls);
+	}
+
+	public function __construct(array $urls)
 	{
 		// TODO validate config
 		//  - probably when passed to Csfd
-		$this->urls = $config[self::CONFIG];
+		$this->urls = $urls;
 		$this->map = [];
+	}
+
+	public function getRoot()
+	{
+		return $this->urls['root'];
 	}
 
 	public function get(array $path)
@@ -27,7 +39,7 @@ class UrlBuilder
 		{
 			if (!isset($node[$key]))
 			{
-				throw new \Exception("Path '" . self::CONFIG . ':' . implode(':', $path) . "' not found in config, error at '$key'."); // @TODO
+				throw new \Exception("Path '" . implode(':', $path) . "' not found in config, error at '$key'."); // @TODO
 			}
 			$node = $node[$key];
 		}

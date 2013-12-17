@@ -12,6 +12,12 @@ class Authenticator
 	private $username;
 	private $password;
 
+	/**
+	 * id of authenticated user
+	 * @var int|NULL
+	 */
+	private $userId;
+
 	public function __construct(UrlBuilder $urlBuilder)
 	{
 		$this->setUrlBuilder($urlBuilder);
@@ -47,8 +53,6 @@ class Authenticator
 
 		$res = Request::withoutRedirect($url, $args, Request::POST);
 
-		file_put_contents('tmp.html', $res->getContent()->html());
-
 		$errors = $res->getContent()->filterXPath('//*[@class="errors"]/ul/li');
 		if ($errors->count())
 		{
@@ -56,7 +60,33 @@ class Authenticator
 		}
 
 		$this->cookie = $res->getCookie();
+
+		$this->setUserId();
+		$this->urlBuilder->addMap('userId', $this->userId);
+
 		return $this->cookie;
+	}
+
+	/**
+	 * @return int|NULL User id of authenticated user or NULL
+	 */
+	public function getUserId()
+	{
+		if ($this->userId === NULL)
+		{
+			$this->getCookie(); // triggers setter
+		}
+		return $this->userId;
+	}
+
+	private function setUserId()
+	{
+		$cookie = $this->cookie; // intentionally not calling getCookie()
+		$res = new Request($this->urlBuilder->getRoot(), [], Request::GET, $cookie);
+		$url = $res->getContent()->filterXPath('//*[@id="user-menu"]/a')->attr('href');
+		
+		$parser = new Parsers\User; // TODO inject
+		$this->userId = $parser->getIdFromUrl($url);
 	}
 
 }

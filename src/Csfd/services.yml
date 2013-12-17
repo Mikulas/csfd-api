@@ -1,0 +1,15 @@
+
+services:
+    urlBuilder:
+        class: 'Csfd\UrlBuilder'
+        factory_class: 'Csfd\UrlBuilder'
+        factory_method: 'factory'
+        arguments: ['%root%/urls.yml']
+    authenticator:
+        class: 'Csfd\Authenticator'
+        arguments: ['@urlBuilder']
+    users:
+        class: 'Csfd\Repositories\Users'
+        arguments: ['@authenticator', '@urlBuilder']
+        calls:
+            - [setEntityClass, ['Csfd\User']]

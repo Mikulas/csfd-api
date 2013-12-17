@@ -14,6 +14,17 @@ trait UrlAccess
 	}
 
 	/**
+	 * Path in urls configuration to key
+	 * @return array of keys
+	 */
+	protected function getConfigKeys()
+	{
+		$path = explode('\\', strToLower(get_class($this)));
+		$path = array_splice($path, 1); // remove first (Csfd)
+		return $path;
+	}
+
+	/**
 	 * Gets url from config. Prepends root url.
 	 * Traverses config by class namespace under Csfd.
 	 * @param string $key
@@ -26,8 +37,7 @@ trait UrlAccess
 			throw new \Exception('urlBuilder not set'); // TODO
 		}
 
-		$path = explode('\\', strToLower(get_class($this)));
-		$path = array_splice($path, 1); // remove first (Csfd)
+		$path = $this->getConfigKeys();
 		array_push($path, $key);
 		return $this->urlBuilder->get($path);
 	}

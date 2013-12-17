@@ -1,0 +1,6 @@
+root: 'https://www.csfd.cz/'
+authenticator:
+    login: 'prihlaseni/prihlaseni/?do=form-submit'
+user:
+    profileToken: 'uzivatel/{$userId}/profile-edit/'
+    profileEdit: 'uzivatel/{$userId}/profile-edit/?do=profileForm-submit'
