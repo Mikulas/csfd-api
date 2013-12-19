@@ -12,7 +12,7 @@ services:
         class: Csfd\Repositories\Users
         arguments: [@authenticator, @urlBuilder]
         calls:
-            - [setEntityClass, [Csfd\User]]
+            - [setEntityClass, [Csfd\Entities\User]]
             - [setParserClass, [Csfd\Parsers\User]]
     parsers:
         user:

@@ -1,6 +1,12 @@
 <?php
 
-namespace Csfd;
+namespace Csfd\Entities;
+
+use Csfd\Authenticator;
+use Csfd\Parsers\Parser;
+use Csfd\Request;
+use Csfd\UrlAccess;
+use Csfd\UrlBuilder;
 
 
 abstract class Entity
@@ -11,7 +17,7 @@ abstract class Entity
 	private $auth;
 	private $parser;
 
-	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, Parsers\Parser $parser)
+	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, Parser $parser)
 	{
 		$this->auth = $auth;
 		$this->setUrlBuilder($urlBuilder);

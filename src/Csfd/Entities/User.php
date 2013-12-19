@@ -1,6 +1,10 @@
 <?php
 
-namespace Csfd;
+namespace Csfd\Entities;
+
+use Csfd\Authenticator;
+use Csfd\Parsers\Parser;
+use Csfd\UrlBuilder;
 
 
 class User extends Entity
@@ -10,7 +14,7 @@ class User extends Entity
 
 	protected $id;
 
-	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, Parsers\Parser $parser, $id)
+	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, Parser $parser, $id)
 	{
 		parent::__construct($auth, $urlBuilder, $parser);
 		$this->id = $id;

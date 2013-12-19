@@ -1,6 +1,8 @@
 <?php
 
-namespace Csfd;
+namespace Csfd\Entities;
+
+use Csfd\Request;
 
 
 class AuthenticatedUser extends User

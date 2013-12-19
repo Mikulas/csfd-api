@@ -1,6 +1,6 @@
 <?php
 
-namespace Csfd;
+namespace Csfd\Entities;
 
 
 class Message

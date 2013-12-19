@@ -2,7 +2,7 @@
 
 namespace Csfd\Repositories;
 
-use Csfd\AuthenticatedUser;
+use Csfd\Entities\AuthenticatedUser;
 
 
 class Users extends Repository
