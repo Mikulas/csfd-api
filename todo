@@ -1,5 +1,7 @@
 // zacit psat testy
 
+// fix parses\bootstrap.php being only used by Parser
+
 // validat yml with http://symfony.com/doc/current/components/config/definition.html#validating-configuration-values
 
 // - v repository udelat search
