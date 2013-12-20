@@ -8,6 +8,8 @@ if (extension_loaded('xdebug'))
 	Tester\CodeCoverage\Collector::start(__DIR__ . '/coverage.dat');
 }
 
+$urlsPath = __DIR__ . '/../src/Csfd/urls.yml';
+
 class Assert extends Tester\Assert
 {
 

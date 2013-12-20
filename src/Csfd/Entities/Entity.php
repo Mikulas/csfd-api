@@ -2,7 +2,7 @@
 
 namespace Csfd\Entities;
 
-use Csfd\Authenticator;
+use Csfd\Authentication\Authenticator;
 use Csfd\Parsers\Parser;
 use Csfd\Networking\Request;
 use Csfd\Networking\RequestFactory;

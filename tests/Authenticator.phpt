@@ -23,7 +23,7 @@ if (!$config['account']['password'])
 	Tester\Environment::skip('Password not set.');
 }
 
-$urlBuilder = UrlBuilder::factory(__DIR__ . '/../src/Csfd/urls.yml');
+$urlBuilder = UrlBuilder::factory($urlsPath);
 
 $rf = new RequestFactory;
 $rf->setRequestClass('Csfd\Networking\Request');

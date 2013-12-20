@@ -5,6 +5,7 @@ namespace Csfd\Repositories;
 use Csfd\Authentication\Authenticator;
 use Csfd\Networking\RequestFactory;
 use Csfd\Networking\UrlBuilder;
+use Csfd\InternalException;
 
 
 abstract class Repository
@@ -39,12 +40,22 @@ abstract class Repository
 
 	public function get($id)
 	{
-		$class = $this->$entityClass;
+		if (!$this->entityClass)
+		{
+			throw new InternalException('Entity class is not set. Hint: call setEntityClass.');
+		}
+
+		$class = $this->entityClass;
 		return new $class($this->authenticator, $this->urlBuilder, $this->getParser(), $this->requestFactory, $id);
 	}
 
 	public function getParser()
 	{
+		if (!$this->parserClass)
+		{
+			throw new InternalException('Parser class is not set. Hint: call setParserClass.');
+		}
+
 		if (!$this->parser)
 		{
 			$class = $this->parserClass;
