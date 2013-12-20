@@ -13,8 +13,6 @@ class Request
 	private $headers;
 	private $statusCode;
 
-	static $maxRedirects = 10;
-
 	static $_dbgCount = 0;
 
 	public function __construct($url, array $args = NULL, $method = self::GET, $cookie = NULL)
@@ -32,7 +30,6 @@ class Request
 		$polo = ['http' => [
 			'method' => $method,
 			'header'=> implode("\r\n", $headers),
-			'max_redirects' => self::$maxRedirects,
 			'ignore_errors' => TRUE, // will handle it manually
 		]];
 		if ($args)
@@ -58,16 +55,6 @@ class Request
 			$headers[$key][] = $value;
 		}
 		$this->headers = $headers;
-	}
-
-	/** @TODO remove, not used */
-	public static function withoutRedirect($url, array $args = NULL, $method = self::GET, $cookie = NULL)
-	{
-		$tmp = self::$maxRedirects;
-		self::$maxRedirects = 0;
-		$res = new self($url, $args, $method, $cookie);
-		self::$maxRedirects = $tmp;
-		return $res;
 	}
 
 	/**
