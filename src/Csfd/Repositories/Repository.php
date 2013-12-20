@@ -4,6 +4,7 @@ namespace Csfd\Repositories;
 
 use Csfd\Authenticator;
 use Csfd\UrlBuilder;
+use Csfd\Networking\RequestFactory;
 
 
 abstract class Repository
@@ -11,6 +12,7 @@ abstract class Repository
 
 	protected $authenticator;
 	protected $urlBuilder;
+	protected $requestFactory;
 
 	protected $entityClass;
 	protected $parserClass;
@@ -18,10 +20,11 @@ abstract class Repository
 	/** singleton of $parserClass */
 	private $parser;
 
-	public function __construct(Authenticator $authenticator, UrlBuilder $urlBuilder)
+	public function __construct(Authenticator $authenticator, UrlBuilder $urlBuilder, RequestFactory $requestFactory)
 	{
 		$this->authenticator = $authenticator;
 		$this->urlBuilder = $urlBuilder;
+		$this->requestFactory = $requestFactory;
 	}
 
 	public function setEntityClass($entityClass)
@@ -37,7 +40,7 @@ abstract class Repository
 	public function get($id)
 	{
 		$class = $this->$entityClass;
-		return new $class($this->authenticator, $this->urlBuilder, $this->getParser(), $id);
+		return new $class($this->authenticator, $this->urlBuilder, $this->getParser(), $this->requestFactory, $id);
 	}
 
 	public function getParser()

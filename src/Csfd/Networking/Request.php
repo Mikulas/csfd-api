@@ -1,6 +1,6 @@
 <?php
 
-namespace Csfd;
+namespace Csfd\Networking;
 
 
 class Request
@@ -60,6 +60,7 @@ class Request
 		$this->headers = $headers;
 	}
 
+	/** @TODO remove, not used */
 	public static function withoutRedirect($url, array $args = NULL, $method = self::GET, $cookie = NULL)
 	{
 		$tmp = self::$maxRedirects;

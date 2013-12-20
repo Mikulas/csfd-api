@@ -1,12 +1,13 @@
 <?php
 
 use Csfd\Csfd;
-use Csfd\Request;
+use Csfd\Networking\Request;
 
 
 require __DIR__ . '/bootstrap.php';
 
 $csfd = Csfd::create();
+
 // $csfd->authenticate('MikulasDite', 'csfd.asdads');
 $csfd->authenticate('MikulasDite', 'csfd.Rlf_158');
 $user = $csfd->users->getAuthenticatedUser();

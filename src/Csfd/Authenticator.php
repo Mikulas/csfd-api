@@ -2,6 +2,9 @@
 
 namespace Csfd;
 
+use Csfd\Networking\Request;
+use Csfd\Networking\RequestFactory;
+
 
 class Authenticator
 {
@@ -15,16 +18,20 @@ class Authenticator
 	/** @var Parsers\User */
 	private $parser;
 
+	/** @var Networking\RequestFactory */
+	private $requestFactory;
+
 	/**
 	 * id of authenticated user
 	 * @var int|NULL
 	 */
 	private $userId;
 
-	public function __construct(UrlBuilder $urlBuilder, Parsers\User $parser)
+	public function __construct(UrlBuilder $urlBuilder, Parsers\User $parser, RequestFactory $requestFactory)
 	{
 		$this->setUrlBuilder($urlBuilder);
 		$this->parser = $parser;
+		$this->requestFactory = $requestFactory;
 	}
 
 	public function setCredentials($username, $password)
@@ -55,7 +62,7 @@ class Authenticator
 			'__REFERER__' => 'http://www.csfd.cz/',
 		];
 
-		$res = Request::withoutRedirect($url, $args, Request::POST);
+		$res = $this->requestFactory->create($url, $args, Request::POST);
 
 		// TODO move to parser
 		// $errors = $res->getContent()->filterXPath('//*[@class="errors"]/ul/li');
@@ -87,7 +94,7 @@ class Authenticator
 	private function setUserId()
 	{
 		$cookie = $this->cookie; // intentionally not calling getCookie()
-		$res = new Request($this->urlBuilder->getRoot(), [], Request::GET, $cookie);
+		$res = $this->requestFactory->create($this->urlBuilder->getRoot(), [], Request::GET, $cookie);
 
 		$this->userId = $this->parser->getCurrentUserId($res->getContent());
 		var_dump($this->userId);

@@ -4,7 +4,8 @@ namespace Csfd\Entities;
 
 use Csfd\Authenticator;
 use Csfd\Parsers\Parser;
-use Csfd\Request;
+use Csfd\Networking\Request;
+use Csfd\Networking\RequestFactory;
 use Csfd\UrlAccess;
 use Csfd\UrlBuilder;
 
@@ -16,17 +17,24 @@ abstract class Entity
 
 	private $auth;
 	private $parser;
+	private $requestFactory;
 
-	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, Parser $parser)
+	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, Parser $parser, RequestFactory $requestFactory)
 	{
 		$this->auth = $auth;
 		$this->setUrlBuilder($urlBuilder);
 		$this->parser = $parser;
+		$this->requestFactory = $requestFactory;
 	}
 
 	protected function getParser()
 	{
 		return $this->parser;
+	}
+
+	public function request()
+	{
+		return call_user_func_array([$this->requestFactory, 'create'], func_get_args());
 	}
 
 	/**
@@ -39,7 +47,7 @@ abstract class Entity
 	 */
 	public function authRequest($url, array $args = NULL, $method = Request::GET)
 	{
-		return new Request($url, $args, $method, $this->auth->getCookie());
+		return $this->request($url, $args, $method, $this->auth->getCookie());
 	}
 
 }

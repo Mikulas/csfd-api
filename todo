@@ -1,7 +1,7 @@
+// move url under networking
+
+
 // - v repository udelat search
-
-// udelat DI request, aby to slo mockovat v testech
-
 // CACHE
 // - na entite uklada potrebne stranky jak Crawler
 // - dale cachovat jednotlive hodnoty a to jako private property na entite

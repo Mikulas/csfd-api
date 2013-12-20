@@ -1,3 +1,6 @@
+parameters:
+    request:
+        class: Csfd\Request
 
 services:
     urlBuilder:
@@ -7,13 +10,17 @@ services:
         arguments: [%root%/urls.yml]
     authenticator:
         class: Csfd\Authenticator
-        arguments: [@urlBuilder, @parsers.user]
+        arguments: [@urlBuilder, @parsers.user, @networking]
     users:
         class: Csfd\Repositories\Users
-        arguments: [@authenticator, @urlBuilder]
+        arguments: [@authenticator, @urlBuilder, @networking]
         calls:
             - [setEntityClass, [Csfd\Entities\User]]
             - [setParserClass, [Csfd\Parsers\User]]
     parsers:
         user:
             class: Csfd\Parsers\User
+    networking:
+        class: Csfd\Networking\RequestFactory
+        calls:
+            - [setRequestClass, [Csfd\Networking\Request]]

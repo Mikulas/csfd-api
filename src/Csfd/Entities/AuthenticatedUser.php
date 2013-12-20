@@ -2,7 +2,7 @@
 
 namespace Csfd\Entities;
 
-use Csfd\Request;
+use Csfd\Networking\Request;
 
 
 class AuthenticatedUser extends User
