@@ -3,6 +3,7 @@
 namespace Csfd\Parsers;
 
 use Symfony\Component\DomCrawler\Crawler;
+use Csfd\InternalException;
 
 
 abstract class Parser
@@ -17,7 +18,13 @@ abstract class Parser
 
 	protected function getValue($subject, $pattern)
 	{
-		return $this->match($subject, $pattern)['value'];
+		$res = $this->match($subject, $pattern);
+		$key = 'value';
+		if (!isset($res[$key]))
+		{
+			throw new InternalException("Pattern `$pattern` does not contain matching group `$key`. Hint: `(?P<$key>)`.");
+		}
+		return $res[$key];
 	}
 
 	protected function getNode($html, $xpath)
@@ -28,7 +35,20 @@ abstract class Parser
 	
 	public function getFormToken($html, $formId)
 	{
-		return $this->getNode($html, '//form[@id="' . $formId . '"]//*[@name="_token_"]')->attr('value');
+		$form = $this->getNode($html, '//form[@id="' . $formId . '"]');
+		if ($form->count() === 0)
+		{
+			throw new Exception("Form [id=$formId] not found.");
+		}
+
+		$tokenField = '_token_';
+		$token = $form->filterXPath('//*[@name="' . $tokenField . '"]');
+		if ($token->count() === 0)
+		{
+			throw new Exception("Form [id=$formId] does not contain field ` . $tokenField . `.");
+		}
+
+		return $token->attr('value');
 	}
 
 }

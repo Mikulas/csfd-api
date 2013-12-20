@@ -17,13 +17,6 @@ class Csfd
 	/** @var Repositories\Users */
 	public $users;
 
-	public function __construct(ContainerBuilder $container)
-	{
-		$this->container = $container;
-
-		$this->users = $this->container->get('users');
-	}
-
 	public static function create()
 	{
 		$container = new ContainerBuilder();
@@ -32,6 +25,13 @@ class Csfd
 		$container->setParameter('root', __DIR__);
 		$container->compile();
 		return new static($container);
+	}
+
+	public function __construct(ContainerBuilder $container)
+	{
+		$this->container = $container;
+
+		$this->users = $this->container->get('users');
 	}
 
 	// TODO methods with @auth should automatically include

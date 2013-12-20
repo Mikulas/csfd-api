@@ -3,7 +3,6 @@
 use Csfd\Csfd;
 use Csfd\Networking\Request;
 
-
 require __DIR__ . '/bootstrap.php';
 
 $csfd = Csfd::create();
