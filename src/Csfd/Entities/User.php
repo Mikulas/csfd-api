@@ -3,9 +3,9 @@
 namespace Csfd\Entities;
 
 use Csfd\Authenticator;
-use Csfd\Parsers\Parser;
 use Csfd\Networking\RequestFactory;
-use Csfd\UrlBuilder;
+use Csfd\Networking\UrlBuilder;
+use Csfd\Parsers\Parser;
 
 
 class User extends Entity

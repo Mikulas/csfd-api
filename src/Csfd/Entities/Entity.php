@@ -6,8 +6,8 @@ use Csfd\Authenticator;
 use Csfd\Parsers\Parser;
 use Csfd\Networking\Request;
 use Csfd\Networking\RequestFactory;
-use Csfd\UrlAccess;
-use Csfd\UrlBuilder;
+use Csfd\Networking\UrlAccess;
+use Csfd\Networking\UrlBuilder;
 
 
 abstract class Entity

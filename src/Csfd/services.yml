@@ -4,8 +4,8 @@ parameters:
 
 services:
     urlBuilder:
-        class: Csfd\UrlBuilder
-        factory_class: Csfd\UrlBuilder
+        class: Csfd\Networking\UrlBuilder
+        factory_class: Csfd\Networking\UrlBuilder
         factory_method: factory
         arguments: [%root%/urls.yml]
     authenticator:

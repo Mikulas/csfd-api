@@ -2,6 +2,8 @@
 
 namespace Csfd;
 
+use Csfd\Networking\UrlAccess;
+use Csfd\Networking\UrlBuilder;
 use Csfd\Networking\Request;
 use Csfd\Networking\RequestFactory;
 

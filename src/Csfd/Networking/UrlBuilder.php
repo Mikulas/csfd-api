@@ -1,6 +1,6 @@
 <?php
 
-namespace Csfd;
+namespace Csfd\Networking;
 
 use Symfony\Component\Yaml\Yaml;
 

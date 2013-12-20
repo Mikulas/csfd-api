@@ -3,8 +3,8 @@
 namespace Csfd\Repositories;
 
 use Csfd\Authenticator;
-use Csfd\UrlBuilder;
 use Csfd\Networking\RequestFactory;
+use Csfd\Networking\UrlBuilder;
 
 
 abstract class Repository
