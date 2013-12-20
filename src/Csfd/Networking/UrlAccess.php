@@ -2,6 +2,8 @@
 
 namespace Csfd\Networking;
 
+use Csfd\InternalException;
+
 
 trait UrlAccess
 {
@@ -34,7 +36,7 @@ trait UrlAccess
 	{
 		if (!$this->urlBuilder)
 		{
-			throw new \Exception('urlBuilder not set'); // TODO
+			throw new InternalException('UrlBuilder not set, call self::setUrlBuilder.');
 		}
 
 		$path = $this->getConfigKeys();
