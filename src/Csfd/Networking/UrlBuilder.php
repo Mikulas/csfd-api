@@ -3,6 +3,7 @@
 namespace Csfd\Networking;
 
 use Symfony\Component\Yaml\Yaml;
+use Csfd\InternalException;
 
 
 class UrlBuilder
@@ -13,15 +14,34 @@ class UrlBuilder
 
 	public static function factory($configFile)
 	{
-		var_dump($configFile);
+		if (!is_file($configFile))
+		{
+			throw new InternalException("Config file `$configFile` does not exist.");
+		}
+
 		$urls = Yaml::parse(file_get_contents($configFile));
+		if (!self::validate($urls))
+		{
+			throw new InternalException("Config file `$configFile` is not valid.");
+		}
 		return new static($urls);
+	}
+
+	/**
+	 * @param array $definition
+	 * @return bool
+	 */
+	private static function validate(array $definition = NULL)
+	{
+		if (!$definition || !isset($definition['root']) || !is_string($definition['root']))
+		{
+			return FALSE;
+		}
+		return TRUE;
 	}
 
 	public function __construct(array $urls)
 	{
-		// TODO validate config
-		//  - probably when passed to Csfd
 		$this->urls = $urls;
 		$this->map = [];
 	}
@@ -39,7 +59,7 @@ class UrlBuilder
 		{
 			if (!isset($node[$key]))
 			{
-				throw new \Exception("Path '" . implode(':', $path) . "' not found in config, error at '$key'."); // @TODO
+				throw new InternalException("Path '" . implode(':', $path) . "' not found in config, error at '$key'.");
 			}
 			$node = $node[$key];
 		}
@@ -57,15 +77,14 @@ class UrlBuilder
 	 * @param string $url
 	 * @return string url with replaced placeholders
 	 */
-	public function map($url)
+	protected function map($url)
 	{
 		$map = $this->map;
-		var_dump($map);
 		$url = preg_replace_callback('~{\$(?P<name>\w+)}~', function($m) use ($map) {
 			$name = $m['name'];
 			if (!isset($map[$name]))
 			{
-				throw new \Exception("Placeholder {\$$name} not mapped."); // TODO
+				throw new InternalException("Placeholder {\$$name} not mapped."); // TODO
 			}
 			return $map[$name];
 		}, $url);

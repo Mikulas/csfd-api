@@ -1,0 +1,7 @@
+root: 'rootVal/'
+foo:
+    bar: 'fooBarVal'
+baA:
+    baB:
+        baC:
+            baD: 'baABCD'
