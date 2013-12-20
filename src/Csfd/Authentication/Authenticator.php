@@ -2,11 +2,11 @@
 
 namespace Csfd\Authentication;
 
+use Csfd\Networking\Request;
+use Csfd\Networking\RequestFactory;
 use Csfd\Networking\UrlAccess;
 use Csfd\Networking\UrlBuilder;
-use Csfd\Networking\Request;
 use Csfd\Parsers;
-use Csfd\Networking\RequestFactory;
 
 
 class Authenticator

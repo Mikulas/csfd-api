@@ -65,6 +65,9 @@ class Request
 		return $this->content;
 	}
 
+	/**
+	 * @return string http cookie format
+	 */
 	public function getCookie()
 	{
 		if (!isset($this->headers['set-cookie']))

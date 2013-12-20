@@ -16,7 +16,8 @@ trait UrlAccess
 	}
 
 	/**
-	 * Path in urls configuration to key
+	 * Path in urls configuration to key.
+	 * Override if necessary.
 	 * @return array of keys
 	 */
 	protected function getConfigKeys()

@@ -15,7 +15,10 @@ abstract class Repository
 	protected $urlBuilder;
 	protected $requestFactory;
 
+	/** @var string class name */
 	protected $entityClass;
+
+	/** @var string class name */
 	protected $parserClass;
 
 	/** singleton of $parserClass */

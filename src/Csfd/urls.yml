@@ -1,3 +1,7 @@
+# Placeholders:
+# {$userId} int authenticated user id
+#
+
 root: 'https://www.csfd.cz/'
 authentication:
     authenticator:

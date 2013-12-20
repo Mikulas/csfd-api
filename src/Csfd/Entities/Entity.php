@@ -3,11 +3,11 @@
 namespace Csfd\Entities;
 
 use Csfd\Authentication\Authenticator;
-use Csfd\Parsers\Parser;
 use Csfd\Networking\Request;
 use Csfd\Networking\RequestFactory;
 use Csfd\Networking\UrlAccess;
 use Csfd\Networking\UrlBuilder;
+use Csfd\Parsers\Parser;
 
 
 abstract class Entity
@@ -40,6 +40,7 @@ abstract class Entity
 	/**
 	 * Make authenticated request. Might trigger login if
 	 * cookie is not stored yet.
+	 * 
 	 * @param string $url
 	 * @param array $args
 	 * @param string $method Request::GET|POST

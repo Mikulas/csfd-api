@@ -4,7 +4,6 @@ namespace Csfd;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-// use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Csfd\Configuration\YamlFileLoader;
 
 
@@ -34,12 +33,6 @@ class Csfd
 		$this->users = $this->container->get('users');
 	}
 
-	// TODO methods with @auth should automatically include
-	// cookie from authenticator get cookie
-
-	// TODO @auth methods are only called on authenticated user?
-	// TODO provide a method for getting authenticated user
-
 	/**
 	 * Credentials are verified upon first authenticated request
 	 * @param string $username
@@ -48,11 +41,6 @@ class Csfd
 	public function authenticate($username, $password)
 	{
 		$this->container->get('authenticator')->setCredentials($username, $password);
-	}
-
-	public function dbg_validateCrendentials()
-	{
-		$this->authenticator->getCookie();
 	}
 
 }

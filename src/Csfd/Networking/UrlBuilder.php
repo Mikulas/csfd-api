@@ -9,7 +9,10 @@ use Csfd\InternalException;
 class UrlBuilder
 {
 
+	/** @var array urls.yml */
 	private $urls;
+
+	/** @var array [key => value] */
 	private $map;
 
 	public static function factory($configFile)
@@ -46,6 +49,9 @@ class UrlBuilder
 		$this->map = [];
 	}
 
+	/**
+	 * @return string root url with scheme, ending with slash
+	 */
 	public function getRoot()
 	{
 		return $this->urls['root'];
@@ -67,6 +73,11 @@ class UrlBuilder
 		return $this->urls['root'] . $this->map($node);
 	}
 
+	/**
+	 * Variables in format {$key} are replaced
+	 * @param scalar $key
+	 * @param scalar $value
+	 */
 	public function addMap($key, $value)
 	{
 		$this->map[$key] = $value;
