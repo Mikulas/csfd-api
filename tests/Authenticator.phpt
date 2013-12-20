@@ -34,6 +34,10 @@ Assert::null($auth->cookie);
 Assert::null($auth->userId);
 
 Assert::exception(function() use ($auth) {
+	$auth->getUserId();
+}, 'Csfd\Authentication\Exception', Exception::NOT_AUTHENTICATED);
+
+Assert::exception(function() use ($auth) {
 	$auth->getCookie();
 }, 'Csfd\Authentication\Exception', Exception::CREDENTIALS_NOT_SET);
 

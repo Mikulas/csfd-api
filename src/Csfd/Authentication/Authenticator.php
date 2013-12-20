@@ -91,7 +91,12 @@ class Authenticator
 	{
 		if ($this->userId === NULL)
 		{
-			$this->getCookie(); // triggers setter
+			try {
+				$this->getCookie(); // triggers setter
+
+			} catch (Exception $e) {
+				throw new Exception('Not authenticated. Hint: call setCredentials.', Exception::NOT_AUTHENTICATED, $e);
+			}
 		}
 		return $this->userId;
 	}

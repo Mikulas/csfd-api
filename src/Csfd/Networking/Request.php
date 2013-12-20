@@ -67,6 +67,11 @@ class Request
 
 	public function getCookie()
 	{
+		if (!isset($this->headers['set-cookie']))
+		{
+			return '';
+		}
+
 		$cookies = [];
 		foreach ($this->headers['set-cookie'] as $line)
 		{

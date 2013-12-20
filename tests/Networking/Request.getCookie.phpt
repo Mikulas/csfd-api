@@ -8,6 +8,9 @@ require __DIR__ . '/bootstrap.php';
 $res = new Request('http://localhost/');
 $headers = Access($res, '$headers');
 
+$headers->set([]);
+Assert::same('', $res->getCookie());
+
 $headers->set([
 	'set-cookie' => []
 ]);
