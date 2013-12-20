@@ -2,7 +2,7 @@
 
 namespace Foo\Bar\Pax; // tested
 
-use Tester\Assert;
+use Assert;
 use Csfd\Networking\UrlAccess;
 
 require __DIR__ . '/bootstrap.php';

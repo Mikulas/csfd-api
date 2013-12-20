@@ -1,6 +1,5 @@
 <?php
 
-use Tester\Assert;
 use Csfd\Networking\UrlBuilder;
 
 require __DIR__ . '/bootstrap.php';

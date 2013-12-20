@@ -8,4 +8,18 @@ if (extension_loaded('xdebug'))
 	Tester\CodeCoverage\Collector::start(__DIR__ . '/coverage.dat');
 }
 
+class Assert extends Tester\Assert
+{
+
+	public static function exception($function, $class, $code = NULL)
+	{
+		$e = parent::exception($function, $class);
+		if ($code)
+		{
+			self::same($code, $e->getCode());
+		}
+	}
+
+}
+
 Tester\Helpers::setup();

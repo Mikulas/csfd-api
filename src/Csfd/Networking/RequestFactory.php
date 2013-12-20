@@ -15,6 +15,8 @@ class RequestFactory
 
 	public function create()
 	{
+		// TODO check if set
+
 		$reflect  = new \ReflectionClass($this->requestClass);
 		return $reflect->newInstanceArgs(func_get_args());
 	}

@@ -1,5 +1,7 @@
 // zacit psat testy
 
+// validat yml with http://symfony.com/doc/current/components/config/definition.html#validating-configuration-values
+
 // - v repository udelat search
 // CACHE
 // - na entite uklada potrebne stranky jak Crawler
@@ -8,3 +10,6 @@
 // - jak resit, kdyz se jedno dato da sehnat z vic zdroju?
 //      - u kazdeho getteru bude v annotacich list zdroju, ze kterych to funguje
 //      - chce to teda udelat abstrakci nad url
+
+
+// sort usings

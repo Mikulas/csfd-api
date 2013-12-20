@@ -1,10 +1,11 @@
 <?php
 
-namespace Csfd;
+namespace Csfd\Authentication;
 
 use Csfd\Networking\UrlAccess;
 use Csfd\Networking\UrlBuilder;
 use Csfd\Networking\Request;
+use Csfd\Parsers;
 use Csfd\Networking\RequestFactory;
 
 
@@ -18,7 +19,10 @@ class Authenticator
 	private $password;
 
 	/** @var Parsers\User */
-	private $parser;
+	private $userParser;
+
+	/** @var Parsers\Authentication */
+	private $authParser;
 
 	/** @var Networking\RequestFactory */
 	private $requestFactory;
@@ -29,10 +33,11 @@ class Authenticator
 	 */
 	private $userId;
 
-	public function __construct(UrlBuilder $urlBuilder, Parsers\User $parser, RequestFactory $requestFactory)
+	public function __construct(UrlBuilder $urlBuilder, Parsers\User $userParser, Parsers\Authentication $authParser, RequestFactory $requestFactory)
 	{
 		$this->setUrlBuilder($urlBuilder);
-		$this->parser = $parser;
+		$this->userParser = $userParser;
+		$this->authParser = $authParser;
 		$this->requestFactory = $requestFactory;
 	}
 
@@ -51,7 +56,7 @@ class Authenticator
 
 		if (!$this->username || !$this->password)
 		{
-			throw new \Exception('self::setCredentials never called or called with empty args'); // TODO
+			throw new Exception('Credentials not set. Hint: call setCredentials().', Exception::CREDENTIALS_NOT_SET);
 		}
 
 		$url = $this->getUrl('login');
@@ -66,13 +71,11 @@ class Authenticator
 
 		$res = $this->requestFactory->create($url, $args, Request::POST);
 
-		// TODO move to parser
-		// $errors = $res->getContent()->filterXPath('//*[@class="errors"]/ul/li');
-		// if ($errors->count())
-		// {
-		// 	throw new \Exception($errors->text()); // TODO
-		// }
-
+		if ($this->authParser->containsError($res->getContent()))
+		{
+			throw new Exception('Invalid credentials.', Exception::INVALID_CREDENTIALS);
+		}
+		
 		$this->cookie = $res->getCookie();
 
 		$this->setUserId();
@@ -98,12 +101,7 @@ class Authenticator
 		$cookie = $this->cookie; // intentionally not calling getCookie()
 		$res = $this->requestFactory->create($this->urlBuilder->getRoot(), [], Request::GET, $cookie);
 
-		$this->userId = $this->parser->getCurrentUserId($res->getContent());
-		var_dump($this->userId);
-
-		// $url = $res->getContent()->filterXPath('//*[@id="user-menu"]/a')->attr('href');
-		// $parser = new Parsers\User; // TODO inject
-		// $this->userId = $parser->getIdFromUrl($url);
+		$this->userId = $this->userParser->getCurrentUserId($res->getContent());
 	}
 
 }

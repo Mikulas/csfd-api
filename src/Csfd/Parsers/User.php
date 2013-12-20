@@ -2,8 +2,6 @@
 
 namespace Csfd\Parsers;
 
-use Symfony\Component\DomCrawler\Crawler;
-
 
 class User extends Parser
 {
@@ -15,7 +13,11 @@ class User extends Parser
 	public function getCurrentUserId($html)
 	{
 		$anchor = $this->getNode($html, '//*[@id="user-menu"]/a');
-		// TODO check if found
+		if (!$anchor->count())
+		{
+			throw new Exception('Passed html page does not contain expected node with user id.');
+		}
+
 		return $this->getIdFromUrl($anchor->attr('href'));
 	}
 

@@ -2,7 +2,7 @@
 
 namespace Bar; // tested
 
-use Tester\Assert;
+use Assert;
 use Csfd\Networking\UrlAccess;
 use Csfd\Networking\UrlBuilder;
 
