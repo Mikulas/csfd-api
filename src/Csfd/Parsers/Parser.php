@@ -38,14 +38,14 @@ abstract class Parser
 		$form = $this->getNode($html, '//form[@id="' . $formId . '"]');
 		if ($form->count() === 0)
 		{
-			throw new Exception("Form [id=$formId] not found.");
+			throw new Exception("Form [id=$formId] not found.", Exception::FORM_NOT_FOUND);
 		}
 
 		$tokenField = '_token_';
 		$token = $form->filterXPath('//*[@name="' . $tokenField . '"]');
 		if ($token->count() === 0)
 		{
-			throw new Exception("Form [id=$formId] does not contain field ` . $tokenField . `.");
+			throw new Exception("Form [id=$formId] does not contain field ` . $tokenField . `.", Exception::TOKEN_NOT_FOUND);
 		}
 
 		return $token->attr('value');
