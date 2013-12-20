@@ -2,6 +2,8 @@
 
 namespace Csfd\Networking;
 
+use Csfd\InternalException;
+
 
 class RequestFactory
 {
@@ -15,7 +17,10 @@ class RequestFactory
 
 	public function create()
 	{
-		// TODO check if set
+		if (!$this->requestClass)
+		{
+			throw new InternalException('Request class is not set. Hint: call setRequestClass.');
+		}
 
 		$reflect  = new \ReflectionClass($this->requestClass);
 		return $reflect->newInstanceArgs(func_get_args());
