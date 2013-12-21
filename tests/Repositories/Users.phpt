@@ -9,6 +9,8 @@ use Csfd\Authentication\Authenticator;
 
 require __DIR__ . '/../bootstrap.php';
 
+covers('Csfd\Repositories\Users');
+
 class MockAuthenticator extends Authenticator
 {
 	public $loggedIn = FALSE;

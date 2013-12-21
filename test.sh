@@ -1,4 +1,5 @@
 #/bin/sh
+rm -rf tests/coverage.dat
 vendor/bin/tester \
 	-p /usr/local/php5/bin/php \
 	-c /usr/local/php5/lib \

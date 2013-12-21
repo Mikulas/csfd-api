@@ -4,6 +4,7 @@ use Csfd\Networking\Request;
 
 require __DIR__ . '/bootstrap.php';
 
+covers('Csfd\Networking\Request');
 
 $res = new Request('http://localhost/');
 $headers = Access($res, '$headers');

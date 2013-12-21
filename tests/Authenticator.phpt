@@ -9,6 +9,8 @@ use Csfd\Parsers;
 
 require __DIR__ . '/bootstrap.php';
 
+covers('Csfd\Authentication\Authenticator');
+
 $config = Yaml::parse(file_get_contents(__DIR__ . '/config.yml'));
 
 $localFile = __DIR__ . '/config.local.yml';

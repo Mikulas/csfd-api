@@ -3,7 +3,9 @@
 use Csfd\Parsers;
 use Csfd\Parsers\Exception;
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/../bootstrap.php';
+
+covers('Csfd\Parsers\User');
 
 $parser = new Parsers\User;
 

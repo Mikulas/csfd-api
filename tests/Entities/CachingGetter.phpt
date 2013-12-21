@@ -4,6 +4,8 @@ use Csfd\Entities\CachingGetter;
 
 require __DIR__ . '/../bootstrap.php';
 
+covers('Csfd\Entities\CachingGetter');
+
 class Foo
 {
 	use CachingGetter;

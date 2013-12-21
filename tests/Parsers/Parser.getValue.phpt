@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/bootstrap.parser.php';
 
 
 $res = $parser->getValue('x.Ax', '~\.(?P<value>\w)~');

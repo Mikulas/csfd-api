@@ -4,6 +4,8 @@ use Csfd\Networking\UrlBuilder;
 
 require __DIR__ . '/bootstrap.php';
 
+covers('Csfd\Networking\UrlBuilder');
+
 Assert::exception(function() {
 	UrlBuilder::factory(__DIR__ . '/config-does-not-exist.yml');
 }, 'Csfd\InternalException');

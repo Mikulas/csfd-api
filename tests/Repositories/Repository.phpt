@@ -8,6 +8,8 @@ use Csfd\Authentication\Authenticator;
 
 require __DIR__ . '/../bootstrap.php';
 
+covers('Csfd\Repositories\Repository');
+
 class TestRepository extends Repository {}
 
 

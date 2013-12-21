@@ -4,6 +4,7 @@ use Csfd\Parsers\Parser;
 
 require __DIR__ . '/../bootstrap.php';
 
+covers('Csfd\Parsers\Parser');
 
 class TestParser extends Parser {}
 

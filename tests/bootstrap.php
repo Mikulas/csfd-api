@@ -1,11 +1,22 @@
 <?php
 
+use Csfd\CodeCoverage\Collector;
+
 $loader = require __DIR__ . '/../vendor/autoload.php';
 $loader->add('Csfd', __DIR__ . '/../src');
 
+require __DIR__ . '/Collector.php';
+
 if (extension_loaded('xdebug'))
 {
-	Tester\CodeCoverage\Collector::start(__DIR__ . '/coverage.dat');
+	Collector::start(__DIR__ . '/coverage.dat');
+}
+
+// assumes PSR-0
+function covers($class)
+{
+	$file = str_replace('\\', '/', $class) . '.php';
+	Collector::$coveredFiles[] = realpath(__DIR__ . "/../src/$file");
 }
 
 $urlsPath = __DIR__ . '/../src/Csfd/urls.yml';

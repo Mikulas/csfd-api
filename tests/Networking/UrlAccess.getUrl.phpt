@@ -8,6 +8,8 @@ use Csfd\Networking\UrlBuilder;
 
 require __DIR__ . '/bootstrap.php';
 
+covers('Csfd\Networking\UrlAccess');
+
 class Foo
 {
 	use UrlAccess;

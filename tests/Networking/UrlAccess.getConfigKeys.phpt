@@ -7,6 +7,8 @@ use Csfd\Networking\UrlAccess;
 
 require __DIR__ . '/bootstrap.php';
 
+covers('Csfd\Networking\UrlAccess');
+
 class Tested
 {
 	use UrlAccess;

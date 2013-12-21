@@ -10,6 +10,8 @@ use Csfd\Entities\Entity;
 
 require __DIR__ . '/../bootstrap.php';
 
+covers('Csfd\Entities\Entity');
+
 class TestEntity extends Entity
 {
 	public function _getFoo()

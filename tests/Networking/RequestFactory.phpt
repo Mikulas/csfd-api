@@ -4,6 +4,7 @@ use Csfd\Networking\RequestFactory;
 
 require __DIR__ . '/bootstrap.php';
 
+covers('Csfd\Networking\RequestFactory');
 
 class MockRequest extends Csfd\Networking\Request
 {

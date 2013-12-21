@@ -4,6 +4,7 @@ use Csfd\Networking\UrlBuilder;
 
 require __DIR__ . '/bootstrap.php';
 
+covers('Csfd\Networking\UrlBuilder');
 
 $urlBuilder = UrlBuilder::factory(__DIR__ . '/fixtures/valid.yml');
 Assert::same('rootVal/fooBarVal', $urlBuilder->get(['foo', 'bar']));

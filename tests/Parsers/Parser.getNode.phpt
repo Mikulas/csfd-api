@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/bootstrap.parser.php';
 
 
 $found = $parser->getNode($html, '//*[@id="foo"]');

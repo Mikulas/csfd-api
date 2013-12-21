@@ -2,7 +2,7 @@
 
 use Csfd\Parsers\Exception;
 
-require __DIR__ . '/bootstrap.php';
+require __DIR__ . '/bootstrap.parser.php';
 
 
 Assert::exception(function() use ($parser, $html) {
