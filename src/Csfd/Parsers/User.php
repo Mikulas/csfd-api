@@ -39,12 +39,117 @@ class User extends Parser
 		}
 	}
 
-	/**
-	 * @return string html
-	 */
+	/** @return string html */
 	public function getProfile($html)
 	{
-		return $this->getNode($html, '//*[@class="user-profile"]')->text();
+		return $this->getNode($html, '//*[@class="user-profile"]')->html();
 	}
-	
+
+	/** @return string */
+	public function getUsername($html)
+	{
+		return $this->getNode($html, '//*[@class="info"]/h2')->text();
+	}
+
+	/** @return array of strings */
+	private function getNames($html)
+	{
+		$fullName = $this->getNode($html, '//*[@class="info"]/h3')->text();
+		return explode(' ', $fullName);
+	}
+
+	/** @return string */
+	public function getFirstName($html)
+	{
+		foreach ($this->getNames($html) as $name)
+		{
+			return $name;
+		}
+	}
+
+	/** @return string */
+	public function getLastName($html)
+	{
+		$names = $this->getNames($html);
+		return end($names);
+	}
+
+	/** @return array of strings */
+	private function getAboutNodes($html)
+	{
+		$text = $this->getNode($html, '//*[@class="info"]/p')->html();
+		return $this->splitByBr($text);
+	}
+
+	/** @return string */
+	public function getLocation($html)
+	{
+		return trim($this->getAboutNodes($html)[0]);
+	}
+
+	/** @return string */
+	public function getAbout($html)
+	{
+		return trim($this->getAboutNodes($html)[1]);
+	}
+
+	/** @return array [method => string] */
+	public function getContact($html)
+	{
+		$node = $this->getNode($html, '//*[@class="contact"]');
+		$nodes = $this->splitByBr($node->html());
+		$contact = [];
+		foreach ($nodes as $node)
+		{
+			if (strpos($node, '">homepage</a>') === FALSE && strpos($node, ':') !== FALSE)
+			{
+				list($method, $value) = explode(':', $node, 2);
+				$method = strToLower(trim($method));
+				$contact[$method] = trim(strip_tags($value));
+			}
+		}
+		// TODO process homepage
+		// TODO process email
+		return $contact;
+	}
+
+	/** @return int */
+	public function getPoints($html)
+	{
+		return (int) $this->getNode($html, '//*[@class="points"]')->text();
+	}
+
+	private function getActivity($html)
+	{
+		$text = $this->getNode($html, '//*[@class="activity"]')->html();
+		var_dump($text);
+		return $this->splitByBr($text);
+	}
+
+	/** @return DateTime */
+	public function getRegistered($html)
+	{
+		$text = $this->getActivity($html)[0];
+		$text = substr(trim($text), mb_strlen('Na ČSFD.cz od: '));
+		return $this->parseCzechDateTime($text);
+	}
+
+	/**
+	 * @return DateTime|NULL|TRUE
+	 * TRUE if user is currently online
+	 * NULL if information is not available
+	 */
+	public function getLastActivity($html)
+	{
+		return NULL;
+		// TODO handle relative czech date (replace dnes with today, strToTime)
+		$text = $this->getActivity($html)[1];
+	}
+
+	public function getAvatarUrl($html)
+	{
+		$url = $this->getNode($html, '//img[@class="avatar"]')->attr('src');
+		return $this->normalizeUrl($url);
+	}
+
 }

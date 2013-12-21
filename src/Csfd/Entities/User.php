@@ -9,7 +9,17 @@ use Csfd\Parsers\Parser;
 
 
 /**
- * @method string getProfile()
+ * @method string getProfile() html
+ * @method string getUsername()
+ * @method string getFirstName()
+ * @method string getLastName()
+ * @method string getLocation()
+ * @method string getAbout()
+ * @method array getContact() [method => string]
+ * @method int getPoints()
+ * @method DateTime getRegistered()
+ * @method DateTime getLastActivity() REQUIRES AUTH
+ * @method string getAvatarUrl() url
  */
 class User extends Entity
 {
@@ -27,10 +37,16 @@ class User extends Entity
 		// TODO check if user exists?
 	}
 
-	protected function _getProfile()
+	protected function _get($property, $args = NULL)
 	{
+		$args = func_get_args();
+		array_shift($args);
+
 		$html = $this->request($this->getUrl('profile'))->getContent();
-		return $this->getParser()->getProfile($html);
+		array_unshift($args, $html);
+
+		$method = 'get' . ucFirst($property);
+		return call_user_func_array([$this->getParser(), $method], $args);
 	}
 
 }

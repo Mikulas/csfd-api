@@ -4,6 +4,7 @@ namespace Csfd\Parsers;
 
 use Symfony\Component\DomCrawler\Crawler;
 use Csfd\InternalException;
+use DateTime;
 
 
 abstract class Parser
@@ -25,6 +26,12 @@ abstract class Parser
 			throw new InternalException("Pattern `$pattern` does not contain matching group `$key`. Hint: `(?P<$key>)`.");
 		}
 		return $res[$key];
+	}
+
+	/** @return array of strings */
+	protected function splitByBr($text)
+	{
+		return preg_split('~\s*<br\s*/?>\s*~i', $text);
 	}
 
 	protected function getNode($html, $xpath)
@@ -56,6 +63,21 @@ abstract class Parser
 		}
 
 		return $token->attr('value');
+	}
+
+	protected function parseCzechDateTime($string)
+	{
+		return DateTime::createFromFormat('j.n.Y*H:i', $string);
+	}
+
+	/**
+	 * @param string $url
+	 * @return string url
+	 */
+	protected function normalizeUrl($url)
+	{
+		$url = preg_replace('~^//~', 'http://', $url);
+		return $url;
 	}
 
 }

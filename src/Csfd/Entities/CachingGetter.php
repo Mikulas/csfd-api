@@ -34,6 +34,14 @@ trait CachingGetter
 				$this->cache[$method] = $res;
 				return $res;
 			}
+			else if (method_exists($this, '_get'))
+			{
+				$property = substr($method, strlen('get'));
+				array_unshift($args, $property);
+				$res = call_user_func_array([$this, '_get'], $args);
+				$this->cache[$method] = $res;
+				return $res;
+			}
 		}
 
 		$class = get_class($this);
