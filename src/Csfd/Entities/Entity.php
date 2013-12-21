@@ -20,12 +20,15 @@ abstract class Entity
 	private $parser;
 	private $requestFactory;
 
-	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, Parser $parser, RequestFactory $requestFactory)
+	protected $id;
+
+	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, Parser $parser, RequestFactory $requestFactory, $id)
 	{
 		$this->auth = $auth;
 		$this->setUrlBuilder($urlBuilder);
 		$this->parser = $parser;
 		$this->requestFactory = $requestFactory;
+		$this->id = $id;
 	}
 
 	protected function getParser()
@@ -50,6 +53,23 @@ abstract class Entity
 	public function authRequest($url, array $args = NULL, $method = Request::GET)
 	{
 		return $this->request($url, $args, $method, $this->auth->getCookie());
+	}
+
+	protected function _get($property, $args = NULL)
+	{
+		$args = func_get_args();
+		array_shift($args);
+
+		$html = $this->request($this->getUrl($this->getUrlKey($property), ["entityId" => $this->id]))->getContent();
+		array_unshift($args, $html);
+
+		$method = 'get' . ucFirst($property);
+		return call_user_func_array([$this->getParser(), $method], $args);
+	}
+
+	protected function getUrlKey($property)
+	{
+		return 'default';
 	}
 
 }

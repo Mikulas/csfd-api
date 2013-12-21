@@ -33,7 +33,7 @@ trait UrlAccess
 	 * @param string $key
 	 * @return string url
 	 */
-	protected function getUrl($key)
+	protected function getUrl($key, array $args = NULL)
 	{
 		if (!$this->urlBuilder)
 		{
@@ -42,7 +42,7 @@ trait UrlAccess
 
 		$path = $this->getConfigKeys();
 		array_push($path, $key);
-		return $this->urlBuilder->get($path);
+		return $this->urlBuilder->get($path, $args);
 	}
 	
 }

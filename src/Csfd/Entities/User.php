@@ -26,27 +26,9 @@ class User extends Entity
 
 	const USER_CSFD = "\10"; // special "username" for csfd message bot
 
-	protected $id;
-
-	public function __construct(Authenticator $auth, UrlBuilder $urlBuilder, Parser $parser,
-		RequestFactory $requestFactory, $id)
+	protected function getUrlKey($property)
 	{
-		parent::__construct($auth, $urlBuilder, $parser, $requestFactory);
-		$this->id = $id;
-
-		// TODO check if user exists?
-	}
-
-	protected function _get($property, $args = NULL)
-	{
-		$args = func_get_args();
-		array_shift($args);
-
-		$html = $this->request($this->getUrl('profile'))->getContent();
-		array_unshift($args, $html);
-
-		$method = 'get' . ucFirst($property);
-		return call_user_func_array([$this->getParser(), $method], $args);
+		return 'profile';
 	}
 
 }

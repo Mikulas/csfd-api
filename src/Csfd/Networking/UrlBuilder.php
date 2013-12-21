@@ -57,7 +57,7 @@ class UrlBuilder
 		return $this->urls['root'];
 	}
 
-	public function get(array $path)
+	public function get(array $path, array $args = NULL)
 	{
 		$node = $this->urls;
 		$stack = $path; // preserve original for error message
@@ -70,7 +70,7 @@ class UrlBuilder
 			$node = $node[$key];
 		}
 
-		return $this->urls['root'] . $this->map($node);
+		return $this->urls['root'] . $this->map($node, $args);
 	}
 
 	/**
@@ -88,9 +88,9 @@ class UrlBuilder
 	 * @param string $url
 	 * @return string url with replaced placeholders
 	 */
-	protected function map($url)
+	protected function map($url, array $moreMappings = NULL)
 	{
-		$map = $this->map;
+		$map = array_merge($this->map, (array) $moreMappings);
 		$url = preg_replace_callback('~{\$(?P<name>\w+)}~', function($m) use ($map) {
 			$name = $m['name'];
 			if (!isset($map[$name]))

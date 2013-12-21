@@ -1,5 +1,6 @@
 # Placeholders:
 # {$userId} int authenticated user id
+# {$entityId} int id of invoked entity
 #
 
 root: 'https://www.csfd.cz/'
@@ -8,6 +9,8 @@ authentication:
         login: 'prihlaseni/prihlaseni/?do=form-submit'
 entities:
     user:
-        profile: 'uzivatel/{$userId}/'
+        profile: 'uzivatel/{$entityId}/'
         profileToken: 'uzivatel/{$userId}/profile-edit/'
         profileEdit: 'uzivatel/{$userId}/profile-edit/?do=profileForm-submit'
+    movie:
+        default: 'film/{$entityId}/'

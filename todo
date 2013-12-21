@@ -5,7 +5,7 @@
 // udelat movie @auth getRating methodu
 // udelat movie rate @auth methodu
 
-// validat yml with http://symfony.com/doc/current/components/config/definition.html#validating-configuration-values
+// validate yml with http://symfony.com/doc/current/components/config/definition.html#validating-configuration-values
 
 // - v repository udelat search
 // CACHE
@@ -15,6 +15,5 @@
 // - jak resit, kdyz se jedno dato da sehnat z vic zdroju?
 //      - u kazdeho getteru bude v annotacich list zdroju, ze kterych to funguje
 //      - chce to teda udelat abstrakci nad url
-
 
 // sort usings

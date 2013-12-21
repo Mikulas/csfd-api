@@ -26,4 +26,4 @@ $requestFactory->setRequestClass('MockRequest');
 $parser = new Parsers\User;
 $auth = new MockAuthenticator;
 
-$entity = Access(new TestEntity($auth, $urlBuilder, $parser, $requestFactory));
+$entity = Access(new TestEntity($auth, $urlBuilder, $parser, $requestFactory, 1));
