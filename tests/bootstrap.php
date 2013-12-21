@@ -1,6 +1,7 @@
 <?php
 
 use Csfd\CodeCoverage\Collector;
+use Symfony\Component\Yaml\Yaml;
 
 $loader = require __DIR__ . '/../vendor/autoload.php';
 $loader->add('Csfd', __DIR__ . '/../src');
@@ -18,6 +19,19 @@ function covers($class)
 {
 	$file = str_replace('\\', '/', $class) . '.php';
 	Collector::$coveredFiles[] = realpath(__DIR__ . "/../src/$file");
+}
+
+function getConfig()
+{
+	$config = Yaml::parse(file_get_contents(__DIR__ . '/config.yml'));
+
+	$localFile = __DIR__ . '/config.local.yml';
+	if (is_file($localFile))
+	{
+		$local = Yaml::parse(file_get_contents($localFile));
+		$config = array_replace_recursive($config, $local);
+	}
+	return $config;
 }
 
 $urlsPath = __DIR__ . '/../src/Csfd/urls.yml';

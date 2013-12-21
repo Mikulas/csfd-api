@@ -12,9 +12,13 @@ class Authentication extends Parser
 	 */
 	public function containsError($html)
 	{
-		$errors = $this->getNode($html, '//*[@class="errors"]/ul/li');
+		try {
+			$errors = $this->getNode($html, '//*[@class="errors"]/ul/li');
 
-		return $errors->count();
+		} catch (Exception $e) {
+			return FALSE; // errors not found
+		}
+		return TRUE; // errors found
 	}
 	
 }

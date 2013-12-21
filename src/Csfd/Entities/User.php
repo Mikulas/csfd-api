@@ -23,11 +23,14 @@ class User extends Entity
 	{
 		parent::__construct($auth, $urlBuilder, $parser, $requestFactory);
 		$this->id = $id;
+
+		// TODO check if user exists?
 	}
 
 	protected function _getProfile()
 	{
-		
+		$html = $this->request($this->getUrl('profile'))->getContent();
+		return $this->getParser()->getProfile($html);
 	}
 
 }

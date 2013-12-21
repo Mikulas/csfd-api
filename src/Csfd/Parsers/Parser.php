@@ -30,20 +30,27 @@ abstract class Parser
 	protected function getNode($html, $xpath)
 	{
 		$nodes = new Crawler($html);
-		return $nodes->filterXPath($xpath);
+		$filtered = $nodes->filterXPath($xpath);
+		if ($filtered->count() === 0)
+		{
+			throw new Exception("Html does not contain `$xpath`.", Exception::NODE_NOT_FOUND);
+		}
+		return $filtered;
 	}
 	
 	public function getFormToken($html, $formId)
 	{
-		$form = $this->getNode($html, '//form[@id="' . $formId . '"]');
-		if ($form->count() === 0)
-		{
-			throw new Exception("Form [id=$formId] not found.", Exception::FORM_NOT_FOUND);
+		try {
+			$form = $this->getNode($html, '//form[@id="' . $formId . '"]');
+
+		} catch (Exception $e) {
+			throw new Exception("Form [id=$formId] not found.", Exception::FORM_NOT_FOUND, $e);
 		}
 
 		$tokenField = '_token_';
 		$token = $form->filterXPath('//*[@name="' . $tokenField . '"]');
-		if ($token->count() === 0)
+
+		if (!$token->count())
 		{
 			throw new Exception("Form [id=$formId] does not contain field ` . $tokenField . `.", Exception::TOKEN_NOT_FOUND);
 		}

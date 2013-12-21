@@ -2,6 +2,7 @@
 
 namespace Csfd\Parsers;
 
+use Csfd\Parsers\Exception;
 use Csfd\InternalException;
 
 
@@ -14,10 +15,11 @@ class User extends Parser
 	 */
 	public function getCurrentUserId($html)
 	{
-		$anchor = $this->getNode($html, '//*[@id="user-menu"]/a');
-		if (!$anchor->count())
-		{
-			throw new Exception('Passed html page does not contain expected node with user id.', Exception::USER_NODE_NOT_FOUND);
+		try {
+			$anchor = $this->getNode($html, '//*[@id="user-menu"]/a');
+
+		} catch (Exception $e) {
+			throw new Exception('Passed html page does not contain expected node with user id.', Exception::USER_NODE_NOT_FOUND, $e);
 		}
 
 		return $this->getIdFromUrl($anchor->attr('href'));
@@ -35,6 +37,14 @@ class User extends Parser
 		} catch (InternalException $e) {
 			throw new Exception("Url `$url` does not contain user id.", Exception::USER_ID_NOT_FOUND);
 		}
+	}
+
+	/**
+	 * @return string html
+	 */
+	public function getProfile($html)
+	{
+		return $this->getNode($html, '//*[@class="user-profile"]')->text();
 	}
 	
 }

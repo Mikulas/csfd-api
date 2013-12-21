@@ -6,6 +6,8 @@ root: 'https://www.csfd.cz/'
 authentication:
     authenticator:
         login: 'prihlaseni/prihlaseni/?do=form-submit'
-user:
-    profileToken: 'uzivatel/{$userId}/profile-edit/'
-    profileEdit: 'uzivatel/{$userId}/profile-edit/?do=profileForm-submit'
+entities:
+    user:
+        profile: 'uzivatel/{$userId}/'
+        profileToken: 'uzivatel/{$userId}/profile-edit/'
+        profileEdit: 'uzivatel/{$userId}/profile-edit/?do=profileForm-submit'
