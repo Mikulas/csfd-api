@@ -4,6 +4,7 @@ use Csfd\CodeCoverage\Collector;
 
 $loader = require __DIR__ . '/../vendor/autoload.php';
 $loader->add('Csfd', __DIR__ . '/../src');
+$loader->add('', __DIR__ . '/mocks');
 
 require __DIR__ . '/Collector.php';
 

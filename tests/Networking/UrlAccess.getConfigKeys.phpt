@@ -9,10 +9,10 @@ require __DIR__ . '/bootstrap.php';
 
 covers('Csfd\Networking\UrlAccess');
 
-class Tested
+class Foo
 {
 	use UrlAccess;
 }
 
-$t = Access(new Tested);
-Assert::same(['bar', 'pax', 'tested'], $t->getConfigKeys());
+$t = Access(new Foo);
+Assert::same(['bar', 'pax', 'foo'], $t->getConfigKeys());

@@ -11,26 +11,10 @@ require __DIR__ . '/../bootstrap.php';
 
 covers('Csfd\Repositories\Users');
 
-class MockAuthenticator extends Authenticator
-{
-	public $loggedIn = FALSE;
 
-	public function getUserId()
-	{
-		if (!$this->loggedIn)
-		{
-			throw new Csfd\Authentication\Exception;
-		}
-		return 1;
-	}
-}
+$auth = new MockAuthenticator;
 
-$urlBuilder = UrlBuilder::factory($urlsPath);
-$requestFactory = new RequestFactory;
-$auth = new MockAuthenticator($urlBuilder, new Parsers\User,
-	new Parsers\Authentication, $requestFactory);
-
-$users = new UsersRepository($auth, $urlBuilder, $requestFactory);
+$users = new UsersRepository($auth, UrlBuilder::factory($urlsPath), new RequestFactory);
 $users->setParserClass('Csfd\Parsers\User');
 $users->setEntityClass($class = 'Csfd\Entities\User');
 
@@ -40,6 +24,6 @@ Assert::exception(function() use ($users) {
 	$users->getAuthenticatedUser();
 }, 'Csfd\Authentication\Exception');
 
-$auth->loggedIn = TRUE;
+$auth->userId = 1;
 
 Assert::type('Csfd\Entities\AuthenticatedUser', $users->getAuthenticatedUser(1));

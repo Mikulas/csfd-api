@@ -1,9 +1,5 @@
 // test Entitites
 
-// udelat mock tridy v testech na jednom miste
-
-// fix parses\bootstrap.php being only used by Parser
-
 // udelat movie entity
 
 // udelat movie @auth getRating methodu

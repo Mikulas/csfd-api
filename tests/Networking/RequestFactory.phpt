@@ -6,13 +6,6 @@ require __DIR__ . '/bootstrap.php';
 
 covers('Csfd\Networking\RequestFactory');
 
-class MockRequest extends Csfd\Networking\Request
-{
-
-	function __construct() {}
-
-}
-
 $rf = new RequestFactory;
 
 Assert::exception(function() use ($rf) {

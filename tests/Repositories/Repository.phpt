@@ -4,7 +4,6 @@ use Csfd\Parsers;
 use Csfd\Repositories\Repository;
 use Csfd\Networking\UrlBuilder;
 use Csfd\Networking\RequestFactory;
-use Csfd\Authentication\Authenticator;
 
 require __DIR__ . '/../bootstrap.php';
 
@@ -15,8 +14,7 @@ class TestRepository extends Repository {}
 
 $urlBuilder = UrlBuilder::factory($urlsPath);
 $requestFactory = new RequestFactory;
-$auth = new Authenticator($urlBuilder, new Parsers\User,
-	new Parsers\Authentication, $requestFactory);
+$auth = new MockAuthenticator;
 
 $repository = new TestRepository($auth, $urlBuilder, $requestFactory);
 
