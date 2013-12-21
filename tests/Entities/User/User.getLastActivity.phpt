@@ -2,6 +2,8 @@
 
 require __DIR__ . '/bootstrap.user.php';
 
+Tester\Environment::skip('not implemented');
+
 $time = $entity->getLastActivity();
 Assert::type('DateTime', $time);
 
