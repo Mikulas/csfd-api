@@ -8,6 +8,9 @@ use Csfd\Networking\UrlBuilder;
 use Csfd\Parsers\Parser;
 
 
+/**
+ * @method string getProfile()
+ */
 class User extends Entity
 {
 
@@ -22,7 +25,7 @@ class User extends Entity
 		$this->id = $id;
 	}
 
-	public function getProfile()
+	protected function _getProfile()
 	{
 		
 	}

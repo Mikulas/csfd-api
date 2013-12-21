@@ -14,6 +14,7 @@ abstract class Entity
 {
 	
 	use UrlAccess;
+	use CachingGetter;
 
 	private $auth;
 	private $parser;
@@ -32,7 +33,7 @@ abstract class Entity
 		return $this->parser;
 	}
 
-	public function request()
+	public function request($url, array $args = NULL, $method = Request::GET)
 	{
 		return call_user_func_array([$this->requestFactory, 'create'], func_get_args());
 	}
