@@ -36,7 +36,7 @@ trait CachingGetter
 			}
 			else if (method_exists($this, '_get'))
 			{
-				$property = substr($method, strlen('get'));
+				$property = lcFirst(substr($method, strlen('get')));
 				array_unshift($args, $property);
 				$res = call_user_func_array([$this, '_get'], $args);
 				$this->cache[$method] = $res;

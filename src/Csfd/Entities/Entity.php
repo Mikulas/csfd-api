@@ -12,7 +12,7 @@ use Csfd\Parsers\Parser;
 
 abstract class Entity
 {
-	
+
 	use UrlAccess;
 	use CachingGetter;
 
@@ -44,7 +44,7 @@ abstract class Entity
 	/**
 	 * Make authenticated request. Might trigger login if
 	 * cookie is not stored yet.
-	 * 
+	 *
 	 * @param string $url
 	 * @param array $args
 	 * @param string $method Request::GET|POST
@@ -55,6 +55,15 @@ abstract class Entity
 		return $this->request($url, $args, $method, $this->auth->getCookie());
 	}
 
+	/**
+	 * Extends capabilities of CachingGetter
+	 * Does not need definition of _getFoo() method if it would
+	 * only call _getFoo() on parser. Define _getFoo() to override.
+	 *
+	 * @param string $property
+	 * @param array|NULL $args
+	 * @return mixed
+	 */
 	protected function _get($property, $args = NULL)
 	{
 		$args = func_get_args();

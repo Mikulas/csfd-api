@@ -14,7 +14,7 @@
 		"symfony/config": "~2.4.0"
 	},
 	"require-dev": {
-		"nette/tester": "@dev",
+		"phpunit/phpunit": "~3.7.0",
 		"petrp/access": "@dev"
 	},
 	"autoload": {
