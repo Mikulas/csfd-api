@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<ruleset name="SimCodingStandard">
+	<description>Sim coding standard.</description>
+	<rule ref="Generic.Classes.DuplicateClassName" />
+	<rule ref="Generic.CodeAnalysis.EmptyStatement" />
+	<rule ref="Generic.CodeAnalysis.ForLoopShouldBeWhileLoop" />
+	<rule ref="Generic.CodeAnalysis.ForLoopWithTestFunctionCall" />
+	<rule ref="Generic.CodeAnalysis.JumbledIncrementer" />
+	<rule ref="Generic.CodeAnalysis.UnconditionalIfStatement" />
+	<rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier" />
+	<rule ref="Generic.CodeAnalysis.UselessOverridingMethod" />
+	<!-- <rule ref="Generic.Commenting.Todo" /> -->
+	<rule ref="Generic.Files.ByteOrderMark" />
+	<rule ref="Generic.Files.EndFileNewline" />
+	<rule ref="Generic.Files.InlineHTML" />
+	<rule ref="Generic.Files.LineEndings" />
+	<rule ref="Generic.Formatting.DisallowMultipleStatements" />
+	<rule ref="Generic.Formatting.SpaceAfterCast" />
+	<rule ref="Generic.Functions.CallTimePassByReference" />
+	<rule ref="Generic.Functions.FunctionCallArgumentSpacing" />
+	<rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman" />
+	<rule ref="Generic.Metrics.NestingLevel" />
+	<rule ref="Generic.NamingConventions.ConstructorName" />
+	<rule ref="Generic.NamingConventions.UpperCaseConstantName" />
+	<rule ref="Generic.PHP.CharacterBeforePHPOpeningTag" />
+	<rule ref="Generic.PHP.DeprecatedFunctions" />
+	<rule ref="Generic.PHP.DisallowShortOpenTag" />
+	<rule ref="Generic.PHP.ForbiddenFunctions" />
+	<rule ref="Generic.PHP.NoSilencedErrors" />
+	<rule ref="PSR1.Classes.ClassDeclaration" />
+	<rule ref="PSR1.Files.SideEffects" />
+	<rule ref="Generic.Strings.UnnecessaryStringConcat" />
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent" />
+	<rule ref="Generic.WhiteSpace.ScopeIndent">
+		<properties>
+			<property name="indent" value="1" />
+		</properties>
+	</rule>
+	<rule ref="Generic.WhiteSpace.ScopeIndent.IncorrectExact">
+		<message>Line indented incorrectly; expected %s tabs, found %s</message>
+	</rule>
+	<rule ref="Generic.WhiteSpace.ScopeIndent.Incorrect">
+		<message>Line indented incorrectly; expected at least %s tabs, found %s</message>
+	</rule>
+	<rule ref="PEAR.Commenting.InlineComment" />
+	<rule ref="PEAR.Functions.ValidDefaultValue" />
+	<rule ref="PSR2.Classes.PropertyDeclaration" />
+	<rule ref="PSR2.Methods.MethodDeclaration" />
+	<rule ref="PSR2.Namespaces.NamespaceDeclaration" />
+	<rule ref="Squiz.Arrays.ArrayBracketSpacing" />
+	<rule ref="Squiz.Classes.SelfMemberReference" />
+	<rule ref="Squiz.Commenting.DocCommentAlignment" />
+	<rule ref="Squiz.Commenting.EmptyCatchComment" />
+	<rule ref="Squiz.ControlStructures.ElseIfDeclaration" />
+	<rule ref="Squiz.ControlStructures.ForEachLoopDeclaration" />
+	<rule ref="Squiz.Functions.GlobalFunction" />
+	<rule ref="Squiz.Operators.IncrementDecrementUsage" />
+	<rule ref="Squiz.PHP.Eval" />
+	<rule ref="Squiz.PHP.GlobalKeyword" />
+	<rule ref="Squiz.PHP.Heredoc" />
+	<rule ref="Squiz.PHP.NonExecutableCode" />
+	<rule ref="Squiz.Scope.MemberVarScope" />
+	<rule ref="Squiz.Scope.MethodScope" />
+	<rule ref="Squiz.Scope.StaticThisUsage" />
+	<rule ref="Squiz.Strings.DoubleQuoteUsage">
+		<exclude name="Squiz.Strings.DoubleQuoteUsage.ContainsVar" />
+	</rule>
+	<rule ref="Squiz.WhiteSpace.LanguageConstructSpacing" />
+	<rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing" />
+	<rule ref="Zend.Files.ClosingTag" />
+	<rule ref="Zend.NamingConventions.ValidVariableName">
+		<exclude name="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore" />
+	</rule>
+<!--
+	<rule ref="Squiz.WhiteSpace.SemicolonSpacing" />
+	<rule ref="Squiz.Commenting.FunctionCommentThrowTag" />
+	<rule ref="Squiz.Objects.ObjectInstantiation" />
+	<rule ref="Generic.ControlStructures.InlineControlStructure" />
+	<rule ref="Squiz.PHP.LowercasePHPFunctionsSniff" />
+	<rule ref="Generic.CodeAnalysis.UnusedFunctionParameter" />
+	<rule ref="Squiz.Commenting.FunctionComment" />
+	<rule ref="Squiz.Commenting.ClassComment" />
+	<rule ref="Squiz.Commenting.VariableComment" />
+-->
+</ruleset>

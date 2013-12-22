@@ -1,0 +1,40 @@
+#!/bin/php
+<?php
+
+#
+# Single file usage:
+#   php tools/CodingStandard/sort-use file
+#
+# Bulk usage (zsh)
+#   find app/**/*.php -exec php tools/CodingStandard/sort-use '{}' \;
+#
+
+if ($argc < 2) {
+	echo "Usage: $argv[0] file\n";
+	die;
+}
+
+$file = $argv[1];
+if (!file_exists($file)) {
+	echo "File $file not found\n";
+	die;
+}
+
+$content = file_get_contents($file);
+$content = preg_replace_callback('~(?:use\s+[^(;]+;\n)+~', function($match) use ($file) {
+	$uses = explode("\n", $match[0]);
+	$uses = array_filter($uses, function($val) {
+		return trim($val);
+	});
+
+	$unsorted = $uses;
+	sort($uses);
+	if ($unsorted === $uses) {
+		return $match[0];
+	}
+
+	echo "Ordering $file\n";
+	return implode("\n", $uses) . "\n";
+}, $content);
+
+file_put_contents($file, $content);
