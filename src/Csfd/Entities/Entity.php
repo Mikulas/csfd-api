@@ -72,4 +72,12 @@ abstract class Entity
 		return 'default';
 	}
 
+	/**
+	 * @return int id
+	 */
+	public function getId()
+	{
+		return $this->id;
+	}
+
 }

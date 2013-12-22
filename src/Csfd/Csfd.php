@@ -30,7 +30,7 @@ class Csfd
 	{
 		$this->container = $container;
 
-		$this->users = $this->container->get('users');
+		$this->users = $this->container->get('repo.users');
 	}
 
 	/**

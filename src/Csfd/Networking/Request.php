@@ -84,6 +84,18 @@ class Request
 	}
 
 	/**
+	 * @return NULL|url if redirected
+	 */
+	public function getRedirectUrl()
+	{
+		if (!isset($this->headers['location']))
+		{
+			return NULL;
+		}
+		return end($this->headers['location']);
+	}
+
+	/**
 	 * @return int status code
 	 */
 	public function getStatusCode()

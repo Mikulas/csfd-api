@@ -80,4 +80,18 @@ abstract class Parser
 		return $url;
 	}
 
+	/**
+	 * @param string $url (e.g. /uzivatel/268216-mikulasdite/)
+	 * @return int id (e.g. 268216)
+	 */
+	public function getIdFromUrl($url)
+	{
+		try {
+			return (int) $this->getValue($url, '~(uzivatel|film|tvurce)/(?P<value>\d+)-~');
+
+		} catch (InternalException $e) {
+			throw new Exception("Url `$url` does not contain user id.", Exception::URL_ID_NOT_FOUND);
+		}
+	}
+
 }

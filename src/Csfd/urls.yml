@@ -3,10 +3,12 @@
 # {$entityId} int id of invoked entity
 #
 
-root: 'https://www.csfd.cz/'
+root: 'http://www.csfd.cz/'
 authentication:
     authenticator:
         login: 'prihlaseni/prihlaseni/?do=form-submit'
+search:
+    default: 'hledat/?q={$query}'
 entities:
     user:
         profile: 'uzivatel/{$entityId}/'

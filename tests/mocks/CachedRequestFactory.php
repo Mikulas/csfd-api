@@ -15,6 +15,7 @@ class CachedRequestFactory extends RequestFactory
 
 	protected function getCached($hash)
 	{
+		// TODO should probably not cache POST requests
 		if (isset($this->cache[$hash]))
 		{
 			return $this->cache[$hash];
