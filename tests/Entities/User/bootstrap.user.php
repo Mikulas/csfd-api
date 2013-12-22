@@ -13,7 +13,7 @@ $id = getConfig()['account']['id'];
 
 $urlBuilder = UrlBuilder::factory($urlsPath);
 $urlBuilder->addMap('userId', $id);
-$requestFactory = new RequestFactory;
+$requestFactory = new CachedRequestFactory;
 $requestFactory->setRequestClass('Csfd\Networking\Request');
 $parser = new Parsers\User;
 $auth = new MockAuthenticator;

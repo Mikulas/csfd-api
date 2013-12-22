@@ -18,7 +18,7 @@ if (!$config['account']['password'])
 
 $urlBuilder = UrlBuilder::factory($urlsPath);
 
-$rf = new RequestFactory;
+$rf = new CachedRequestFactory;
 $rf->setRequestClass('Csfd\Networking\Request');
 
 $auth = Access(new Authenticator($urlBuilder, new Parsers\User, new Parsers\Authentication, $rf));

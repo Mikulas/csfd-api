@@ -14,6 +14,8 @@ if (extension_loaded('xdebug'))
 	Collector::start(__DIR__ . '/coverage.dat');
 }
 
+CachedRequestFactory::$tempDir = __DIR__ . '/temp';
+
 // assumes PSR-0
 function covers($class)
 {

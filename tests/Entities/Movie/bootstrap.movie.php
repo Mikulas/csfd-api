@@ -2,7 +2,6 @@
 
 use Csfd\Parsers;
 use Csfd\Networking\UrlBuilder;
-use Csfd\Networking\RequestFactory;
 use Csfd\Entities\Movie;
 
 require __DIR__ . '/../../bootstrap.php';
@@ -13,7 +12,7 @@ $id = getConfig()['movie']['id'];
 
 $urlBuilder = UrlBuilder::factory($urlsPath);
 $urlBuilder->addMap('userId', $id);
-$requestFactory = new RequestFactory;
+$requestFactory = new CachedRequestFactory;
 $requestFactory->setRequestClass('Csfd\Networking\Request');
 $parser = new Parsers\Movie;
 $auth = new MockAuthenticator;

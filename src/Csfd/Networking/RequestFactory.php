@@ -10,11 +10,25 @@ class RequestFactory
 
 	private $requestClass;
 
-	private $cache;
+	protected $cache;
 
 	public function setRequestClass($class)
 	{
 		$this->requestClass = $class;
+	}
+
+	protected function getCached($hash)
+	{
+		if (isset($this->cache[$hash]))
+		{
+			return $this->cache[$hash];
+		}
+		return NULL;
+	}
+
+	protected function saveCache($hash, $result)
+	{
+		$this->cache[$hash] = $result;
 	}
 
 	public function create($url, array $args = NULL, $method = Request::GET)
@@ -25,16 +39,18 @@ class RequestFactory
 		}
 
 		$hash = $this->hash($url, $args, $method);
-		if (!isset($this->cache[$hash]))
+		if ($res = $this->getCached($hash))
 		{
-			$reflect  = new \ReflectionClass($this->requestClass);
-			$res = $reflect->newInstanceArgs(func_get_args());
-			$this->cache[$hash] = $res;
+			return $res;
 		}
-		return $this->cache[$hash];
+
+		$reflect  = new \ReflectionClass($this->requestClass);
+		$res = $reflect->newInstanceArgs(func_get_args());
+		$this->saveCache($hash, $res);
+		return $res;
 	}
 
-	private function hash($url, array $args = NULL, $method = Request::GET)
+	protected function hash($url, array $args = NULL, $method = Request::GET)
 	{
 		return md5(json_encode([$url, $args, $method]));
 	}

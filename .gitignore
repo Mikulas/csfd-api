@@ -4,3 +4,4 @@
 /tests/output
 tests/coverage.html
 tests/config.local.yml
+tests/temp/*
