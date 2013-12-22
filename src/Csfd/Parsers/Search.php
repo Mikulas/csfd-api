@@ -41,4 +41,9 @@ class Search extends Parser
 		return $this->getIds($html, 'search-films');
 	}
 
+	public function getAuthors($html)
+	{
+		return $this->getIds($html, 'search-creators');
+	}
+
 }

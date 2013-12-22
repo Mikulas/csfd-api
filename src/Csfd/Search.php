@@ -6,6 +6,7 @@ use Csfd\Networking\UrlAccess;
 use Csfd\Networking\UrlBuilder;
 use Csfd\Networking\RequestFactory;
 use Csfd\Parsers;
+use Csfd\Repositories\Authors;
 use Csfd\Repositories\Users;
 use Csfd\Repositories\Movies;
 
@@ -19,15 +20,17 @@ class Search
 	private $parser;
 	private $users;
 	private $movies;
+	private $authors;
 
 	public function __construct(UrlBuilder $urlBuilder, RequestFactory $requestFactory,
-		Parsers\Search $parser, Users $users, Movies $movies)
+		Parsers\Search $parser, Users $users, Movies $movies, Authors $authors)
 	{
 		$this->setUrlBuilder($urlBuilder);
 		$this->requestFactory = $requestFactory;
 		$this->parser = $parser;
 		$this->users = $users;
 		$this->movies = $movies;
+		$this->authors = $authors;
 	}
 
 	protected function getResult($query)
@@ -69,7 +72,7 @@ class Search
 
 	public function findAuthor($query)
 	{
-
+		return $this->findEntity($query, '/tvurce/', $this->authors, 'getAuthors');
 	}
 	
 }

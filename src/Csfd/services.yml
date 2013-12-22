@@ -17,12 +17,14 @@ services:
             - [setRequestClass, [Csfd\Networking\Request]]
     search:
         class: Csfd\Search
-        arguments: [@urlBuilder, @networking, @parsers.search, @repo.users, @repo.movies]
+        arguments: [@urlBuilder, @networking, @parsers.search, @repo.users, @repo.movies, @repo.authors]
     parsers:
         user:
             class: Csfd\Parsers\User
         movie:
             class: Csfd\Parsers\Movie
+        author:
+            class: Csfd\Parsers\Author
         search:
             class: Csfd\Parsers\Search
         auth:
@@ -40,3 +42,9 @@ services:
             calls:
                 - [setEntityClass, [Csfd\Entities\Movie]]
                 - [setParserClass, [Csfd\Parsers\Movie]]
+        authors:
+            class: Csfd\Repositories\Authors
+            arguments: [@authenticator, @urlBuilder, @networking]
+            calls:
+                - [setEntityClass, [Csfd\Entities\Author]]
+                - [setParserClass, [Csfd\Parsers\Author]]
