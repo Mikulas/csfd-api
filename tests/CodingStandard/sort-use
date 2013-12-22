@@ -6,7 +6,7 @@
 #   php tools/CodingStandard/sort-use file
 #
 # Bulk usage (zsh)
-#   find app/**/*.php -exec php tools/CodingStandard/sort-use '{}' \;
+#   find src/**/*.php -exec php tests/CodingStandard/sort-use '{}' \;
 #
 
 if ($argc < 2) {

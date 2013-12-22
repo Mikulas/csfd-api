@@ -13,14 +13,14 @@ class Request
 	private $headers;
 	private $statusCode;
 
-	static $_dbgCount = 0;
+	public static $_dbgCount = 0;
 
 	public function __construct($url, array $args = NULL, $method = self::GET, $cookie = NULL)
 	{
 		self::$_dbgCount++;
 
 		$headers = [
-			"Content-type: application/x-www-form-urlencoded",
+			'Content-type: application/x-www-form-urlencoded',
 		];
 		if ($cookie)
 		{
@@ -39,14 +39,18 @@ class Request
 
 		$this->content = file_get_contents($url, NULL, stream_context_create($polo));
 
+		// @codingStandardsIgnoreStart
 		$rawHeaders = $http_response_header;
+		// @codingStandardsIgnoreEnd
+
 		$this->statusCode = (int) substr($rawHeaders[0], strlen('HTTP/1.1 '));
 		array_shift($rawHeaders);
 		$headers = [];
 		foreach ($rawHeaders as $header)
 		{
 			$p = strpos($header, ':');
-			if ($p === FALSE) {
+			if ($p === FALSE)
+			{
 				break; // headers from next request 
 			}
 			$key = strToLower(substr($header, 0, $p));

@@ -2,9 +2,9 @@
 
 namespace Csfd;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\FileLocator;
 use Csfd\Configuration\YamlFileLoader;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 
 class Csfd

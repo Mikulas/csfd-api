@@ -24,7 +24,7 @@ use Csfd\Parsers\Parser;
 class User extends Entity
 {
 
-	const USER_CSFD = "\10"; // special "username" for csfd message bot
+	const USER_CSFD = "\x10"; // special "username" for csfd message bot
 
 	protected function getUrlKey($property)
 	{

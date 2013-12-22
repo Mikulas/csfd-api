@@ -2,8 +2,8 @@
 
 namespace Csfd\Parsers;
 
-use Csfd\Parsers\Exception;
 use Csfd\InternalException;
+use Csfd\Parsers\Exception;
 
 
 class Movie extends Parser

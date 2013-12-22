@@ -2,9 +2,9 @@
 
 namespace Csfd\Parsers;
 
-use Symfony\Component\DomCrawler\Crawler;
 use Csfd\InternalException;
 use DateTime;
+use Symfony\Component\DomCrawler\Crawler;
 
 
 abstract class Parser

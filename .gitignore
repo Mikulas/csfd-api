@@ -2,6 +2,6 @@
 /vendor
 /test.php
 /tests/output
-tests/coverage.html
-tests/config.local.yml
-tests/temp/*
+/tests/coverage/*
+/tests/config.local.yml
+/tests/temp/*

@@ -3,9 +3,9 @@
 namespace Csfd\Repositories;
 
 use Csfd\Authentication\Authenticator;
+use Csfd\InternalException;
 use Csfd\Networking\RequestFactory;
 use Csfd\Networking\UrlBuilder;
-use Csfd\InternalException;
 
 
 abstract class Repository

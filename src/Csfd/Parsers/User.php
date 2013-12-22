@@ -2,8 +2,8 @@
 
 namespace Csfd\Parsers;
 
-use Csfd\Parsers\Exception;
 use Csfd\InternalException;
+use Csfd\Parsers\Exception;
 
 
 class User extends Parser
@@ -108,7 +108,6 @@ class User extends Parser
 	private function getActivity($html)
 	{
 		$text = $this->getNode($html, '//*[@class="activity"]')->html();
-		var_dump($text);
 		return $this->splitByBr($text);
 	}
 
@@ -127,9 +126,9 @@ class User extends Parser
 	 */
 	public function getLastActivity($html)
 	{
-		return NULL;
 		// TODO handle relative czech date (replace dnes with today, strToTime)
-		$text = $this->getActivity($html)[1];
+		// $text = $this->getActivity($html)[1];
+		throw new Exception('not implemented');
 	}
 
 	public function getAvatarUrl($html)

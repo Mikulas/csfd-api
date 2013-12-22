@@ -2,8 +2,8 @@
 
 namespace Csfd\Networking;
 
-use Symfony\Component\Yaml\Yaml;
 use Csfd\InternalException;
+use Symfony\Component\Yaml\Yaml;
 
 
 class UrlBuilder

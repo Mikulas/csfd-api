@@ -2,13 +2,13 @@
 
 namespace Csfd;
 
+use Csfd\Networking\RequestFactory;
 use Csfd\Networking\UrlAccess;
 use Csfd\Networking\UrlBuilder;
-use Csfd\Networking\RequestFactory;
 use Csfd\Parsers;
 use Csfd\Repositories\Authors;
-use Csfd\Repositories\Users;
 use Csfd\Repositories\Movies;
+use Csfd\Repositories\Users;
 
 
 class Search

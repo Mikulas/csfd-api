@@ -13,8 +13,8 @@ use Csfd\Parsers\Parser;
 abstract class Entity
 {
 
-	use UrlAccess;
 	use CachingGetter;
+	use UrlAccess;
 
 	private $auth;
 	private $parser;
@@ -69,7 +69,7 @@ abstract class Entity
 		$args = func_get_args();
 		array_shift($args);
 
-		$html = $this->request($this->getUrl($this->getUrlKey($property), ["entityId" => $this->id]))->getContent();
+		$html = $this->request($this->getUrl($this->getUrlKey($property), ['entityId' => $this->id]))->getContent();
 		array_unshift($args, $html);
 
 		$method = 'get' . ucFirst($property);

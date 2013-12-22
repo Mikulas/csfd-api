@@ -30,7 +30,7 @@ class Movie extends Entity
 	{
 		if (!is_integer($rating) || $rating < 0 || $rating > 5)
 		{
-			throw new Exception("Rating must be an integer from {0, 1, 2, 3, 4, 5}.");
+			throw new Exception('Rating must be an integer from {0, 1, 2, 3, 4, 5}.');
 		}
 		// TODO implement
 	}

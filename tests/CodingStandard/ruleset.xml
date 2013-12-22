@@ -44,8 +44,12 @@
 	</rule>
 	<rule ref="PEAR.Commenting.InlineComment" />
 	<rule ref="PEAR.Functions.ValidDefaultValue" />
-	<rule ref="PSR2.Classes.PropertyDeclaration" />
-	<rule ref="PSR2.Methods.MethodDeclaration" />
+	<rule ref="PSR2.Classes.PropertyDeclaration">
+		<exclude name="PSR2.Classes.PropertyDeclaration.Underscore" />
+	</rule>
+	<rule ref="PSR2.Methods.MethodDeclaration">
+		<exclude name="PSR2.Methods.MethodDeclaration.Underscore" />
+	</rule>
 	<rule ref="PSR2.Namespaces.NamespaceDeclaration" />
 	<rule ref="Squiz.Arrays.ArrayBracketSpacing" />
 	<rule ref="Squiz.Classes.SelfMemberReference" />
@@ -70,6 +74,7 @@
 	<rule ref="Zend.Files.ClosingTag" />
 	<rule ref="Zend.NamingConventions.ValidVariableName">
 		<exclude name="Zend.NamingConventions.ValidVariableName.PrivateNoUnderscore" />
+		<exclude name="Zend.NamingConventions.ValidVariableName.PublicHasUnderscore" />
 	</rule>
 <!--
 	<rule ref="Squiz.WhiteSpace.SemicolonSpacing" />
