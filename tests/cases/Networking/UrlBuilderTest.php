@@ -16,7 +16,7 @@ class UrlBuilderTest extends TestCase
 		$this->assertInstanceOf('Csfd\Networking\UrlBuilder', UrlBuilder::factory($config));
 	}
 
-	private function getConfig()
+	private function getUrlsFile()
 	{
 		return __DIR__ . '/urls.yml';
 	}
@@ -27,7 +27,7 @@ class UrlBuilderTest extends TestCase
 	 */
 	public function testFactory()
 	{
-		$builder = UrlBuilder::factory($this->getConfig());
+		$builder = UrlBuilder::factory($this->getUrlsFile());
 		$this->assertInstanceOf('Csfd\Networking\UrlBuilder', $builder);
 	}
 
@@ -52,7 +52,7 @@ class UrlBuilderTest extends TestCase
 	 */
 	public function testGetRoot()
 	{
-		$builder = UrlBuilder::factory($this->getConfig());
+		$builder = UrlBuilder::factory($this->getUrlsFile());
 		$this->assertSame('_root_url_', $builder->getRoot());
 	}
 

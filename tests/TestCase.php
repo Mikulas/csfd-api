@@ -3,6 +3,7 @@
 use Csfd\Networking\UrlBuilder;
 use Csfd\Networking\RequestFactory;
 use Csfd\Repositories;
+use Symfony\Component\Yaml\Yaml;
 
 
 class TestCase extends PHPUnit_Framework_TestCase
@@ -27,6 +28,19 @@ class TestCase extends PHPUnit_Framework_TestCase
 			$this->markTestIncomplete('Missing mandatory @covers or @coversNothing annotation');
 		}
 		return parent::runTest();
+	}
+
+	protected function getConfig()
+	{
+		$config = Yaml::parse(file_get_contents(__DIR__ . '/config.yml'));
+
+		$localFile = __DIR__ . '/config.local.yml';
+		if (is_file($localFile))
+		{
+			$local = Yaml::parse(file_get_contents($localFile));
+			$config = array_replace_recursive($config, $local);
+		}
+		return $config;
 	}
 
 
