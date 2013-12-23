@@ -3,6 +3,9 @@
 <a href="https://travis-ci.org/Mikulas/csfd-api">
 	<img src="https://khanovaskola.cz/travis/index.php?user=Mikulas&repo=csfd-api&branch=master" height="18" alt="Build Status">
 </a>
+<a href="https://www.versioneye.com/user/projects/52b862ddec1375b24e00000e">
+	<img src="http://khanovaskola.cz/travis/versioneye.php?hash=52b8606bec1375b24e000002" height="18" alt="Dependencies">
+</a>
 
 # WIP
 
