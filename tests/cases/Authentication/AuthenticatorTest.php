@@ -27,7 +27,7 @@ class AuthenticatorTest extends TestCase
 	 * @expectedException Csfd\Authentication\Exception
 	 * @expectedExceptionCode Csfd\Authentication\Exception::CREDENTIALS_NOT_SET
 	 */
-	public function testGetCookieCredentialsNotSet()
+	public function testGetCookieCredentials_notSet()
 	{
 		$this->auth->getCookie();
 	}
@@ -67,7 +67,7 @@ class AuthenticatorTest extends TestCase
 	 * @expectedException Csfd\Authentication\Exception
 	 * @expectedExceptionCode Csfd\Authentication\Exception::NOT_AUTHENTICATED
 	 */
-	public function testGetUserIdNotAuthenticated()
+	public function testGetUserId_notAuthenticated()
 	{
 		$this->auth->getUserId();
 	}

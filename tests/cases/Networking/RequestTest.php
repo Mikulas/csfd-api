@@ -25,7 +25,7 @@ class RequestTest extends TestCase
 	}
 
 	/** @covers Csfd\Networking\Request::getCookie() */
-	public function testGetCookieEmpty()
+	public function testGetCookie_empty()
 	{
 		$e = Access($this->request);
 		$e->headers = [];
@@ -46,7 +46,7 @@ class RequestTest extends TestCase
 	}
 
 	/** @covers Csfd\Networking\Request::getRedirectUrl() */
-	public function testGetRedirectUrlEmpty()
+	public function testGetRedirectUrl_empty()
 	{
 		$e = Access($this->request);
 		$e->headers = [];

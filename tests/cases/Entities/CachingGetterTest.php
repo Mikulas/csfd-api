@@ -9,7 +9,7 @@ class CachingGetterTest extends TestCase
 {
 
 	/** @covers \Csfd\Entities\CachingGetter::__call */
-	public function testCallDefined()
+	public function testCall_defined()
 	{
 		$foo = new CGImplement;
 		$this->assertSame(0, CGImplement::$callCount);
@@ -23,7 +23,7 @@ class CachingGetterTest extends TestCase
 	 * @covers \Csfd\Entities\CachingGetter::__call
 	 * @expectedException \Csfd\InternalException
 	 */
-	public function testCallUndefined()
+	public function testCall_undefined()
 	{
 		$foo = new CGImplement;
 		$this->assertSame(CGImplement::RETVAL, $foo->getUndefined());
@@ -32,7 +32,7 @@ class CachingGetterTest extends TestCase
 	/**
 	 * @covers \Csfd\Entities\CachingGetter::__call
 	 */
-	public function testCallDynamic()
+	public function testCall_dynamic()
 	{
 		$foo = new CGImplementDynamic;
 		$this->assertSame('dynamic', $foo->getDynamic());

@@ -32,7 +32,7 @@ class ParserTest extends TestCase
 	 * @covers Csfd\Parsers\Parser::getValue()
 	 * @expectedException Csfd\InternalException
 	 */
-	public function testGetValueGroupMissing()
+	public function testGetValue_groupMissing()
 	{
 		$e = Access($this->parser);
 		$e->getValue('aBa', '~a(?P<wrongName>.)a~');
@@ -69,7 +69,7 @@ class ParserTest extends TestCase
 	 * @expectedException Csfd\Parsers\Exception
 	 * @expectedExceptionCode Csfd\Parsers\Exception::NODE_NOT_FOUND
 	 */
-	public function testGetNodeNotFound()
+	public function testGetNode_notFound()
 	{
 		$e = Access($this->parser);
 		$e->getNode('', '//div/barbara');
@@ -89,7 +89,7 @@ class ParserTest extends TestCase
 	 * @expectedException Csfd\Parsers\Exception
 	 * @expectedExceptionCode Csfd\Parsers\Exception::FORM_NOT_FOUND
 	 */
-	public function testGetFormTokenFormNotFound()
+	public function testGetFormToken_formNotFound()
 	{
 		$e = Access($this->parser);
 		$e->getFormToken('', 'any');
@@ -100,7 +100,7 @@ class ParserTest extends TestCase
 	 * @expectedException Csfd\Parsers\Exception
 	 * @expectedExceptionCode Csfd\Parsers\Exception::TOKEN_NOT_FOUND
 	 */
-	public function testGetFormTokenTokenNotFound()
+	public function testGetFormToken_tokenNotFound()
 	{
 		$e = Access($this->parser);
 		$html = file_get_contents(__DIR__ . '/fixtures/form.html');
@@ -144,7 +144,7 @@ class ParserTest extends TestCase
 	 * @expectedException Csfd\Parsers\Exception
 	 * @expectedExceptionCode Csfd\Parsers\Exception::URL_ID_NOT_FOUND
 	 */
-	public function testGetIdFromUrlNotFound()
+	public function testGetIdFromUrl_notFound()
 	{
 		$this->parser->getIdFromUrl('http://www.csfd.cz/whatever/460251-csfdapitest/');
 	}

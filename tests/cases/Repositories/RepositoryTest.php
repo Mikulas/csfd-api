@@ -24,7 +24,7 @@ class RepositoryTest extends TestCase
 	 * @covers Csfd\Repositories\Repository::get()
 	 * @expectedException Csfd\InternalException
 	 */
-	public function testGetEntityNotSet()
+	public function testGet_notSet()
 	{
 		$this->repo->get(1);
 	}
@@ -50,7 +50,7 @@ class RepositoryTest extends TestCase
 	 * @covers Csfd\Repositories\Repository::getParser()
 	 * @expectedException Csfd\InternalException
 	 */
-	public function testGetParserNotSet()
+	public function testGetParser_notSet()
 	{
 		$this->repo->getParser();
 	}

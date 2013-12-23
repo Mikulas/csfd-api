@@ -40,7 +40,7 @@ class UserParserTest extends TestCase
 	 * @expectedException Csfd\Parsers\Exception
 	 * @expectedExceptionCode Csfd\Parsers\Exception::USER_NODE_NOT_FOUND
 	 */
-	public function testGetCurrentUserIdNotFound()
+	public function testGetCurrentUserId_notFound()
 	{
 		$this->parser->getCurrentUserId('random html');
 	}

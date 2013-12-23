@@ -26,7 +26,7 @@ class UsersTest extends TestCase
 	 * @expectedException Csfd\Authentication\Exception
 	 * @expectedExceptionCode Csfd\Authentication\Exception::NOT_AUTHENTICATED
 	 */
-	public function testGetAuthenticatedUserNotAuthenticated()
+	public function testGetAuthenticatedUser_notAuthenticated()
 	{
 		$this->repo->getAuthenticatedUser();
 	}
