@@ -3,6 +3,8 @@
 use Csfd\Networking\UrlBuilder;
 use Csfd\Networking\RequestFactory;
 use Csfd\Repositories;
+use Csfd\Authentication\Authenticator;
+use Csfd\Parsers;
 use Symfony\Component\Yaml\Yaml;
 
 
@@ -90,6 +92,18 @@ class TestCase extends PHPUnit_Framework_TestCase
 		});
 	}
 	
+	protected function getAuthenticator()
+	{
+		return $this->getSingleton(__METHOD__, function() {
+			return new Authenticator(
+				$this->getUrlBuilder(),
+				new Parsers\User,
+				new Parsers\Authentication,
+				$this->getRequestFactory()
+			);
+		});
+	}
+
 	protected function getMockAuthenticator()
 	{
 		return $this->getSingleton(__METHOD__, function() {

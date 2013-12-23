@@ -31,7 +31,7 @@ class RequestFactory
 		$this->cache[$hash] = $result;
 	}
 
-	public function create($url, array $args = NULL, $method = Request::GET)
+	public function create($url, array $args = NULL, $method = Request::GET, $cookie = NULL)
 	{
 		if (!$this->requestClass)
 		{

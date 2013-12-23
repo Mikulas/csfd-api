@@ -5,3 +5,4 @@
 /tests/coverage/*
 /tests/config.local.yml
 /tests/temp/*
+.idea/*

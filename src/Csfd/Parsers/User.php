@@ -47,10 +47,7 @@ class User extends Parser
 	/** @return string */
 	public function getFirstName($html)
 	{
-		foreach ($this->getNames($html) as $name)
-		{
-			return $name;
-		}
+		return $this->getNames($html)[0];
 	}
 
 	/** @return string */
