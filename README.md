@@ -1,5 +1,9 @@
 # ČSFD API
 
+<a href="https://travis-ci.org/Mikulas/csfd-api">
+	<img src="https://khanovaskola.cz/travis/index.php?user=Mikulas&repo=csfd-api&branch=2.0" height="18" alt="Build Status">
+</a>
+
 <b>This API is also available via JSON at <a href="http://csfdapi.cz/">http://csfdapi.cz</a>.</b>
 
 # Installation
