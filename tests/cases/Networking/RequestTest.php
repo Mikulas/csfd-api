@@ -11,7 +11,7 @@ class RequestTest extends TestCase
 	/** @covers Csfd\Networking\Request::__construct() */
 	public function setUp()
 	{
-		$this->request = new Request('http://localhost', ['arg' => 'val'], NULL, 'foo=bar');
+		$this->request = new Request('http://google.com', ['arg' => 'val'], NULL, 'x-foo=bar');
 	}
 
 	/** @covers Csfd\Networking\Request::getContent() */
@@ -68,6 +68,9 @@ class RequestTest extends TestCase
 	/** @covers Csfd\Networking\Request::getStatusCode() */
 	public function testGetStatusCode()
 	{
+		$this->assertInternalType('integer', $this->request->getStatusCode());
+		$e = Access($this->request);
+		$e->statusCode = 200;
 		$this->assertSame(200, $this->request->getStatusCode());
 	}
 
