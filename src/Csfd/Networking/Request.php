@@ -51,7 +51,8 @@ class Request
 			$p = strpos($header, ':');
 			if ($p === FALSE)
 			{
-				break; // headers from next request 
+				// ignore status header from redirected request
+				continue;
 			}
 			$key = strToLower(substr($header, 0, $p));
 			$value = trim(substr($header, $p + 1));
