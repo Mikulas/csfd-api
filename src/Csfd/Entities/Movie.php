@@ -20,12 +20,16 @@ class Movie extends Entity
 
 	/**
 	 * @auth
+	 * @codeCoverageIgnore WIP
 	 */
 	public function _getMyRating()
 	{
 		
 	}
 
+	/**
+	 * @codeCoverageIgnore WIP
+	 */
 	public function rate($rating)
 	{
 		if (!is_integer($rating) || $rating < 0 || $rating > 5)

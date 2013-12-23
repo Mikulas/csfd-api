@@ -3,6 +3,9 @@
 namespace Csfd\Entities;
 
 
+/**
+ * @codeCoverageIgnore WIP
+ */
 class Message
 {
 

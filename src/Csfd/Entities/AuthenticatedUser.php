@@ -8,6 +8,10 @@ use Csfd\Networking\Request;
 class AuthenticatedUser extends User
 {
 
+	// 
+	// @codeCoverageIgnoreStart
+	// 
+
 	/**
 	 * @auth
 	 * @return Message[]
@@ -59,6 +63,10 @@ class AuthenticatedUser extends User
 
 		// TODO check status and return if ok
 	}
+
+	// 
+	// @codeCoverageIgnoreEnd
+	// 
 
 	protected function getConfigKeys()
 	{
