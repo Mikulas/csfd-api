@@ -6,5 +6,6 @@ php:
 
 install:
   - composer install
+  - mkdir tests/temp
 
 script: phpunit --coverage-text --configuration tests/config.xml tests/cases/

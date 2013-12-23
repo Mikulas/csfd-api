@@ -35,11 +35,14 @@ class TestCase extends PHPUnit_Framework_TestCase
 		$config = Yaml::parse(file_get_contents(__DIR__ . '/config.yml'));
 
 		$localFile = __DIR__ . '/config.local.yml';
-		if (is_file($localFile))
+		if (!is_file($localFile))
 		{
-			$local = Yaml::parse(file_get_contents($localFile));
-			$config = array_replace_recursive($config, $local);
+			$this->markTestIncomplete('Configuration file config.local.yml not found.');
 		}
+
+		$local = Yaml::parse(file_get_contents($localFile));
+		$config = array_replace_recursive($config, $local);
+
 		return $config;
 	}
 
