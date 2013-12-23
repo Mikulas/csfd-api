@@ -20,9 +20,16 @@ class UrlAccessTest extends TestCase
 		$foo->getUrl('key');
 	}
 
-	/**
-	 * @covers Csfd\Networking\UrlAccess::getUrl()
-	 */
+	/** @covers Csfd\Networking\UrlAccess::setUrlBuilder() */
+	public function testSetUrlBuilder()
+	{
+		$e = Access(new UrlAccessImplement);
+		$builder = $this->getMockUrlBuilder();
+		$e->setUrlBuilder($builder);
+		$this->assertSame($builder, $e->urlBuilder);
+	}
+
+	/** @covers Csfd\Networking\UrlAccess::getUrl() */
 	public function testGetUrl()
 	{
 		$foo = Access(new UrlAccessImplement);

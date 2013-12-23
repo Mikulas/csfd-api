@@ -1,0 +1,4 @@
+root: rootUrl/
+foo:
+    bar: fooBar
+    qaz: a{$arg1}c{$arg2}e

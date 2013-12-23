@@ -12,15 +12,33 @@ class UrlBuilderTest extends TestCase
 	 * @covers Csfd\Networking\UrlBuilder::factory()
 	 * @expectedException Csfd\InternalException
 	 */
-	public function testConfigNotFound()
+	public function testFactory_configNotFound()
 	{
 		$config = __DIR__ . '/doesNotExist';
 		$this->assertInstanceOf('Csfd\Networking\UrlBuilder', UrlBuilder::factory($config));
 	}
 
+	public function getInvalidConfigFiles()
+	{
+		return [
+			[__DIR__ . '/fixtures/invalid-1.yml'],
+			[__DIR__ . '/fixtures/invalid-2.yml']
+		];
+	}
+
+	/**
+	 * @covers Csfd\Networking\UrlBuilder::factory()
+	 * @dataProvider getInvalidConfigFiles
+	 * @expectedException Csfd\InternalException
+	 */
+	public function testFactory_invalidConfig($configFile)
+	{
+		UrlBuilder::factory($configFile);
+	}
+
 	private function getUrlsFile()
 	{
-		return __DIR__ . '/urls.yml';
+		return __DIR__ . '/fixtures/urls.yml';
 	}
 
 	/**
@@ -55,7 +73,45 @@ class UrlBuilderTest extends TestCase
 	public function testGetRoot()
 	{
 		$builder = UrlBuilder::factory($this->getUrlsFile());
-		$this->assertSame('_root_url_', $builder->getRoot());
+		$this->assertSame('rootUrl/', $builder->getRoot());
+	}
+
+	/**
+	 * @covers Csfd\Networking\UrlBuilder::get()
+	 * @expectedException Csfd\InternalException
+	 */
+	public function testGet_notFound()
+	{
+		$builder = UrlBuilder::factory($this->getUrlsFile());
+		$builder->get(['invalid']);
+	}
+
+	/** @covers Csfd\Networking\UrlBuilder::get() */
+	public function testGet()
+	{
+		$builder = UrlBuilder::factory($this->getUrlsFile());
+		$this->assertSame('rootUrl/fooBar', $builder->get(['foo', 'bar']));
+	}
+
+	/**
+	 * @covers Csfd\Networking\UrlBuilder::addMap()
+	 * @covers Csfd\Networking\UrlBuilder::map()
+	 */
+	public function testMap()
+	{
+		$builder = UrlBuilder::factory($this->getUrlsFile());
+		$builder->addMap('arg1', 'b');
+		$this->assertSame('rootUrl/abcde', $builder->get(['foo', 'qaz'], ['arg2' => 'd']));
+	}
+
+	/**
+	 * @covers Csfd\Networking\UrlBuilder::map()
+	 * @expectedException Csfd\InternalException
+	 */
+	public function testMap_unsetMap()
+	{
+		$builder = UrlBuilder::factory($this->getUrlsFile());
+		$builder->get(['foo', 'qaz']);
 	}
 
 }
