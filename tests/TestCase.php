@@ -34,18 +34,7 @@ class TestCase extends PHPUnit_Framework_TestCase
 
 	protected function getConfig()
 	{
-		$config = Yaml::parse(file_get_contents(__DIR__ . '/config.yml'));
-
-		$localFile = __DIR__ . '/config.local.yml';
-		if (!is_file($localFile))
-		{
-			$this->markTestIncomplete('Configuration file config.local.yml not found.');
-		}
-
-		$local = Yaml::parse(file_get_contents($localFile));
-		$config = array_replace_recursive($config, $local);
-
-		return $config;
+		return Yaml::parse(file_get_contents(__DIR__ . '/config.yml'));
 	}
 
 
