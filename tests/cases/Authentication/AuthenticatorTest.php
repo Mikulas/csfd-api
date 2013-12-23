@@ -1,7 +1,9 @@
 <?php
 
-use Csfd\Authentication\Authenticator;
+namespace Csfd\Authentication;
+
 use Csfd\Parsers;
+use TestCase;
 
 
 class AuthenticatorTest extends TestCase

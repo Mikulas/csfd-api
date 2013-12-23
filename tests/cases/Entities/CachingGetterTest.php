@@ -1,6 +1,8 @@
 <?php
 
-use Csfd\Entities\CachingGetter;
+namespace Csfd\Entities;
+
+use TestCase;
 
 
 class CachingGetterTest extends TestCase

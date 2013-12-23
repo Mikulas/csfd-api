@@ -1,6 +1,8 @@
 <?php
 
-use Csfd\Networking\Request;
+namespace Csfd\Networking;
+
+use TestCase;
 
 
 class RequestTest extends TestCase

@@ -1,7 +1,9 @@
 <?php
 
-use Csfd\Entities\Entity;
+namespace Csfd\Entities;
+
 use Csfd\Parsers;
+use TestCase;
 
 
 class EntityTest extends TestCase

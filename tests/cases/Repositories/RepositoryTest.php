@@ -1,6 +1,8 @@
 <?php
 
-use Csfd\Repositories\Repository;
+namespace Csfd\Repositories;
+
+use TestCase;
 
 
 class RepositoryTest extends TestCase

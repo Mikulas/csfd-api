@@ -1,7 +1,9 @@
 <?php
 
-use Csfd\Entities\User;
+namespace Csfd\Entities;
+
 use Csfd\Parsers;
+use TestCase;
 
 
 class UserTest extends TestCase

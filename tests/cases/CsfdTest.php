@@ -1,6 +1,8 @@
 <?php
 
-use Csfd\Csfd;
+namespace Csfd;
+
+use TestCase;
 
 
 class CsfdTest extends TestCase

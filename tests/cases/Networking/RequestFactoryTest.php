@@ -1,6 +1,9 @@
 <?php
 
-use Csfd\Networking\RequestFactory;
+namespace Csfd\Networking;
+
+use TestCase;
+
 
 /**
  * @covers Csfd\Networking\RequestFactory

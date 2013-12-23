@@ -1,8 +1,10 @@
 <?php
 
-use Csfd\Networking\UrlAccess;
+namespace Csfd\Networking;
+
 use Csfd\Entities\Movie;
 use Csfd\Parsers;
+use TestCase;
 
 
 class UrlAccessTest extends TestCase

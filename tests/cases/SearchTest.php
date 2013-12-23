@@ -1,7 +1,9 @@
 <?php
 
-use Csfd\Search;
+namespace Csfd;
+
 use Csfd\Parsers;
+use TestCase;
 
 
 class SearchTest extends TestCase

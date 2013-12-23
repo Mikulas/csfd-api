@@ -1,6 +1,8 @@
 <?php
 
-use Csfd\Networking\UrlBuilder;
+namespace Csfd\Networking;
+
+use TestCase;
 
 
 class UrlBuilderTest extends TestCase
