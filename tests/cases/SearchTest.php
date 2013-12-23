@@ -48,7 +48,7 @@ class SearchTest extends TestCase
 
 		$ids = $this->resultToIds($this->search->findUser('spike'));
 		$this->assertSame([
-				402135, 111737, 75401, 117435, 339139, 92296,
+				402135, 111737, 75401, 117435, 339139, 92296, 460552,
 				286671, 30174, 30000, 2638, 51341, 5062, 113366
 			], $ids);
 	}
