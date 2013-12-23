@@ -6,8 +6,6 @@ use Csfd\Networking\UrlBuilder;
 class MockUrlBuilder extends UrlBuilder
 {
 
-	const URL = 'generated_url';
-
 	public function __construct(array $urls = NULL)
 	{
 		$this->urls = [];
@@ -16,7 +14,7 @@ class MockUrlBuilder extends UrlBuilder
 
 	public function get(array $path, array $args = NULL)
 	{
-		return self::URL;
+		return implode(':', $path);
 	}
 
 }

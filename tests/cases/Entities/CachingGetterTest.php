@@ -9,12 +9,12 @@ class CachingGetterTest extends TestCase
 	/** @covers \Csfd\Entities\CachingGetter::__call */
 	public function testCallDefined()
 	{
-		$foo = new Foo;
-		$this->assertSame(0, Foo::$callCount);
-		$this->assertSame(Foo::RETVAL, $foo->getBar());
-		$this->assertSame(1, Foo::$callCount);
-		$this->assertSame(Foo::RETVAL, $foo->getBar()); // cached
-		$this->assertSame(1, Foo::$callCount);
+		$foo = new CGImplement;
+		$this->assertSame(0, CGImplement::$callCount);
+		$this->assertSame(CGImplement::RETVAL, $foo->getBar());
+		$this->assertSame(1, CGImplement::$callCount);
+		$this->assertSame(CGImplement::RETVAL, $foo->getBar()); // cached
+		$this->assertSame(1, CGImplement::$callCount);
 	}
 
 	/**
@@ -23,8 +23,8 @@ class CachingGetterTest extends TestCase
 	 */
 	public function testCallUndefined()
 	{
-		$foo = new Foo;
-		$this->assertSame(Foo::RETVAL, $foo->getUndefined());
+		$foo = new CGImplement;
+		$this->assertSame(CGImplement::RETVAL, $foo->getUndefined());
 	}
 
 	/**
@@ -32,13 +32,13 @@ class CachingGetterTest extends TestCase
 	 */
 	public function testCallDynamic()
 	{
-		$foo = new FooDynamic;
+		$foo = new CGImplementDynamic;
 		$this->assertSame('dynamic', $foo->getDynamic());
 	}
 
 }
 
-class Foo
+class CGImplement
 {
 	use CachingGetter;
 
@@ -53,7 +53,7 @@ class Foo
 	}
 }
 
-class FooDynamic
+class CGImplementDynamic
 {
 	use CachingGetter;
 

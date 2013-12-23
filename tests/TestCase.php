@@ -2,6 +2,7 @@
 
 use Csfd\Networking\UrlBuilder;
 use Csfd\Networking\RequestFactory;
+use Csfd\Repositories;
 
 
 class TestCase extends PHPUnit_Framework_TestCase
@@ -76,6 +77,48 @@ class TestCase extends PHPUnit_Framework_TestCase
 	{
 		return $this->getSingleton(__METHOD__, function() {
 			return new MockAuthenticator;
+		});
+	}
+
+	protected function getUsersRepository()
+	{
+		return $this->getSingleton(__METHOD__, function() {
+			$repo = new Repositories\Users(
+				$this->getMockAuthenticator(),
+				$this->getMockUrlBuilder(),
+				$this->getMockRequestFactory()
+			);
+			$repo->setParserClass('Csfd\Parsers\User');
+			$repo->setEntityClass('Csfd\Entities\User');
+			return $repo;
+		});
+	}
+
+	protected function getMoviesRepository()
+	{
+		return $this->getSingleton(__METHOD__, function() {
+			$repo = new Repositories\Movies(
+				$this->getMockAuthenticator(),
+				$this->getMockUrlBuilder(),
+				$this->getMockRequestFactory()
+			);
+			$repo->setParserClass('Csfd\Parsers\Movie');
+			$repo->setEntityClass('Csfd\Entities\Movie');
+			return $repo;
+		});
+	}
+
+	protected function getAuthorsRepository()
+	{
+		return $this->getSingleton(__METHOD__, function() {
+			$repo = new Repositories\Authors(
+				$this->getMockAuthenticator(),
+				$this->getMockUrlBuilder(),
+				$this->getMockRequestFactory()
+			);
+			$repo->setParserClass('Csfd\Parsers\Author');
+			$repo->setEntityClass('Csfd\Entities\Author');
+			return $repo;
 		});
 	}
 

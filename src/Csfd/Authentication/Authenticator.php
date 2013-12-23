@@ -2,6 +2,7 @@
 
 namespace Csfd\Authentication;
 
+use Csfd\Networking;
 use Csfd\Networking\Request;
 use Csfd\Networking\RequestFactory;
 use Csfd\Networking\UrlAccess;

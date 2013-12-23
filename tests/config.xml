@@ -17,9 +17,9 @@
          stopOnIncomplete="false"
          stopOnSkipped="false"
          testSuiteLoaderClass="PHPUnit_Runner_StandardTestSuiteLoader"
-         timeoutForSmallTests="1"
-         timeoutForMediumTests="10"
-         timeoutForLargeTests="60"
+         timeoutForSmallTests="4"
+         timeoutForMediumTests="6"
+         timeoutForLargeTests="10"
          strict="true"
          verbose="false">
    <filter>
