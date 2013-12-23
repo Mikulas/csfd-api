@@ -1,15 +1,17 @@
 # ČSFD API
 
 <a href="https://travis-ci.org/Mikulas/csfd-api">
-	<img src="https://khanovaskola.cz/travis/index.php?user=Mikulas&repo=csfd-api&branch=2.0" height="18" alt="Build Status">
+	<img src="https://khanovaskola.cz/travis/index.php?user=Mikulas&repo=csfd-api&branch=master" height="18" alt="Build Status">
 </a>
 
-<b>This API is also available via JSON at <a href="http://csfdapi.cz/">http://csfdapi.cz</a>.</b>
+# WIP
+
+This is a WIP version 2.0. The stable library is available at <a href="https://github.com/Mikulas/csfd-api/tree/1.x">branch 1.x</a>.
 
 # Installation
 
 ```sh
-composer require mikulas/csfdapi
+composer require mikulas/csfdapi "@dev"
 ```
 or <a href="https://github.com/Mikulas/csfd-api/releases">download packages</a> manually
 
