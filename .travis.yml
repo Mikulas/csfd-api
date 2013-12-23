@@ -6,6 +6,11 @@ php:
 
 install:
   - composer install
-  - mkdir tests/temp
 
-script: phpunit --coverage-text --configuration tests/config.xml tests/cases/
+script:
+  - mkdir -p tests/temp
+  - mkdir -p build/logs
+  - phpunit --coverage-clover build/logs/clover.xml --configuration tests/config.xml tests/cases/
+
+after_script:
+  - php vendor/bin/coveralls -v
