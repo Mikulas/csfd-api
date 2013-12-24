@@ -37,7 +37,18 @@ class Request
 			$polo['http']['content'] = http_build_query($args);
 		}
 
-		$this->content = file_get_contents($url, NULL, stream_context_create($polo));
+		$this->content = @file_get_contents($url, NULL, stream_context_create($polo));
+		if ($this->content === FALSE)
+		{
+			if (@file_get_contents('http://google.com') === FALSE)
+			{
+				throw new Exception('Request failed. Your internet connection is down.', Exception::NO_CONNECTION);
+			}
+			else
+			{
+				throw new Exception('Request failed. You have been blacklisted by CSFD firewall, which usually lasts for about a day.', Exception::BLOCKED);
+			}
+		}
 
 		// @codingStandardsIgnoreStart
 		$rawHeaders = $http_response_header;
