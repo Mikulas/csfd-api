@@ -11,6 +11,7 @@ use TestCase;
 class MovieParserTest extends TestCase
 {
 
+	/** @see http://www.csfd.cz/film/228329-avatar/ */
 	const ID = 228329;
 
 	private $parser;
@@ -52,6 +53,18 @@ class MovieParserTest extends TestCase
 		$url = $this->parser->getPosterUrl($this->html);
 		$exp = 'http://img.csfd.cz/posters/22/228329_dvd_1.jpg?h180';
 		$this->assertSame($exp, $url);
+	}
+
+	/** @covers Csfd\Parsers\Movie::getNames() */
+	public function testGetNames()
+	{
+		$names = $this->parser->getNames($this->html);
+		$exp = [
+			'cs' => 'Avatar',
+			'en' => 'Avatar',
+			'sk' => 'Avatar',
+		];
+		$this->assertSame($exp, $names);
 	}
 
 }

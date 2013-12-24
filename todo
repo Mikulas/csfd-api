@@ -1,6 +1,4 @@
-// test Entitites
-
-// udelat movie entity
+// otestovat parsery proti unset (movie bez popisu atp)
 
 // udelat movie @auth getRating methodu
 // udelat movie rate @auth methodu
