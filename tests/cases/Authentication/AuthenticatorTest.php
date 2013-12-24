@@ -53,13 +53,13 @@ class AuthenticatorTest extends TestCase
 	 */
 	public function testValidCredentials()
 	{
-		$c = $this->getConfig();
-		$this->auth->setCredentials($c['account']['username'], $c['account']['password']);
+		$c = $this->getConfig()['account'];
+		$this->auth->setCredentials($c['username'], $c['password']);
 		$cookie = $this->auth->getCookie();
 		$this->assertInternalType('string', $cookie);
 		$this->assertSame($cookie, $this->auth->getCookie()); // internal caching
 
-		$this->assertSame($c['account']['id'], $this->auth->getUserId());
+		$this->assertSame($c['id'], $this->auth->getUserId());
 	}
 
 	/**
@@ -70,6 +70,16 @@ class AuthenticatorTest extends TestCase
 	public function testGetUserId_notAuthenticated()
 	{
 		$this->auth->getUserId();
+	}
+
+	/**
+	 * @covers Csfd\Authentication\Authenticator::getUserId()
+	 */
+	public function testGetUserId_validFirstRequest()
+	{
+		$c = $this->getConfig()['account'];
+		$this->auth->setCredentials($c['username'], $c['password']);
+		$this->assertSame($c['id'], $this->auth->getUserId());
 	}
 
 }
