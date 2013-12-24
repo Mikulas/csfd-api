@@ -23,8 +23,7 @@ class UserParserTest extends TestCase
 		$account = $this->getConfig()['account'];
 		$auth->setCredentials($account['username'], $account['password']);
 
-		$factory = new CachedRequestFactory;
-		$factory->setRequestClass('Csfd\Networking\Request');
+		$factory = $this->getRequestFactory();
 		$url = $builder->get(['entities', 'user', 'profile'], ['entityId' => $account['id']]);
 		$this->html = $factory->create($url, NULL, NULL, $auth->getCookie())->getContent();
 	}

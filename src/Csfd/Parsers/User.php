@@ -123,9 +123,13 @@ class User extends Parser
 	 */
 	public function getLastActivity($html)
 	{
+		// @codeCoverageIgnoreStart
+
 		// TODO handle relative czech date (replace dnes with today, strToTime)
 		// $text = $this->getActivity($html)[1];
 		throw new Exception('not implemented');
+
+		// @codeCoverageIgnoreEnd
 	}
 
 	public function getAvatarUrl($html)
