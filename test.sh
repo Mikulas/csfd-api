@@ -1,4 +1,9 @@
 #/bin/sh
+
+# purge old cache
+find tests/temp/ -name "*" -type f -mmin +120 -delete
+
+# run cs and phpunit
 vendor/bin/phpcs \
 	-s \
 	--ignore=YamlFileLoader \
