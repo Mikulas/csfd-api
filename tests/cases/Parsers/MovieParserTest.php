@@ -55,14 +55,17 @@ class MovieParserTest extends TestCase
 		$this->assertSame($exp, $url);
 	}
 
-	/** @covers Csfd\Parsers\Movie::getNames() */
+	/**
+	 * @covers Csfd\Parsers\Movie::getNames()
+	 * @covers Csfd\Parsers\Movie::getCountryCode()
+	 */
 	public function testGetNames()
 	{
 		$names = $this->parser->getNames($this->html);
 		$exp = [
-			'cs' => 'Avatar',
-			'en' => 'Avatar',
-			'sk' => 'Avatar',
+			'CZ' => 'Avatar',
+			'SK' => 'Avatar',
+			'US' => 'Avatar',
 		];
 		$this->assertSame($exp, $names);
 	}

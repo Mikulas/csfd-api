@@ -20,7 +20,7 @@
 			timeoutForSmallTests="4"
 			timeoutForMediumTests="6"
 			timeoutForLargeTests="10"
-			strict="true"
+			strict="false"
 			verbose="false">
 	<filter>
 		<whitelist processUncoveredFilesFromWhitelist="true">

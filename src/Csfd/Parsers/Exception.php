@@ -17,4 +17,7 @@ class Exception extends CsdfException
 	// User
 	const USER_NODE_NOT_FOUND = 1001;
 
+	// Movie
+	const UNKNOWN_COUNTRY = 2001;
+
 }

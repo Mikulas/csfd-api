@@ -1,7 +1,7 @@
 #/bin/sh
 
 # purge old cache
-find tests/temp/ -name "*" -type f -mmin +120 -delete
+find tests/temp/ -name "*" -type f -mmin +360 -delete
 
 # run cs and phpunit
 vendor/bin/phpcs \
