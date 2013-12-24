@@ -39,6 +39,8 @@ class SearchTest extends TestCase
 	/**
 	 * @covers Csfd\Search::findEntity()
 	 * @covers Csfd\Search::findUser()
+	 * @covers Csfd\Parsers\Search::getIds()
+	 * @covers Csfd\Parsers\Search::getUsers()
 	 */
 	public function testFindUser()
 	{
@@ -59,6 +61,8 @@ class SearchTest extends TestCase
 	/**
 	 * @covers Csfd\Search::findEntity()
 	 * @covers Csfd\Search::findMovie()
+	 * @covers Csfd\Parsers\Search::getIds()
+	 * @covers Csfd\Parsers\Search::getMovies()
 	 */
 	public function testFindMovie()
 	{
@@ -82,6 +86,8 @@ class SearchTest extends TestCase
 	/**
 	 * @covers Csfd\Search::findEntity()
 	 * @covers Csfd\Search::findAuthor()
+	 * @covers Csfd\Parsers\Search::getIds()
+	 * @covers Csfd\Parsers\Search::getAuthors()
 	 */
 	public function testFindAuthor()
 	{
