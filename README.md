@@ -1,13 +1,13 @@
 # ČSFD API
 
 <a href="https://travis-ci.org/Mikulas/csfd-api">
-	<img src="https://khanovaskola.cz/travis/index.php?user=Mikulas&repo=csfd-api&branch=master" height="18" alt="Build Status">
+	<img src="https://khancdn.eu/badges.php?service=https%3A%2F%2Ftravis-ci.org%2FMikulas%2Fcsfd-api.png%3Fbranch%3Dmaster" height="18" alt="Build Status">
 </a>
 <a href="https://coveralls.io/r/Mikulas/csfd-api?branch=master">
-	<img src="https://coveralls.io/repos/Mikulas/csfd-api/badge.png?branch=master" alt='Coverage Status' />
+	<img src="https://khancdn.eu/badges.php?service=https%3A%2F%2Fcoveralls.io%2Frepos%2FMikulas%2Fcsfd-api%2Fbadge.png%3Fbranch%3Dmaster" height="18" alt='Coverage Status' />
 </a>
 <a href="https://www.versioneye.com/user/projects/52b862ddec1375b24e00000e">
-	<img src="http://khanovaskola.cz/travis/versioneye.php?hash=52b8606bec1375b24e000002" height="18" alt="Dependencies">
+	<img src="https://khancdn.eu/badges.php?service=https%3A%2F%2Fwww.versioneye.com%2Fuser%2Fprojects%2F52b862ddec1375b24e00000e%2Fbadge.png" height="18" alt="Dependencies">
 </a>
 
 # WIP
