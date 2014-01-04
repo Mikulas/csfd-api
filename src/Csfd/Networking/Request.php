@@ -37,10 +37,11 @@ class Request
 			$polo['http']['content'] = http_build_query($args);
 		}
 
-		$this->content = @file_get_contents($url, NULL, stream_context_create($polo));
+		list($this->content, $rawHeaders) = $this->fileGetContents($url, NULL, stream_context_create($polo));
 		if ($this->content === FALSE)
 		{
-			if (@file_get_contents('http://google.com') === FALSE)
+			list($res) = $this->fileGetContents('http://google.com');
+			if ($res === FALSE)
 			{
 				throw new Exception('Request failed. Your internet connection is down.', Exception::NO_CONNECTION);
 			}
@@ -49,10 +50,6 @@ class Request
 				throw new Exception('Request failed. You have been blacklisted by CSFD firewall, which usually lasts for about a day.', Exception::BLOCKED);
 			}
 		}
-
-		// @codingStandardsIgnoreStart
-		$rawHeaders = $http_response_header;
-		// @codingStandardsIgnoreEnd
 
 		$this->statusCode = (int) substr($rawHeaders[0], strlen('HTTP/1.1 '));
 		array_shift($rawHeaders);
@@ -71,6 +68,19 @@ class Request
 			$headers[$key][] = $value;
 		}
 		$this->headers = $headers;
+	}
+
+	/**
+	 * Mockable file_get_contents wrapper
+	 * @return [$res, $headers]
+	 */
+	protected function fileGetContents()
+	{
+		// @codingStandardsIgnoreStart
+		$http_response_header = NULL;
+		$res = call_user_func_array('file_get_contents', func_get_args());
+		return [$res, $http_response_header];
+		// @codingStandardsIgnoreEnd
 	}
 
 	/**

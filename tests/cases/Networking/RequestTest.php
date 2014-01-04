@@ -10,10 +10,33 @@ class RequestTest extends TestCase
 
 	private $request;
 
-	/** @covers Csfd\Networking\Request::__construct() */
+	/**
+	 * @covers Csfd\Networking\Request::__construct()
+	 * @covers Csfd\Networking\Request::fileGetContents()
+	 */
 	public function setUp()
 	{
 		$this->request = new Request('http://google.com', ['arg' => 'val'], NULL, 'x-foo=bar');
+	}
+
+	/**
+	 * @covers Csfd\Networking\Request::__construct()
+	 * @expectedException Csfd\Networking\Exception
+	 * @expectedException Csfd\Networking\Exception::NO_CONNECTION
+	 */
+	public function testConnectionFailure()
+	{
+		new FailingRequest('http://google.com/');
+	}
+
+	/**
+	 * @covers Csfd\Networking\Request::__construct()
+	 * @expectedException Csfd\Networking\Exception
+	 * @expectedException Csfd\Networking\Exception::BLOCKED
+	 */
+	public function testCsfdBlock()
+	{
+		new CsfdBlockedRequest('http://csfd.cz/');
 	}
 
 	/** @covers Csfd\Networking\Request::getContent() */
@@ -76,4 +99,25 @@ class RequestTest extends TestCase
 		$this->assertSame(200, $this->request->getStatusCode());
 	}
 
+}
+
+class FailingRequest extends Request
+{
+	protected function fileGetContents()
+	{
+		return [FALSE, NULL];
+	}
+}
+
+class CsfdBlockedRequest extends Request
+{
+
+	static $return = FALSE;
+
+	protected function fileGetContents()
+	{
+		$ret = [self::$return, NULL];
+		self::$return = !self::$return;
+		return $ret;
+	}
 }
