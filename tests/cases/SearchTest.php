@@ -78,7 +78,7 @@ class SearchTest extends TestCase
 		// both full and short results
 		$ids = $this->resultToIds($this->search->findMovie('gatsby'));
 		$this->assertSame([
-				29491, 19372, 293006, 24915, 26359, 134362
+				293006, 29491, 19372, 24915, 26359, 134362
 			], $ids);
 	}
 
