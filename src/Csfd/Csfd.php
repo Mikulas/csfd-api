@@ -16,6 +16,12 @@ class Csfd
 	/** @var Repositories\Users */
 	public $users;
 
+	/** @var Repositories\Movies */
+	public $movies;
+
+	/** @var Repositories\Authors */
+	public $authors;
+
 	public static function create()
 	{
 		$container = new ContainerBuilder();
@@ -30,7 +36,11 @@ class Csfd
 	{
 		$this->container = $container;
 
-		$this->users = $this->container->get('repo.users');
+		foreach (['users', 'movies', 'authors'] as $repo)
+		{
+			$this->$repo = $this->container->get("repo.$repo");
+			$this->$repo->setContainer($this);
+		}
 	}
 
 	/**

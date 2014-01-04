@@ -67,6 +67,53 @@ class MovieParserTest extends TestCase
 		$this->assertSame($exp, $url);
 	}
 
+	/** @covers Csfd\Parsers\Movie::getGenres() */
+	public function testGetGenres()
+	{
+		$out = $this->parser->getGenres($this->html);
+		$exp = ['akční', 'dobrodružný', 'fantasy', 'sci-fi'];
+		$this->assertSame($exp, $out);
+	}
+
+	/** @covers Csfd\Parsers\Movie::getOrigin() */
+	public function testGetOrigin()
+	{
+		$out = $this->parser->getOrigin($this->html);
+		$exp = ['GB', 'US'];
+		$this->assertSame($exp, $out);
+	}
+
+	/** @covers Csfd\Parsers\Movie::getYear() */
+	public function testGetYear()
+	{
+		$out = $this->parser->getYear($this->html);
+		$this->assertInternalType('integer', $out);
+		$this->assertSame(2009, $out);
+	}
+
+	/** @covers Csfd\Parsers\Movie::getDuration() */
+	public function testGetDuration()
+	{
+		$out = $this->parser->getDuration($this->html);
+		$this->assertInternalType('integer', $out);
+		$this->assertSame(162, $out);
+	}
+
+	/** @covers Csfd\Parsers\Movie::getPlots() */
+	public function testGetPlots()
+	{
+		$out = $this->parser->getPlots($this->html);
+		$this->assertInternalType('array', $out);
+		$this->assertCount(3, $out);
+		foreach ($out as $node)
+		{
+			$this->assertInternalType('array', $node);
+			$this->assertArrayHasKey('plot', $node);
+			$this->assertArrayHasKey('user', $node);
+			$this->assertSame($node['plot'], strip_tags($node['plot']), 'Plot should not contain html');
+		}
+	}
+
 	/**
 	 * @covers Csfd\Parsers\Movie::getNames()
 	 * @covers Csfd\Parsers\Movie::getCountryCode()

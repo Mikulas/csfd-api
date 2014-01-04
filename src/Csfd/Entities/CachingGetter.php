@@ -5,6 +5,7 @@ namespace Csfd\Entities;
 use Csfd\InternalException;
 
 
+// TODO just move it to Entity
 trait CachingGetter
 {
 
@@ -26,17 +27,23 @@ trait CachingGetter
 
 		if (strpos($method, 'get') === 0)
 		{
+			$property = lcFirst(substr($method, strlen('get')));
 			$getter = "_$method";
 			if (method_exists($this, $getter))
 			{
-				// TODO inject args
-				$res = $this->$getter();
+				$query = [];
+				if ($this instanceof Entity)
+				{
+					$query['entityId'] = $this->id;	
+					$html = $this->request($this->getUrl($this->getUrlKey($property), $query))->getContent();
+					array_unshift($args, $html);
+				}
+				$res = call_user_func_array([$this, $getter], $args);
 				$this->cache[$method] = $res;
 				return $res;
 			}
 			else if (method_exists($this, '_get'))
 			{
-				$property = lcFirst(substr($method, strlen('get')));
 				array_unshift($args, $property);
 				$res = call_user_func_array([$this, '_get'], $args);
 				$this->cache[$method] = $res;
@@ -46,6 +53,11 @@ trait CachingGetter
 
 		$class = get_class($this);
 		throw new InternalException("Call to undefined method $class::$method.");
+	}
+
+	protected function getUrlKey()
+	{
+		return 'default';
 	}
 
 }

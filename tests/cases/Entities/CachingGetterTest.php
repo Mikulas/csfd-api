@@ -53,6 +53,7 @@ class CGImplement
 		self::$callCount++;
 		return self::RETVAL;
 	}
+
 }
 
 class CGImplementDynamic

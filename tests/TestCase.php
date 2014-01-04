@@ -142,4 +142,19 @@ class TestCase extends PHPUnit_Framework_TestCase
 		});
 	}
 
+	protected function getMockContainer()
+	{
+		return $this->getSingleton(__METHOD__, function() {
+			$container = new MockContainer(
+				$this->getUsersRepository(),
+				$this->getMoviesRepository(),
+				$this->getAuthorsRepository()
+			);
+			$this->getUsersRepository()->setContainer($container);
+			$this->getMoviesRepository()->setContainer($container);
+			$this->getAuthorsRepository()->setContainer($container);
+			return $container;
+		});
+	}
+
 }

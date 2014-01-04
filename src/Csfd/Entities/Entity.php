@@ -3,11 +3,13 @@
 namespace Csfd\Entities;
 
 use Csfd\Authentication\Authenticator;
+use Csfd\InternalException;
 use Csfd\Networking\Request;
 use Csfd\Networking\RequestFactory;
 use Csfd\Networking\UrlAccess;
 use Csfd\Networking\UrlBuilder;
 use Csfd\Parsers\Parser;
+use Csfd\Repositories\Repository;
 
 
 abstract class Entity
@@ -19,6 +21,7 @@ abstract class Entity
 	private $auth;
 	private $parser;
 	private $requestFactory;
+	private $repository;
 
 	protected $id;
 
@@ -29,6 +32,28 @@ abstract class Entity
 		$this->parser = $parser;
 		$this->requestFactory = $requestFactory;
 		$this->id = $id;
+	}
+
+	public function setRepository(Repository $repo)
+	{
+		$this->repository = $repo;
+	}
+
+	/**
+	 * @param string $name repo name or nothing to return current entity repo
+	 * @return Repository
+	 */
+	protected function getRepository($name = NULL)
+	{
+		if (!$this->repository)
+		{
+			throw new InternalException('Entity is not attached to repository');
+		}
+		if ($name)
+		{
+			return $this->repository->getRepository($name);
+		}
+		return $this->repository;
 	}
 
 	protected function getParser()

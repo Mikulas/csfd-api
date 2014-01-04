@@ -21,6 +21,9 @@ abstract class Repository
 	/** @var string class name */
 	protected $parserClass;
 
+	/** @var Csfd */
+	private $container;
+
 	/** singleton of $parserClass */
 	private $parser;
 
@@ -29,6 +32,28 @@ abstract class Repository
 		$this->authenticator = $authenticator;
 		$this->urlBuilder = $urlBuilder;
 		$this->requestFactory = $requestFactory;
+	}
+
+	public function setContainer($container)
+	{
+		$this->container = $container;
+	}
+
+	public function getRepository($name)
+	{
+		if (!$this->container)
+		{
+			throw new InternalException("Repository is not attached to repository container.");
+		}
+		if (!property_exists($this->container, $name))
+		{
+			throw new InternalException("Repository container does not contain repository `$name`.");
+		}
+		if (! $this->container->$name instanceof Repository)
+		{
+			throw new InternalException("Repository container has `$name` defined, but it's not of type Csfd\Repositories\Repository.");
+		}
+		return $this->container->$name;
 	}
 
 	public function setEntityClass($entityClass)
@@ -49,7 +74,9 @@ abstract class Repository
 		}
 
 		$class = $this->entityClass;
-		return new $class($this->authenticator, $this->urlBuilder, $this->getParser(), $this->requestFactory, $id);
+		$entity = new $class($this->authenticator, $this->urlBuilder, $this->getParser(), $this->requestFactory, $id);
+		$entity->setRepository($this);
+		return $entity;
 	}
 
 	public function getParser()

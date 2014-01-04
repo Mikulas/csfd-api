@@ -22,6 +22,7 @@ class Movie extends Parser
 		return (int) $this->getNode($html, '//p[@class="charts"]/a')->text();
 	}
 
+	/** @return string[] urls */
 	public function getPosterUrls($html)
 	{
 		$urls = $this->getNode($html, '//*[@id="posters"]//div[@class="image"]')->each(function(Crawler $node) {
@@ -35,6 +36,61 @@ class Movie extends Parser
 	{
 		$url = $this->getNode($html, '//img[@class="film-poster"]')->attr('src');
 		return $this->normalizeUrl($url);
+	}
+
+	/** @return string[] */
+	public function getGenres($html)
+	{
+		$text = $this->getNode($html, '//*[@id="profile"]//p[@class="genre"]')->text();
+		$genres = preg_split('~\s*/\s*~', mb_strToLower($text, 'UTF-8'));
+		sort($genres);
+		return $genres;
+	}
+
+	/** @return string[] */
+	public function getOrigin($html)
+	{
+		$origin = $this->getNode($html, '//*[@id="profile"]//p[@class="origin"]')->text();
+		$text = $this->getValue($origin, '~^(?P<value>[^,]+?),~');
+		$countries = preg_split('~\s*/\s*~', mb_strToLower($text, 'UTF-8'));
+
+		$codes = [];
+		foreach ($countries as $country)
+		{
+			$codes[] = $this->getCountryCode($country);
+		}
+		sort($codes);
+		return $codes;
+	}
+
+	/** @return int */
+	public function getYear($html)
+	{
+		$origin = $this->getNode($html, '//*[@id="profile"]//p[@class="origin"]')->text();
+		return (int) $this->getValue($origin, '~\b(?P<value>1[89]\d\d|20\d\d)\b~');
+	}
+
+	/** @return int */
+	public function getDuration($html)
+	{
+		// TODO parse series properly
+		// TODO parse different versions (SE, Directors Cut, @see http://www.csfd.cz/film/228329-avatar/)
+		$origin = $this->getNode($html, '//*[@id="profile"]//p[@class="origin"]')->text();
+		return (int) $this->getValue($origin, '~\b(?P<value>\d+)\s*min\b~');
+	}
+
+	/** @return string[] */
+	public function getPlots($html)
+	{
+		return $this->getNode($html, '//div[@id="plots"]//ul/li')->each(function(Crawler $node) {
+			$user = NULL;
+			$user = $node->filterXPath('//*[@class="source"]/a');
+			if ($user->count())
+			{
+				$user = $this->getIdFromUrl($user->attr('href'));
+			}
+			return ['user' => $user, 'plot' => trim($node->text())];
+		});
 	}
 
 	/**
