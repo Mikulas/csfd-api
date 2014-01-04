@@ -117,6 +117,15 @@ class ParserTest extends TestCase
 		$this->assertSame($exp->format('c'), $date->format('c'));
 	}
 
+	/** @covers Csfd\Parsers\Parser::getCssUrl() */
+	public function testGetCssUrl()
+	{
+		$e = Access($this->parser);
+		$in = "background-image: url('\/\/img\.csfd\.cz\/posters\/22\/228329_dvd_1\.jpg\?h180'); width: 131px; height: 180px";
+		$exp = 'http://img.csfd.cz/posters/22/228329_dvd_1.jpg?h180';
+		$this->assertSame($exp, $e->getCssUrl($in));
+	}
+
 	/** @covers Csfd\Parsers\Parser::normalizeUrl() */
 	public function testNormalizeUrl()
 	{
