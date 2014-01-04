@@ -22,6 +22,14 @@ class Movie extends Parser
 		return (int) $this->getNode($html, '//p[@class="charts"]/a')->text();
 	}
 
+	public function getPosterUrls($html)
+	{
+		$urls = $this->getNode($html, '//*[@id="posters"]//div[@class="image"]')->each(function(Crawler $node) {
+			return $this->getCssUrl($node->attr('style'));
+		});
+		return $urls;
+	}
+
 	/** @return string url */
 	public function getPosterUrl($html)
 	{

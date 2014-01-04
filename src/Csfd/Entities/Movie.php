@@ -11,7 +11,8 @@ use Csfd\Parsers\Parser;
 /**
  * @method int getRating() 0..100
  * @method int|NULL getChartPosition() NULL if not in top 100
- * @method string getPosterUrl()
+ * @method string getPosterUrl() returns poster url
+ * @method string getPosterUrls() returns urls of all available posters
  * @method array getNames()
  *
  * @method string getMyRating() REQUIRES AUTH

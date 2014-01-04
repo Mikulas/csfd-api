@@ -71,6 +71,16 @@ abstract class Parser
 	}
 
 	/**
+	 * @param string $css
+	 * @return string url
+	 */
+	protected function getCssUrl($css)
+	{
+		$url = $this->getValue($css, '~url\([\'"]?(?P<value>[^)]*?)[\'"]?\)~');
+		return $this->normalizeUrl(stripslashes($url));
+	}
+
+	/**
 	 * @param string $url
 	 * @return string url
 	 */

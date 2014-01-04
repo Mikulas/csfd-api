@@ -47,6 +47,18 @@ class MovieParserTest extends TestCase
 		$this->assertLessThanOrEqual(250, $rating); // not sure what maximum is
 	}
 
+	/** @covers Csfd\Parsers\Movie::getPosterUrls() */
+	public function testGetPosterUrls()
+	{
+		$urls = $this->parser->getPosterUrls($this->html);
+		$this->assertInternalType('array', $urls);
+		$this->assertCount(22, $urls);
+		foreach ($urls as $url)
+		{
+			$this->assertTrue((bool) preg_match('~^http://img.csfd.cz/(posters|files)~', $url));
+		}
+	}
+
 	/** @covers Csfd\Parsers\Movie::getPosterUrl() */
 	public function testGetPosterUrl()
 	{
