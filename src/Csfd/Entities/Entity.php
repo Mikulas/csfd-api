@@ -114,4 +114,14 @@ abstract class Entity
 		return $this->id;
 	}
 
+	protected function mapToEntity(array $ids, $repository)
+	{
+		$entities = [];
+		foreach ($ids as $id)
+		{
+			$entities[] = $repository->get($id);
+		}
+		return $entities;
+	}
+
 }

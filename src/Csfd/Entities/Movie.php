@@ -78,10 +78,7 @@ class Movie extends Entity
 		$authors = $this->getParser()->getAuthors($html);
 		foreach ($authors as &$node)
 		{
-			foreach ($node as &$id)
-			{
-				$id = $this->getRepository('users')->get($id);
-			}
+			$node = $this->mapToEntity($node, $this->getRepository('users'));
 		}
 		return $authors;
 	}
@@ -92,11 +89,7 @@ class Movie extends Entity
 	public function _getRelatedMovies($html)
 	{
 		$movies = $this->getParser()->getRelatedMovies($html);
-		foreach ($movies as &$movie)
-		{
-			$movie = $this->getRepository('movies')->get($movie);
-		}
-		return $movies;
+		return $this->mapToEntity($movies, $this->getRepository('movies'));
 	}
 
 	/**
@@ -105,11 +98,7 @@ class Movie extends Entity
 	public function _getSimilarMovies($html)
 	{
 		$movies = $this->getParser()->getSimilarMovies($html);
-		foreach ($movies as &$movie)
-		{
-			$movie = $this->getRepository('movies')->get($movie);
-		}
-		return $movies;
+		return $this->mapToEntity($movies, $this->getRepository('movies'));
 	}
 
 

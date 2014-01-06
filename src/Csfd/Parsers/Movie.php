@@ -142,20 +142,22 @@ class Movie extends Parser
 		return $a->attr('href');
 	}
 
-	public function getRelatedMovies($html)
+	private function getMovieList($html, $class)
 	{
-		$xp = '//div[contains(@class,"related")]//a[contains(@class,"film")]';
+		$xp = '//div[contains(@class,"' . $class . '")]//a[contains(@class,"film")]';
 		return $this->getNode($html, $xp)->each(function(Crawler $node) {
 			return $this->getIdFromUrl($node->attr('href'));
 		});
 	}
 
+	public function getRelatedMovies($html)
+	{
+		return $this->getMovieList($html, 'related');
+	}
+
 	public function getSimilarMovies($html)
 	{
-		$xp = '//div[contains(@class,"similar")]//a[contains(@class,"film")]';
-		return $this->getNode($html, $xp)->each(function(Crawler $node) {
-			return $this->getIdFromUrl($node->attr('href'));
-		});
+		return $this->getMovieList($html, 'similar');
 	}
 
 	public function getTags($html)
