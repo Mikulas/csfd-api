@@ -121,6 +121,27 @@ class Movie extends Parser
 		});
 	}
 
+	/** @return string url */
+	public function getImdbUrl($html)
+	{
+		$a = $this->getNode($html, '//*[@id="share"]/ul[@class="links"]//a[contains(@href,"imdb")]');
+		return $a->attr('href');
+	}
+
+	/** @return string id */
+	public function getImdbId($html)
+	{
+		$url = $this->getImdbUrl($html);
+		return $this->getValue($url, '~title/(?P<value>tt\d+)/~');
+	}
+
+	/** @return string url */
+	public function getOfficialUrl($html)
+	{
+		$a = $this->getNode($html, '//*[@id="share"]/ul[@class="links"]//a[@class="www"]');
+		return $a->attr('href');
+	}
+
 	/**
 	 * @return string ISO 3166-1 alpha-2 code
 	 * @see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements

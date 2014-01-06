@@ -19,6 +19,9 @@ use Csfd\Parsers\Parser;
  * @method int getYear()
  * @method array getPlots() array of ['author' => User, 'plot' => string]
  * @method array getAuthors() array of [role => Author[]]
+ * @method string getOfficialUrl() url
+ * @method string getImdbUrl() url
+ * @method string getImdbId()
  *
  * @method string getMyRating() REQUIRES AUTH
  */

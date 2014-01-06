@@ -149,4 +149,25 @@ class MovieParserTest extends TestCase
 		$this->assertSame($exp, $names);
 	}
 
+	/** @covers Csfd\Parsers\Movie::getOfficialUrl() */
+	public function testGetOfficialUrl()
+	{
+		$url = $this->parser->getOfficialUrl($this->html);
+		$this->assertSame('http://www.avatarmovie.com/', $url);
+	}
+
+	/** @covers Csfd\Parsers\Movie::getImdbUrl() */
+	public function testGetImdbUrl()
+	{
+		$url = $this->parser->getImdbUrl($this->html);
+		$this->assertSame('http://www.imdb.com/title/tt0499549/', $url);
+	}
+
+	/** @covers Csfd\Parsers\Movie::getImdbId() */
+	public function testGetImdbId()
+	{
+		$id = $this->parser->getImdbId($this->html);
+		$this->assertSame('tt0499549', $id);
+	}
+
 }
