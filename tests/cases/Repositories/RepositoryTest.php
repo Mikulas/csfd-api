@@ -21,6 +21,55 @@ class RepositoryTest extends TestCase
 	}
 
 	/**
+	 * @covers Csfd\Repositories\Repository::setContainer
+	 */
+	public function testSetContainer()
+	{
+		$e = Access($this->repo);
+		$container = $this->getMockContainer();
+		$e->setContainer($container);
+		$this->assertSame($e->container, $container);
+	}
+
+	/**
+	 * @covers Csfd\Repositories\Repository::getRepository
+	 * @expectedException Csfd\InternalException
+	 */
+	public function testGetRepository_notAttached()
+	{
+		$this->repo->getRepository('foo');
+	}
+
+	/**
+	 * @covers Csfd\Repositories\Repository::getRepository
+	 * @expectedException Csfd\InternalException
+	 */
+	public function testGetRepository_repoUnset()
+	{
+		$this->repo->setContainer($this->getMockContainer());
+		$this->repo->getRepository('foo');
+	}
+
+	/**
+	 * @covers Csfd\Repositories\Repository::getRepository
+	 * @expectedException Csfd\InternalException
+	 */
+	public function testGetRepository_repoInvalid()
+	{
+		$this->repo->setContainer($this->getMockContainer());
+		$this->repo->getRepository('invalid');
+	}
+
+	/** @covers Csfd\Repositories\Repository::getRepository */
+	public function testGetRepository()
+	{
+		$container = $this->getMockContainer();
+		$this->repo->setContainer($container);
+		$users = $this->repo->getRepository('users');
+		$this->assertSame($container->users, $users);
+	}
+
+	/**
 	 * @covers Csfd\Repositories\Repository::get()
 	 * @expectedException Csfd\InternalException
 	 */

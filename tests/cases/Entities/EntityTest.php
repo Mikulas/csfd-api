@@ -68,6 +68,52 @@ class EntityTest extends TestCase
 		$this->assertSame(TestParser::RETVAL, $this->entity->getBar());
 	}
 
+	/**
+	 * @covers Csfd\Entities\Entity::setRepository
+	 * @covers Csfd\Entities\Entity::getRepository
+	 */
+	public function testSetGetRepository()
+	{
+		$e = Access($this->entity);
+		$repo = $this->getUsersRepository();
+		$e->setRepository($repo);
+		$this->assertSame($repo, $e->repository);
+		$this->assertSame($repo, $e->getRepository());
+	}
+
+	/**
+	 * @covers Csfd\Entities\Entity::getRepository
+	 * @expectedException Csfd\InternalException
+	 */
+	public function testGetRepository_notSet()
+	{
+		$e = Access($this->entity);
+		$e->getRepository();
+	}
+
+	/**
+	 * @covers Csfd\Entities\Entity::getRepository
+	 * @expectedException Csfd\InternalException
+	 */
+	public function testGetRepository_byName_notSet()
+	{
+		$e = Access($this->entity);
+		$e->getRepository('whatever');
+	}
+
+	/** @covers Csfd\Entities\Entity::getRepository */
+	public function testGetRepository_byName()
+	{
+		$e = Access($this->entity);
+
+		$repo = $this->getUsersRepository();
+		$repo->setContainer($this->getMockContainer());
+
+		$e->setRepository($repo);
+
+		$this->assertInstanceOf('Csfd\Repositories\Authors', $e->getRepository('authors'));
+	}
+
 }
 
 class TestEntity extends Entity

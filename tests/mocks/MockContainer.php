@@ -12,11 +12,15 @@ class MockContainer
 	public $movies;
 	public $authors;
 
+	public $invalid;
+
 	public function __construct(Users $users, Movies $movies, Authors $authors)
 	{
 		$this->users = $users;
 		$this->movies = $movies;
 		$this->authors = $authors;
+
+		$this->invalid = new StdClass;
 	}
 
 }
