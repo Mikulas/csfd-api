@@ -18,6 +18,7 @@ use Csfd\Parsers\Parser;
  * @method array getOrigin() ISO 3166-1 alpha-2 codes
  * @method int getYear()
  * @method array getPlots() array of ['author' => User, 'plot' => string]
+ * @method array getAuthors() array of [role => Author[]]
  *
  * @method string getMyRating() REQUIRES AUTH
  */
@@ -61,6 +62,22 @@ class Movie extends Entity
 			$node['user'] = $this->getRepository('users')->get($node['user']);
 		}
 		return $plots;
+	}
+
+	/**
+	 * Map id from parser to actual user entity
+	 */
+	public function _getAuthors($html)
+	{
+		$authors = $this->getParser()->getAuthors($html);
+		foreach ($authors as &$node)
+		{
+			foreach ($node as &$id)
+			{
+				$id = $this->getRepository('users')->get($id);
+			}
+		}
+		return $authors;
 	}
 
 }

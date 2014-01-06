@@ -40,4 +40,15 @@ class MovieTest extends TestCase
 		}
 	}
 
+
+	/** @covers Csfd\Entities\Movie::_getAuthors() */
+	public function testGetAuthors()
+	{
+		$authors = $this->entity->getAuthors();
+		foreach ($authors as $role => $authors)
+		{
+			$this->assertContainsOnlyInstancesOf('Csfd\Entities\User', $authors);
+		}
+	}
+
 }

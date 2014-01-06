@@ -3,6 +3,7 @@
 namespace Csfd\Parsers;
 
 use CachedRequestFactory;
+use Csfd\Entities\Author as AuthorE;
 use Csfd\Networking\UrlBuilder;
 use DateTime;
 use TestCase;
@@ -97,6 +98,25 @@ class MovieParserTest extends TestCase
 		$out = $this->parser->getDuration($this->html);
 		$this->assertInternalType('integer', $out);
 		$this->assertSame(162, $out);
+	}
+
+	/** @covers Csfd\Parsers\Movie::getAuthors() */
+	public function testGetAuthors()
+	{
+		$out = $this->parser->getAuthors($this->html);
+		$this->assertArrayHasKey(AuthorE::DIRECTOR, $out);
+		$this->assertArrayHasKey(AuthorE::CAMERA, $out);
+		$this->assertArrayHasKey(AuthorE::COMPOSER, $out);
+		$this->assertArrayHasKey(AuthorE::WRITER, $out);
+		$this->assertArrayHasKey(AuthorE::ACTOR, $out);
+		foreach ($out as $role => $ids)
+		{
+			$this->assertInternalType('array', $ids);
+			foreach ($ids as $id)
+			{
+				$this->assertInternalType('int', $id);
+			}
+		}
 	}
 
 	/** @covers Csfd\Parsers\Movie::getPlots() */

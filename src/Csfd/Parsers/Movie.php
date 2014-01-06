@@ -4,7 +4,9 @@ namespace Csfd\Parsers;
 
 use Csfd\InternalException;
 use Csfd\Parsers\Exception;
+use Csfd\Entities;
 use Symfony\Component\DomCrawler\Crawler;
+use Stringy\StaticStringy as S;
 
 
 class Movie extends Parser
@@ -77,6 +79,32 @@ class Movie extends Parser
 		// TODO parse different versions (SE, Directors Cut, @see http://www.csfd.cz/film/228329-avatar/)
 		$origin = $this->getNode($html, '//*[@id="profile"]//p[@class="origin"]')->text();
 		return (int) $this->getValue($origin, '~\b(?P<value>\d+)\s*min\b~');
+	}
+
+	private function getRole($role)
+	{
+		switch (S::slugify($role))
+		{
+			case 'rezie': return Entities\Author::DIRECTOR;
+			case 'scenar': return Entities\Author::WRITER;
+			case 'hudba': return Entities\Author::COMPOSER;
+			case 'kamera': return Entities\Author::CAMERA;
+			case 'hraji': return Entities\Author::ACTOR;
+		}
+		throw new InternalException("Author role $role undefined.");
+	}
+
+	public function getAuthors($html)
+	{
+		$authors = [];
+		$xp = '//*[@id="profile"]//div[@class="creators"]/div';
+		$this->getNode($html, $xp)->each(function(Crawler $node) use (&$authors) {
+			$role = $this->getRole($node->filterXPath('//h4')->text());
+			$node->filterXpath('//a')->each(function(Crawler $node) use (&$authors, $role) {
+				$authors[$role][] = $this->getIdFromUrl($node->attr('href'));
+			});
+		});
+		return $authors;
 	}
 
 	/** @return string[] */
