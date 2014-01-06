@@ -158,6 +158,14 @@ class Movie extends Parser
 		});
 	}
 
+	public function getTags($html)
+	{
+		$xp = '//div[contains(@class,"tags")]//a[contains(@href,"tagcontrol")]';
+		return $this->getNode($html, $xp)->each(function(Crawler $node) {
+			return $node->text();
+		});
+	}
+
 	/**
 	 * @return string ISO 3166-1 alpha-2 code
 	 * @see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements

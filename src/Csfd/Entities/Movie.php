@@ -24,6 +24,7 @@ use Csfd\Parsers\Parser;
  * @method string getImdbId()
  * @method array getRelatedMovies() next movies in series
  * @method array getSimilarMovies() similar plot or genre
+ * @method array getTags()
  *
  * @method string getMyRating() REQUIRES AUTH
  */

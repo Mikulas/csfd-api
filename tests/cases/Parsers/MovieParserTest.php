@@ -184,4 +184,11 @@ class MovieParserTest extends TestCase
 		$this->assertSame([343401, 238081], $id);
 	}
 
+	/** @covers Csfd\Parsers\Movie::getTags() */
+	public function testGetTags()
+	{
+		$id = $this->parser->getTags($this->html);
+		$this->assertSame(['mimozemšťani', 'vesmír', 'zbraně', '3D', 'bitva', 'vojenská vzpoura'], $id);
+	}
+
 }
