@@ -177,4 +177,11 @@ class MovieParserTest extends TestCase
 		$this->assertSame([328911, 286594, 277495, 343401, 238081], $id);
 	}
 
+	/** @covers Csfd\Parsers\Movie::getSimilarMovies() */
+	public function testGetSimilarMovies()
+	{
+		$id = $this->parser->getSimilarMovies($this->html);
+		$this->assertSame([343401, 238081], $id);
+	}
+
 }

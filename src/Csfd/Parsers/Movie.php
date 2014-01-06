@@ -150,6 +150,14 @@ class Movie extends Parser
 		});
 	}
 
+	public function getSimilarMovies($html)
+	{
+		$xp = '//div[contains(@class,"similar")]//a[contains(@class,"film")]';
+		return $this->getNode($html, $xp)->each(function(Crawler $node) {
+			return $this->getIdFromUrl($node->attr('href'));
+		});
+	}
+
 	/**
 	 * @return string ISO 3166-1 alpha-2 code
 	 * @see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements

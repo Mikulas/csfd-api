@@ -57,4 +57,11 @@ class MovieTest extends TestCase
 		$this->assertContainsOnlyInstancesOf('Csfd\Entities\Movie', $movies);
 	}
 
+	/** @covers Csfd\Entities\Movie::_getSimilarMovies() */
+	public function testGetSimilarMovies()
+	{
+		$movies = $this->entity->getSimilarMovies();
+		$this->assertContainsOnlyInstancesOf('Csfd\Entities\Movie', $movies);
+	}
+
 }

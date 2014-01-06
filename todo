@@ -1,3 +1,5 @@
+// abstraction for id to entity mapping (refactor movie entity)
+
 // unify array vs Movie[] in annotations
 
 // otestovat parsery proti unset (movie bez popisu atp)

@@ -22,7 +22,8 @@ use Csfd\Parsers\Parser;
  * @method string getOfficialUrl() url
  * @method string getImdbUrl() url
  * @method string getImdbId()
- * @method array getRelatedMovies()
+ * @method array getRelatedMovies() next movies in series
+ * @method array getSimilarMovies() similar plot or genre
  *
  * @method string getMyRating() REQUIRES AUTH
  */
@@ -96,5 +97,19 @@ class Movie extends Entity
 		}
 		return $movies;
 	}
+
+	/**
+	 * Map id from parser to actual user entity
+	 */
+	public function _getSimilarMovies($html)
+	{
+		$movies = $this->getParser()->getSimilarMovies($html);
+		foreach ($movies as &$movie)
+		{
+			$movie = $this->getRepository('movies')->get($movie);
+		}
+		return $movies;
+	}
+
 
 }
