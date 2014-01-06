@@ -142,6 +142,14 @@ class Movie extends Parser
 		return $a->attr('href');
 	}
 
+	public function getRelatedMovies($html)
+	{
+		$xp = '//div[contains(@class,"related")]//a[contains(@class,"film")]';
+		return $this->getNode($html, $xp)->each(function(Crawler $node) {
+			return $this->getIdFromUrl($node->attr('href'));
+		});
+	}
+
 	/**
 	 * @return string ISO 3166-1 alpha-2 code
 	 * @see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements

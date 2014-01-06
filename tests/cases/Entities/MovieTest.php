@@ -40,7 +40,6 @@ class MovieTest extends TestCase
 		}
 	}
 
-
 	/** @covers Csfd\Entities\Movie::_getAuthors() */
 	public function testGetAuthors()
 	{
@@ -49,6 +48,13 @@ class MovieTest extends TestCase
 		{
 			$this->assertContainsOnlyInstancesOf('Csfd\Entities\User', $authors);
 		}
+	}
+
+	/** @covers Csfd\Entities\Movie::_getRelatedMovies() */
+	public function testGetRelatedMovies()
+	{
+		$movies = $this->entity->getRelatedMovies();
+		$this->assertContainsOnlyInstancesOf('Csfd\Entities\Movie', $movies);
 	}
 
 }
