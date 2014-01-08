@@ -1,6 +1,6 @@
-// abstraction for id to entity mapping (refactor movie entity)
-
 // unify array vs Movie[] in annotations
+
+// prepsat struktury array na neco lepsiho
 
 // otestovat parsery proti unset (movie bez popisu atp)
 
@@ -10,12 +10,14 @@
 // validate yml with http://symfony.com/doc/current/components/config/definition.html#validating-configuration-values
 
 // - v repository udelat search
+
 // CACHE
-// - na entite uklada potrebne stranky jak Crawler
-// - dale cachovat jednotlive hodnoty a to jako private property na entite
-// - pokud ani jedno neni vyplnene, udela se request
-// - jak resit, kdyz se jedno dato da sehnat z vic zdroju?
-//      - u kazdeho getteru bude v annotacich list zdroju, ze kterych to funguje
-//      - chce to teda udelat abstrakci nad url
+// - [ ] na entite uklada potrebne stranky jako html
+// - [x] dale cachovat jednotlive hodnoty (to uz umi CachingGetter)
+// - [ ] pokud ani jedno neni vyplnene, udela se request
+// - [ ] jak resit, kdyz se jedno dato da sehnat z vic zdroju?
+//      - nejvic easy je vybrat jeden zdroj. Je to edge case
+//      - [ ] u kazdeho getteru bude v annotacich list zdroju, ze kterych to funguje
+//      - [ ] chce to teda udelat abstrakci nad url
 
 // sort usings

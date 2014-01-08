@@ -2,9 +2,6 @@
 
 namespace Csfd\Parsers;
 
-use Csfd\InternalException;
-use Csfd\Parsers\Exception;
-
 
 class User extends Parser
 {
@@ -25,58 +22,85 @@ class User extends Parser
 		return $this->getIdFromUrl($anchor->attr('href'));
 	}
 
-	/** @return string html */
+	/**
+	 * @param $html
+	 * @return string html
+	 */
 	public function getProfile($html)
 	{
 		return $this->getNode($html, '//*[@class="user-profile"]')->html();
 	}
 
-	/** @return string */
+	/**
+	 * @param $html
+	 * @return string
+	 */
 	public function getUsername($html)
 	{
 		return $this->getNode($html, '//*[@class="info"]/h2')->text();
 	}
 
-	/** @return array of strings */
+	/**
+	 * @param $html
+	 * @return array of strings
+	 */
 	private function getNames($html)
 	{
 		$fullName = $this->getNode($html, '//*[@class="info"]/h3')->text();
 		return explode(' ', $fullName);
 	}
 
-	/** @return string */
+	/**
+	 * @param $html
+	 * @return string
+	 */
 	public function getFirstName($html)
 	{
 		return $this->getNames($html)[0];
 	}
 
-	/** @return string */
+	/**
+	 * @param $html
+	 * @return string
+	 */
 	public function getLastName($html)
 	{
 		$names = $this->getNames($html);
 		return end($names);
 	}
 
-	/** @return array of strings */
+	/**
+	 * @param $html
+	 * @return array of strings
+	 */
 	private function getAboutNodes($html)
 	{
 		$text = $this->getNode($html, '//*[@class="info"]/p')->html();
 		return $this->splitByBr($text);
 	}
 
-	/** @return string */
+	/**
+	 * @param $html
+	 * @return string
+	 */
 	public function getLocation($html)
 	{
 		return trim($this->getAboutNodes($html)[0]);
 	}
 
-	/** @return string */
+	/**
+	 * @param $html
+	 * @return string
+	 */
 	public function getAbout($html)
 	{
 		return trim($this->getAboutNodes($html)[1]);
 	}
 
-	/** @return array [method => string] */
+	/**
+	 * @param $html
+	 * @return array [method => string]
+	 */
 	public function getContact($html)
 	{
 		$node = $this->getNode($html, '//*[@class="contact"]');
@@ -96,7 +120,10 @@ class User extends Parser
 		return $contact;
 	}
 
-	/** @return int */
+	/**
+	 * @param $html
+	 * @return int
+	 */
 	public function getPoints($html)
 	{
 		return (int) $this->getNode($html, '//*[@class="points"]')->text();
@@ -108,7 +135,10 @@ class User extends Parser
 		return $this->splitByBr($text);
 	}
 
-	/** @return DateTime */
+	/**
+	 * @param $html
+	 * @return \DateTime
+	 */
 	public function getRegistered($html)
 	{
 		$text = $this->getActivity($html)[0];
@@ -117,7 +147,9 @@ class User extends Parser
 	}
 
 	/**
-	 * @return DateTime|NULL|TRUE
+	 * @param $html
+	 * @throws Exception
+	 * @return \DateTime|NULL|TRUE
 	 * TRUE if user is currently online
 	 * NULL if information is not available
 	 */

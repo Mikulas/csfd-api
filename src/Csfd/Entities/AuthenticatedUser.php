@@ -14,6 +14,7 @@ class AuthenticatedUser extends User
 
 	/**
 	 * @auth
+	 * @param int $page
 	 * @return Message[]
 	 */
 	public function getReceivedMessages($page = NULL)
@@ -23,6 +24,7 @@ class AuthenticatedUser extends User
 
 	/**
 	 * @auth
+	 * @param int $page
 	 * @return Message[]
 	 */
 	public function getSentMessage($page = NULL)

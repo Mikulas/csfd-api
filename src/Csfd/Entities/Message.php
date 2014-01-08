@@ -15,13 +15,13 @@ class Message
 	/** @var User */
 	protected $receiver;
 
-	/** @var html */
+	/** @var string html */
 	protected $body;
 
 	/** @var bool */
 	protected $read; // read by receiver if I am sender
 
-	/** @var DateTime */
+	/** @var \DateTime */
 	protected $date;
 
 	public function delete()

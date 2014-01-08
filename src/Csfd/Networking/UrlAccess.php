@@ -8,6 +8,7 @@ use Csfd\InternalException;
 trait UrlAccess
 {
 
+	/** @var UrlBuilder */
 	private $urlBuilder;
 
 	public function setUrlBuilder(UrlBuilder $urlBuilder)
@@ -31,6 +32,8 @@ trait UrlAccess
 	 * Gets url from config. Prepends root url.
 	 * Traverses config by class namespace under Csfd.
 	 * @param string $key
+	 * @param array $args
+	 * @throws \Csfd\InternalException
 	 * @return string url
 	 */
 	protected function getUrl($key, array $args = NULL)

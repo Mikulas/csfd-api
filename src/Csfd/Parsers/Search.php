@@ -2,8 +2,7 @@
 
 namespace Csfd\Parsers;
 
-use Csfd\InternalException;
-use Csfd\Parsers\Exception;
+
 use Symfony\Component\DomCrawler\Crawler;
 
 

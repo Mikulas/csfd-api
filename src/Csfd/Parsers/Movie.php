@@ -4,7 +4,7 @@ namespace Csfd\Parsers;
 
 use Csfd\Entities;
 use Csfd\InternalException;
-use Csfd\Parsers\Exception;
+
 use Stringy\StaticStringy as S;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -12,19 +12,28 @@ use Symfony\Component\DomCrawler\Crawler;
 class Movie extends Parser
 {
 
-	/** @return int 0..100 */
+	/**
+	 * @param $html
+	 * @return int 0..100
+	 */
 	public function getRating($html)
 	{
 		return (int) $this->getNode($html, '//h2[@class="average"]')->text();
 	}
 
-	/** @return int|NULL if not in top 100 */
+	/**
+	 * @param $html
+	 * @return int|NULL if not in top 100
+	 */
 	public function getChartPosition($html)
 	{
 		return (int) $this->getNode($html, '//p[@class="charts"]/a')->text();
 	}
 
-	/** @return string[] urls */
+	/**
+	 * @param $html
+	 * @return string[] urls
+	 */
 	public function getPosterUrls($html)
 	{
 		$urls = $this->getNode($html, '//*[@id="posters"]//div[@class="image"]')->each(function(Crawler $node) {
@@ -33,14 +42,20 @@ class Movie extends Parser
 		return $urls;
 	}
 
-	/** @return string url */
+	/**
+	 * @param $html
+	 * @return string url
+	 */
 	public function getPosterUrl($html)
 	{
 		$url = $this->getNode($html, '//img[@class="film-poster"]')->attr('src');
 		return $this->normalizeUrl($url);
 	}
 
-	/** @return string[] */
+	/**
+	 * @param $html
+	 * @return string[]
+	 */
 	public function getGenres($html)
 	{
 		$text = $this->getNode($html, '//*[@id="profile"]//p[@class="genre"]')->text();
@@ -49,7 +64,10 @@ class Movie extends Parser
 		return $genres;
 	}
 
-	/** @return string[] */
+	/**
+	 * @param $html
+	 * @return string[]
+	 */
 	public function getOrigin($html)
 	{
 		$origin = $this->getNode($html, '//*[@id="profile"]//p[@class="origin"]')->text();
@@ -65,14 +83,20 @@ class Movie extends Parser
 		return $codes;
 	}
 
-	/** @return int */
+	/**
+	 * @param $html
+	 * @return int
+	 */
 	public function getYear($html)
 	{
 		$origin = $this->getNode($html, '//*[@id="profile"]//p[@class="origin"]')->text();
 		return (int) $this->getValue($origin, '~\b(?P<value>1[89]\d\d|20\d\d)\b~');
 	}
 
-	/** @return int */
+	/**
+	 * @param $html
+	 * @return int
+	 */
 	public function getDuration($html)
 	{
 		// TODO parse series properly
@@ -107,7 +131,10 @@ class Movie extends Parser
 		return $authors;
 	}
 
-	/** @return string[] */
+	/**
+	 * @param $html
+	 * @return string[]
+	 */
 	public function getPlots($html)
 	{
 		return $this->getNode($html, '//div[@id="plots"]//ul/li')->each(function(Crawler $node) {
@@ -121,21 +148,30 @@ class Movie extends Parser
 		});
 	}
 
-	/** @return string url */
+	/**
+	 * @param $html
+	 * @return string url
+	 */
 	public function getImdbUrl($html)
 	{
 		$a = $this->getNode($html, '//*[@id="share"]/ul[@class="links"]//a[contains(@href,"imdb")]');
 		return $a->attr('href');
 	}
 
-	/** @return string id */
+	/**
+	 * @param $html
+	 * @return string id
+	 */
 	public function getImdbId($html)
 	{
 		$url = $this->getImdbUrl($html);
 		return $this->getValue($url, '~title/(?P<value>tt\d+)/~');
 	}
 
-	/** @return string url */
+	/**
+	 * @param $html
+	 * @return string url
+	 */
 	public function getOfficialUrl($html)
 	{
 		$a = $this->getNode($html, '//*[@id="share"]/ul[@class="links"]//a[@class="www"]');
@@ -169,6 +205,8 @@ class Movie extends Parser
 	}
 
 	/**
+	 * @param $text
+	 * @throws Exception
 	 * @return string ISO 3166-1 alpha-2 code
 	 * @see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements
 	 */
@@ -326,7 +364,10 @@ class Movie extends Parser
 		return $codes[$text];
 	}
 
-	/** @return array strings */
+	/**
+	 * @param $html
+	 * @return array strings
+	 */
 	public function getNames($html)
 	{
 		$cs = $this->getNode($html, '//div[@class="content"]//h1')->text();

@@ -72,7 +72,7 @@ class Request
 
 	/**
 	 * Mockable file_get_contents wrapper
-	 * @return [$res, $headers]
+	 * @return array [$res, $headers]
 	 */
 	protected function fileGetContents()
 	{
@@ -110,7 +110,7 @@ class Request
 	}
 
 	/**
-	 * @return NULL|url if redirected
+	 * @return NULL|string url if redirected
 	 */
 	public function getRedirectUrl()
 	{

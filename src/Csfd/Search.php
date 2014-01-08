@@ -8,6 +8,7 @@ use Csfd\Networking\UrlBuilder;
 use Csfd\Parsers;
 use Csfd\Repositories\Authors;
 use Csfd\Repositories\Movies;
+use Csfd\Repositories\Repository;
 use Csfd\Repositories\Users;
 
 
@@ -39,7 +40,7 @@ class Search
 		return $this->requestFactory->create($url);
 	}
 
-	private function findEntity($query, $urlMatch, $repo, $parserMethod)
+	private function findEntity($query, $urlMatch, Repository $repo, $parserMethod)
 	{
 		$result = $this->getResult($query);
 
@@ -53,9 +54,9 @@ class Search
 		// ambiguous results, list of entities
 		$data = call_user_func([$this->parser, $parserMethod], $result->getContent());
 		$entities = [];
-		foreach ($data as $data)
+		foreach ($data as $row)
 		{
-			$entities[] = $repo->get($data['id']);
+			$entities[] = $repo->get($row['id']);
 		}
 		return $entities;
 	}

@@ -14,7 +14,7 @@ class UrlBuilder
 	/** @var array urls.yml */
 	private $urls;
 
-	/** @var Collections\HashMap */
+	/** @var HashMap */
 	private $map;
 
 	public static function factory($configFile)
@@ -76,7 +76,7 @@ class UrlBuilder
 	}
 
 	/**
-	 * @return Collections\HashMap
+	 * @return \Collections\HashMap
 	 */
 	public function getMap()
 	{
@@ -86,6 +86,7 @@ class UrlBuilder
 	/**
 	 * Replace placeholders with real data
 	 * @param string $url
+	 * @param array $moreMappings
 	 * @return string url with replaced placeholders
 	 */
 	protected function replacePlaceholders($url, array $moreMappings = NULL)

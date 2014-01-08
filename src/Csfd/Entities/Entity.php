@@ -19,8 +19,14 @@ abstract class Entity
 	use UrlAccess;
 
 	private $auth;
+
+	/** @var \Csfd\Parsers\Parser */
 	private $parser;
+
+	/** @var \Csfd\Networking\RequestFactory */
 	private $requestFactory;
+
+	/** @var \Csfd\Repositories\Repository */
 	private $repository;
 
 	protected $id;
@@ -56,6 +62,9 @@ abstract class Entity
 		return $this->repository;
 	}
 
+	/**
+	 * @return Parser
+	 */
 	protected function getParser()
 	{
 		return $this->parser;
@@ -114,7 +123,7 @@ abstract class Entity
 		return $this->id;
 	}
 
-	protected function mapToEntity(array $ids, $repository)
+	protected function mapToEntity(array $ids, Repository $repository)
 	{
 		$entities = [];
 		foreach ($ids as $id)

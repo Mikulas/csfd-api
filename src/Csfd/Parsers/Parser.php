@@ -28,7 +28,10 @@ abstract class Parser
 		return $res[$key];
 	}
 
-	/** @return array of strings */
+	/**
+	 * @param $text
+	 * @return array of strings
+	 */
 	protected function splitByBr($text)
 	{
 		return preg_split('~\s*<br\s*/?>\s*~i', $text);

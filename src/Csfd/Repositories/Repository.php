@@ -3,6 +3,7 @@
 namespace Csfd\Repositories;
 
 use Csfd\Authentication\Authenticator;
+
 use Csfd\InternalException;
 use Csfd\Networking\RequestFactory;
 use Csfd\Networking\UrlBuilder;
@@ -21,7 +22,7 @@ abstract class Repository
 	/** @var string class name */
 	protected $parserClass;
 
-	/** @var Csfd */
+	/** @var \Csfd\Csfd */
 	private $container;
 
 	/** singleton of $parserClass */
@@ -74,6 +75,7 @@ abstract class Repository
 		}
 
 		$class = $this->entityClass;
+		/** @var \Csfd\Entities\Entity $entity */
 		$entity = new $class($this->authenticator, $this->urlBuilder, $this->getParser(), $this->requestFactory, $id);
 		$entity->setRepository($this);
 		return $entity;
