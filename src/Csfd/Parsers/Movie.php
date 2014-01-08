@@ -2,11 +2,11 @@
 
 namespace Csfd\Parsers;
 
+use Csfd\Entities;
 use Csfd\InternalException;
 use Csfd\Parsers\Exception;
-use Csfd\Entities;
-use Symfony\Component\DomCrawler\Crawler;
 use Stringy\StaticStringy as S;
+use Symfony\Component\DomCrawler\Crawler;
 
 
 class Movie extends Parser

@@ -2,10 +2,10 @@
 
 namespace Csfd\Networking;
 
+use Collections\HashMap;
+use Collections\KeyException;
 use Csfd\InternalException;
 use Symfony\Component\Yaml\Yaml;
-use Collections\KeyException;
-use Collections\HashMap;
 
 
 class UrlBuilder
@@ -95,7 +95,7 @@ class UrlBuilder
 			try {
 				return $map->get($m['name']);
 			} catch (KeyException $e) {
-				throw new InternalException("Failede to resolve placeholder $m[name]." , NULL, $e);
+				throw new InternalException("Failede to resolve placeholder $m[name].", NULL, $e);
 			}
 		}, $url);
 
