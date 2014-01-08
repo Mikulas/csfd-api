@@ -94,21 +94,21 @@ class UrlBuilderTest extends TestCase
 	}
 
 	/**
-	 * @covers Csfd\Networking\UrlBuilder::addMap()
-	 * @covers Csfd\Networking\UrlBuilder::map()
+	 * @covers Csfd\Networking\UrlBuilder::getMap()
+	 * @covers Csfd\Networking\UrlBuilder::replacePlaceholders()
 	 */
-	public function testMap()
+	public function testReplacePlaceholders()
 	{
 		$builder = UrlBuilder::factory($this->getUrlsFile());
-		$builder->addMap('arg1', 'b');
+		$builder->getMap()->insert('arg1', 'b');
 		$this->assertSame('rootUrl/abcde', $builder->get(['foo', 'qaz'], ['arg2' => 'd']));
 	}
 
 	/**
-	 * @covers Csfd\Networking\UrlBuilder::map()
+	 * @covers Csfd\Networking\UrlBuilder::replacePlaceholders()
 	 * @expectedException Csfd\InternalException
 	 */
-	public function testMap_unsetMap()
+	public function testReplacePlaceholders_unsetMap()
 	{
 		$builder = UrlBuilder::factory($this->getUrlsFile());
 		$builder->get(['foo', 'qaz']);

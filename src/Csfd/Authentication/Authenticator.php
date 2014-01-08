@@ -80,7 +80,7 @@ class Authenticator
 		$this->cookie = $res->getCookie();
 
 		$this->setUserId();
-		$this->urlBuilder->addMap('userId', $this->userId);
+		$this->urlBuilder->getMap()->insert('userId', $this->userId);
 
 		return $this->cookie;
 	}

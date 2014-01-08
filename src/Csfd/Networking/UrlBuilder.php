@@ -4,6 +4,8 @@ namespace Csfd\Networking;
 
 use Csfd\InternalException;
 use Symfony\Component\Yaml\Yaml;
+use Collections\KeyException;
+use Collections\HashMap;
 
 
 class UrlBuilder
@@ -12,7 +14,7 @@ class UrlBuilder
 	/** @var array urls.yml */
 	private $urls;
 
-	/** @var array [key => value] */
+	/** @var Collections\HashMap */
 	private $map;
 
 	public static function factory($configFile)
@@ -46,7 +48,7 @@ class UrlBuilder
 	public function __construct(array $urls)
 	{
 		$this->urls = $urls;
-		$this->map = [];
+		$this->map = new HashMap;
 	}
 
 	/**
@@ -70,17 +72,15 @@ class UrlBuilder
 			$node = $node[$key];
 		}
 
-		return $this->urls['root'] . $this->map($node, $args);
+		return $this->urls['root'] . $this->replacePlaceholders($node, $args);
 	}
 
 	/**
-	 * Variables in format {$key} are replaced
-	 * @param scalar $key
-	 * @param scalar $value
+	 * @return Collections\HashMap
 	 */
-	public function addMap($key, $value)
+	public function getMap()
 	{
-		$this->map[$key] = $value;
+		return $this->map;
 	}
 
 	/**
@@ -88,16 +88,15 @@ class UrlBuilder
 	 * @param string $url
 	 * @return string url with replaced placeholders
 	 */
-	protected function map($url, array $moreMappings = NULL)
+	protected function replacePlaceholders($url, array $moreMappings = NULL)
 	{
-		$map = array_merge($this->map, (array) $moreMappings);
+		$map = $this->map->mergeWith($moreMappings ?: []);
 		$url = preg_replace_callback('~{\$(?P<name>\w+)}~', function($m) use ($map) {
-			$name = $m['name'];
-			if (!isset($map[$name]))
-			{
-				throw new InternalException("Placeholder {\$$name} not mapped."); // TODO
+			try {
+				return $map->get($m['name']);
+			} catch (KeyException $e) {
+				throw new InternalException("Failede to resolve placeholder $m[name]." , NULL, $e);
 			}
-			return $map[$name];
 		}, $url);
 
 		return $url;
