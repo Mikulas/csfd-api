@@ -64,7 +64,7 @@ class MovieParserTest extends TestCase
 	public function testGetPosterUrl()
 	{
 		$url = $this->parser->getPosterUrl($this->html);
-		$exp = 'http://img.csfd.cz/posters/22/228329_dvd_1.jpg?h180';
+		$exp = 'http://img.csfd.cz/posters/22/228329_dvd_1.jpg?h180&1';
 		$this->assertSame($exp, $url);
 	}
 

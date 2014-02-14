@@ -114,7 +114,7 @@ class UserParserTest extends TestCase
 	/** @covers Csfd\Parsers\User::getAvatarUrl() */
 	public function testGetAvatarUrl()
 	{
-		$exp = 'http://img.csfd.cz/files/images/user/avatars/158/155/158155401_a5d9bc.jpg?w60h80crop';
+		$exp = 'http://img.csfd.cz/files/images/user/avatars/158/155/158155401_a5d9bc.jpg?w60h80crop&1';
 		$this->assertSame($exp, $this->parser->getAvatarUrl($this->html));
 	}
 
