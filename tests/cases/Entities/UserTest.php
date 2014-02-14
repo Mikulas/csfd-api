@@ -32,4 +32,11 @@ class UserTest extends TestCase
 		$this->assertInternalType('string', $e->getUrlKey('any property'));
 	}
 
+	/** @covers Csfd\Entities\User::getRatings() */
+	public function testGetRatings()
+	{
+		$ratings = $this->entity->getRatings(1);
+		$this->assertContainsOnlyInstancesOf('Csfd\Collections\Rating', $ratings);
+	}
+
 }

@@ -2,6 +2,8 @@
 
 namespace Csfd\Entities;
 
+use Csfd\Collections\Ratings;
+
 
 /**
  * @method string getProfile() html
@@ -24,6 +26,25 @@ class User extends Entity
 	protected function getUrlKey($property)
 	{
 		return 'profile';
+	}
+
+	/**
+	 * @param int $page 1..n
+	 * @return Rating[]
+	 */
+	public function getRatings($page)
+	{
+		$vars = ['entityId' => $this->id, 'page' => $page];
+		$html = $this->request($this->getUrl('ratings', $vars))->getContent();
+		
+		$ratings = [];
+		foreach ($this->getParser()->getRatings($html) as list($id, $rating, $date))
+		{
+			$movie = $this->getRepository('movies')->get($id);
+			$ratings[] = new Rating($movie, $rating, $date);
+		}
+
+		return $ratings;
 	}
 
 }

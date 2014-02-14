@@ -14,5 +14,6 @@ entities:
         profile: 'uzivatel/{$entityId}/'
         profileToken: 'uzivatel/{$userId}/profile-edit/'
         profileEdit: 'uzivatel/{$userId}/profile-edit/?do=profileForm-submit'
+        ratings: 'uzivatel/{$entityId}/hodnoceni/strana-{$page}/'
     movie:
         default: 'film/{$entityId}/'

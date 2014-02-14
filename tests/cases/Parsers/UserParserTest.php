@@ -12,19 +12,20 @@ class UserParserTest extends TestCase
 {
 
 	private $parser;
+	private $builder;
 	private $html;
 
 	public function setUp()
 	{
 		$this->parser = new User;
-		$builder = UrlBuilder::factory(__DIR__ . '/../../../src/Csfd/urls.yml');
+		$this->builder = UrlBuilder::factory(__DIR__ . '/../../../src/Csfd/urls.yml');
 
 		$auth = $this->getAuthenticator();
 		$account = $this->getConfig()['account'];
 		$auth->setCredentials($account['username'], $account['password']);
 
 		$factory = $this->getRequestFactory();
-		$url = $builder->get(['entities', 'user', 'profile'], ['entityId' => $account['id']]);
+		$url = $this->builder->get(['entities', 'user', 'profile'], ['entityId' => $account['id']]);
 		$this->html = $factory->create($url, NULL, NULL, $auth->getCookie())->getContent();
 	}
 
@@ -116,6 +117,44 @@ class UserParserTest extends TestCase
 	{
 		$exp = 'http://img.csfd.cz/files/images/user/avatars/158/155/158155401_a5d9bc.jpg?w60h80crop&1';
 		$this->assertSame($exp, $this->parser->getAvatarUrl($this->html));
+	}
+
+	/** @covers Csfd\Parsers\User::getRatings() */
+	public function testGetRatings_empty()
+	{
+		$exp = [];
+
+		$userId = 434388; // csfdapi.cz account
+		$url = $this->builder->get(['entities', 'user', 'ratings'],
+			['entityId' => $userId, 'page' => 1]);
+		$html = $this->getRequestFactory()->create($url)->getContent();
+
+		$this->assertSame($exp, $this->parser->getRatings($html));
+	}
+
+	/** @covers Csfd\Parsers\User::getRatings() */
+	public function testGetRatings()
+	{
+		$exp = [
+			[7684, 2, '2014/02/14'],
+			[10503, 1, '2014/02/14'],
+			[310284, 4, '2014/02/14'],
+			[348147, 3, '2014/02/14'],
+			[291800, 0, '2014/02/14'],
+			[305234, 5, '2014/02/14'],
+		];
+
+		$account = $this->getConfig()['account'];
+		$url = $this->builder->get(['entities', 'user', 'ratings'],
+			['entityId' => $account['id'], 'page' => 1]);
+		$html = $this->getRequestFactory()->create($url)->getContent();
+
+		$ratings = $this->parser->getRatings($html);
+		array_walk($ratings, function(&$rating) {
+			$rating[2] = $rating[2]->format('Y/m/d');
+		});
+
+		$this->assertSame($exp, $ratings);
 	}
 
 }

@@ -2,6 +2,8 @@
 
 namespace Csfd\Parsers;
 
+use Symfony\Component\DomCrawler\Crawler;
+
 
 class User extends Parser
 {
@@ -168,6 +170,28 @@ class User extends Parser
 	{
 		$url = $this->getNode($html, '//img[@class="avatar"]')->attr('src');
 		return $this->normalizeUrl($url);
+	}
+
+	public function getRatings($html)
+	{
+		try {
+			$nodes = $this->getNodes($html, '//*[@class="profile-content ratings"]//tbody/tr');
+		} catch (Exception $e) {
+			return []; // user has no ratings
+		}
+
+		$ratings = $nodes->each(function(Crawler $row) {
+			$id = $this->getIdFromUrl($row->filterXPath('//td[1]/a')->attr('href'));
+
+			$node = $row->filterXPath('//td[2]/img');
+			$rating = $node->count() ? strlen($node->attr('alt')) : 0;
+
+			$date = $this->parseCzechDate($row->filterXPath('//td[3]')->text());
+
+			return [$id, $rating, $date];
+		});
+
+		return $ratings;
 	}
 
 }

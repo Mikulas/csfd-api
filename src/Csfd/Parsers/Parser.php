@@ -47,6 +47,12 @@ abstract class Parser
 		}
 		return $filtered;
 	}
+
+	/** alias */
+	protected function getNodes($html, $xpath)
+	{
+		return $this->getNode($html, $xpath);
+	}
 	
 	public function getFormToken($html, $formId)
 	{
@@ -71,6 +77,13 @@ abstract class Parser
 	protected function parseCzechDateTime($string)
 	{
 		return DateTime::createFromFormat('j.n.Y*H:i', $string);
+	}
+
+	protected function parseCzechDate($string)
+	{
+		$date = DateTime::createFromFormat('j.n.Y', $string);
+		$date->setTime(0, 0, 0); // not current time
+		return $date;
 	}
 
 	/**
